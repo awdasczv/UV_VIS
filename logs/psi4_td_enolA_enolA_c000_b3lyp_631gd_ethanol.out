@@ -593,3 +593,6 @@ Total time:
                            Max[D[value]]     Max[|R|]   # vectors
   DavidsonSolver iter   1:   2.14729e-01  8.75606e-02     48      
   DavidsonSolver iter   2:   1.05022e-02  1.99415e-02     60      
+  DavidsonSolver iter   3:   3.79377e-04  4.49296e-03     72      
+  DavidsonSolver iter   4:   2.23173e-05  9.18353e-04     84      
+  DavidsonSolver iter   5:   9.25315e-07  1.67178e-04     96      
