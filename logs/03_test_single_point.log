@@ -1,0 +1,10 @@
+﻿S matrix is not positive-definite!
+Consider changing the average area of the cavity finite elements.
+Normally an error, this has been commuted to a warning via patch.
+Please report this issue: https://github.com/PCMSolver/pcmsolver/issues/206
+
+S matrix is not positive-definite!
+Consider changing the average area of the cavity finite elements.
+Normally an error, this has been commuted to a warning via patch.
+Please report this issue: https://github.com/PCMSolver/pcmsolver/issues/206
+

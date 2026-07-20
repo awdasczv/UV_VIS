@@ -1,0 +1,161 @@
+{
+  "psi4_version": "1.11",
+  "addons": {
+    "pcmsolver": true,
+    "ddx": false,
+    "dftd3": false,
+    "dftd4": false,
+    "s-dftd3": "query failed: 's-dftd3'",
+    "gdma": false,
+    "cppe": false,
+    "libefp": false,
+    "chemps2": false,
+    "simint": false,
+    "brianqc": "query failed: 'brianqc'",
+    "adcc": false,
+    "cfour": false,
+    "v2rdm_casscf": false
+  },
+  "functionals": {
+    "B3LYP": {
+      "available": true,
+      "test_energy_hartree": -75.31252189
+    },
+    "B3LYP-D3BJ": {
+      "available": false,
+      "error": "Program s-dftd3 is registered with QCEngine, but cannot be found."
+    },
+    "PBE0": {
+      "available": true,
+      "test_energy_hartree": -75.24570065
+    },
+    "PBE0-D3BJ": {
+      "available": false,
+      "error": "Program s-dftd3 is registered with QCEngine, but cannot be found."
+    },
+    "CAM-B3LYP": {
+      "available": true,
+      "test_energy_hartree": -75.27970067
+    },
+    "CAM-B3LYP-D3BJ": {
+      "available": false,
+      "error": "Program s-dftd3 is registered with QCEngine, but cannot be found."
+    },
+    "WB97X-D": {
+      "available": true,
+      "test_energy_hartree": -75.30658451
+    },
+    "WB97X-D3BJ": {
+      "available": false,
+      "error": "Program s-dftd3 is registered with QCEngine, but cannot be found."
+    },
+    "WB97X-V": {
+      "available": true,
+      "test_energy_hartree": -75.29882506
+    },
+    "WB97M-V": {
+      "available": true,
+      "test_energy_hartree": -75.30988525
+    },
+    "M06-2X": {
+      "available": true,
+      "test_energy_hartree": -75.31278664
+    },
+    "BHANDHLYP": {
+      "available": true,
+      "test_energy_hartree": -75.28971031
+    },
+    "LRC-WPBEH": {
+      "available": true,
+      "test_energy_hartree": -75.25335921
+    },
+    "HSE06": {
+      "available": true,
+      "test_energy_hartree": -75.25095279
+    }
+  },
+  "basis_sets_avobenzone": {
+    "6-31G(d)": {
+      "available": true,
+      "nbf": 389,
+      "nshell": 182,
+      "puream": false
+    },
+    "6-31+G(d)": {
+      "available": true,
+      "nbf": 481,
+      "nshell": 228,
+      "puream": false
+    },
+    "6-311G(d,p)": {
+      "available": true,
+      "nbf": 546,
+      "nshell": 272,
+      "puream": true
+    },
+    "def2-SVP": {
+      "available": true,
+      "nbf": 432,
+      "nshell": 204,
+      "puream": true
+    },
+    "def2-SVPD": {
+      "available": true,
+      "nbf": 645,
+      "nshell": 275,
+      "puream": true
+    },
+    "def2-TZVP": {
+      "available": true,
+      "nbf": 845,
+      "nshell": 341,
+      "puream": true
+    },
+    "def2-TZVP(-f)": {
+      "available": false,
+      "error": "BasisSet::construct: Unable to find a basis set for atom 1 for key BASIS among:"
+    },
+    "def2-TZVPD": {
+      "available": true,
+      "nbf": 1058,
+      "nshell": 412,
+      "puream": true
+    }
+  },
+  "tdscf": {
+    "gas_TDA": {
+      "ok": true,
+      "excitation_energies_eV": [
+        11.713688444077158,
+        13.9760388841714,
+        14.647934841264894
+      ]
+    },
+    "gas_RPA": {
+      "ok": true,
+      "excitation_energies_eV": [
+        11.659650332826612,
+        13.967518640999197,
+        14.50726640645433
+      ]
+    }
+  },
+  "solvation": {
+    "scf_pcm": {
+      "ok": true,
+      "energy_hartree": -75.3174868
+    },
+    "tddft_pcm": {
+      "ok": true,
+      "excitation_energies_eV": [
+        11.98161227259423,
+        14.16656461695902,
+        14.819529803498957
+      ]
+    },
+    "scf_ddx": {
+      "ok": false,
+      "error": "Python module ddx not found. Solve by installing it: `conda install -c conda-forge pyddx` or `pip install pyddx`"
+    }
+  }
+}

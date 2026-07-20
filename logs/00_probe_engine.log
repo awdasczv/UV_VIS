@@ -1,0 +1,46 @@
+﻿Psi4 version: 1.11
+애드온: {"pcmsolver": true, "ddx": false, "dftd3": false, "dftd4": false, "s-dftd3": "query failed: 's-dftd3'", "gdma": false, "cppe": false, "libefp": false, "chemps2": false, "simint": false, "brianqc": "query failed: 'brianqc'", "adcc": false, "cfour": false, "v2rdm_casscf": false}
+
+범함수:
+  B3LYP            OK
+  B3LYP-D3BJ       X  Program s-dftd3 is registered with QCEngine, but cannot be found.
+  PBE0             OK
+  PBE0-D3BJ        X  Program s-dftd3 is registered with QCEngine, but cannot be found.
+  CAM-B3LYP        OK
+  CAM-B3LYP-D3BJ   X  Program s-dftd3 is registered with QCEngine, but cannot be found.
+  WB97X-D          OK
+  WB97X-D3BJ       X  Program s-dftd3 is registered with QCEngine, but cannot be found.
+  WB97X-V          OK
+  WB97M-V          OK
+  M06-2X           OK
+  BHANDHLYP        OK
+  LRC-WPBEH        OK
+  HSE06            OK
+
+QcdbException BasisSetNotFound: BasisSet::construct: Unable to find a basis set for atom 1 for key BASIS among:
+  Shell Entries: ['C']
+  Basis Sets: [('def2-TZVP(-f)', 'def2-TZVP(-f)', None)]
+  File Path: C:\Users\ysm04\Documents\etc\uv_vis, C:\Users\ysm04\Documents\etc\uv_vis, C:\Users\ysm04\Documents\etc\uv_vis\.mamba\envs\qc\Library\share\psi4\basis
+  Input Blocks: 
+
+
+
+
+기저셋 (아보벤존 enolA, C20H22O3 = 45 원자):
+  6-31G(d)         nbf=  389  shells=182
+  6-31+G(d)        nbf=  481  shells=228
+  6-311G(d,p)      nbf=  546  shells=272
+  def2-SVP         nbf=  432  shells=204
+  def2-SVPD        nbf=  645  shells=275
+  def2-TZVP        nbf=  845  shells=341
+  def2-TZVP(-f)    X BasisSet::construct: Unable to find a basis set for atom 1 for key BASIS among:
+  def2-TZVPD       nbf= 1058  shells=412
+
+TD-DFT / 용매 모델:
+  기체상 TDA : OK
+  기체상 RPA : OK
+  SCF + PCM  : OK
+  TDDFT + PCM: OK
+  SCF + DDX  : X
+
+저장: C:\Users\ysm04\Documents\etc\uv_vis\logs\engine_probe.json

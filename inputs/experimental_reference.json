@@ -1,0 +1,122 @@
+{
+  "_comment": "아보벤존 UV-Vis 실험값 및 선행 계산값. 계산 결과와의 오차 계산에 사용된다. 모든 값은 출처 명시.",
+  "experimental": {
+    "enol_band": {
+      "description": "킬레이트 에놀형의 강한 pi->pi* UVA 밴드",
+      "values": [
+        {"solvent": "ethanol",      "lambda_max_nm": 354.9, "epsilon_M-1cm-1": 34000, "ref": "Vallejo2011"},
+        {"solvent": "acetonitrile", "lambda_max_nm": 355.0, "epsilon_M-1cm-1": 33600, "ref": "Vallejo2011"},
+        {"solvent": "hexane",       "lambda_max_nm": 350.0, "epsilon_M-1cm-1": 34800, "ref": "Vallejo2011"},
+        {"solvent": "methanol",     "lambda_max_nm": 358.0, "epsilon_M-1cm-1": null,  "ref": "Mturi2008"},
+        {"solvent": "cyclohexane",  "lambda_max_nm": 351.0, "epsilon_M-1cm-1": null,  "ref": "Mturi2008"},
+        {"solvent": "ethyl acetate","lambda_max_nm": 356.0, "epsilon_M-1cm-1": null,  "ref": "Mturi2008"},
+        {"solvent": "DMSO",         "lambda_max_nm": 363.0, "epsilon_M-1cm-1": null,  "ref": "Mturi2008"}
+      ],
+      "primary_target": {"solvent": "ethanol", "lambda_max_nm": 354.9, "ref": "Vallejo2011"},
+      "solvatochromism": "극성이 커질수록 적색이동 (hexane 350 -> EtOH 355 -> DMSO 363 nm). 양의 용매변색."
+    },
+    "diketo_band": {
+      "description": "디케토형의 UVB 밴드 (개별 아릴케톤 발색단)",
+      "values": [
+        {"solvent": "HPLC 85:15 MeOH/H2O", "lambda_max_nm": 269.0, "ref": "Mturi2008"},
+        {"solvent": "cyclohexane",         "lambda_max_nm": 265.0, "ref": "Mturi2008"},
+        {"solvent": "aqueous buffer",      "lambda_max_nm": 267.0, "ref": "Langmuir2025"},
+        {"solvent": "MeCN/H2O 1:1",        "lambda_max_nm": 270.0, "ref": "Langmuir2025"}
+      ],
+      "primary_target": {"solvent": "generic polar", "lambda_max_nm": 265.0, "ref": "Mturi2008"},
+      "note": "에탄올/메탄올에서의 디케토 몰흡광계수(eps)는 문헌에서 찾지 못함."
+    },
+    "tautomer_equilibrium": {
+      "description": "에놀:디케토 비율",
+      "values": [
+        {"solvent": "cyclohexane-d12", "Ke_enol_over_keto": 46, "enol_percent": 98,   "method": "1H NMR", "ref": "Mturi2008"},
+        {"solvent": "DMSO-d6",         "Ke_enol_over_keto": 10, "enol_percent": 91,   "method": "1H NMR", "ref": "Mturi2008"},
+        {"solvent": "acetonitrile",    "Ke_enol_over_keto": null, "enol_percent": 98, "method": "UV/HPLC", "ref": "Langmuir2025"},
+        {"solvent": "70% methanol",    "Ke_enol_over_keto": null, "enol_percent": 84.7, "method": "UV/HPLC", "ref": "Langmuir2025"}
+      ],
+      "caveat": "에탄올/메탄올에서는 CH2 양성자의 H/D 교환 때문에 NMR 로 비율을 직접 못 잰다. 극성 양성자성 용매에서도 평형은 항상 에놀 쪽으로 치우쳐 있다."
+    }
+  },
+  "previous_calculations": {
+    "B3LYP_6-31+Gd_PCM": {
+      "level": "B3LYP/6-31+G(d), TD-DFT 10 singlets, PCM",
+      "ref": "ACSOmega2026",
+      "enol": {"gas_nm": 342.76, "gas_f": 0.9912,
+               "ethanol_nm": 360.79, "ethanol_f": 1.1378,
+               "methanol_nm": 360.38, "water_nm": 360.86},
+      "keto": {"gas_nm": 269.86, "gas_f": 0.4667,
+               "ethanol_nm": 284.79, "ethanol_f": 0.6508,
+               "methanol_nm": 284.64, "water_nm": 285.00},
+      "enol_more_stable_by_kcalmol": 3.834,
+      "error_vs_exp_nm": "에놀 +3 ~ +6 nm (과대), 케토 +15 ~ +20 nm (과대)"
+    },
+    "CAM-B3LYP_TZVP_gas": {
+      "level": "CAM-B3LYP/TZVP, 진공, tert-butyl 생략한 축소 모델",
+      "ref": "Kojic2016",
+      "enol_S1": {"eV": 4.09, "nm": 303.0, "f": 0.91, "character": "pi->pi*, HOMO->LUMO"},
+      "enol_S2": {"eV": 4.17, "character": "n->pi*, f 무시 가능"},
+      "keto_bright": {"eV": 4.80},
+      "error_vs_exp": "에놀 밴드 약 +0.6 eV (약 -50 nm, 너무 청색). 케토는 +0.12 eV 로 양호.",
+      "relative_energies_kJmol": {
+        "chelated_enol": 0.0,
+        "enolA_vs_enolB": 0.7,
+        "keto_s": 15.0, "keto_d": 21.0,
+        "non_chelated_enol": 69.5
+      }
+    },
+    "wB97X-D_def2-SVP": {
+      "level": "opt wB97X-D/def2-SVP, TD-DFT wB97X-D / M06-2X / PBE0 with def2-SVP",
+      "ref": "Wong2020",
+      "note": "양성자화된 아보벤존(기체상). 계산된 전이를 실험에 맞추려면 일률적으로 0.53 eV 적색이동이 필요했다 -> 이 발색단에 대한 TD-DFT 의 계통 오차 크기를 보여줌."
+    },
+    "MINDO3_TDA": {
+      "status": "NOT_FOUND_IN_LITERATURE",
+      "search_scope": "Google Scholar 전문검색, OpenAlex, Crossref, Europe PMC, PubMed, KCI(한국), 기관 리포지터리, 한국어/인도네시아어 질의 포함",
+      "findings": [
+        "'MINDO/3 avobenzone' -> Google Scholar 결과 0건",
+        "'MINDO/3-TDA' -> 결과 0건. 이 이름의 방법론이 발표된 문헌 자체가 없는 것으로 보인다.",
+        "MINDO/3 은 본래 바닥상태 SCF 방법이며, 들뜬상태를 얻으려면 별도의 CI 를 붙여야 한다. 아보벤존에 그렇게 적용한 사례를 찾지 못했다."
+      ],
+      "user_supplied_lambda_max_nm": null,
+      "note": "따라서 본 프로젝트에서 동급의 저비용 기준선(HF/STO-3G + CIS)을 직접 계산해 비교 대상으로 삼는다. scripts/08_lowcost_baseline.py"
+    },
+
+    "semiempirical_avobenzone_found": {
+      "status": "EXISTS_BUT_NUMBERS_UNRETRIEVABLE",
+      "ref": "Tahir2006",
+      "level": "PM3 구조 최적화 + ZINDO/S (단일여기 CI), HyperChem",
+      "molecules": ["avobenzone", "oxybenzone"],
+      "solvent_treatment": "명시적 초분자 모형 - 용질 + 에탄올 1분자 수소결합",
+      "qualitative_result": "에탄올 초분자에서 적색이동이 나타나지만 실험값에 '유의미하게 근접하지는 않았다'고 저자들이 서술",
+      "lambda_max_nm": null,
+      "note": "아보벤존에 대해 실제로 존재하는 유일한 반경험적 UV-Vis 계산. 다만 원문 PDF 가 로그인 장벽/404 로 접근 불가라 수치를 인용할 수 없다. 정성적 결론만 보고서에 인용한다."
+    },
+
+    "semiempirical_parent_chromophore": {
+      "_comment": "아보벤존의 모체 발색단인 다이벤조일메탄(DBM)에 대한 반경험적 계산들. 저비용 방법의 오차 크기를 가늠하는 참고자료.",
+      "entries": [
+        {"ref": "Markov1977", "method": "CNDO/S", "molecules": ["dibenzoylmethane", "benzoylacetone", "ethyl benzoylacetate"]},
+        {"ref": "Morita1981", "method": "수정 CNDO-CI + composite molecule method",
+         "experimental_CT_bands_cm-1": {"benzoylacetone": [44000], "dibenzoylmethane": [40000, 44000]},
+         "note": "여기서 다룬 것은 약 227-250 nm 의 고에너지 CT 밴드이고, 아보벤존의 ~355 nm pi->pi* 밴드와는 다르다."},
+        {"ref": "Hamilton1982", "method": "CNDO/S-2", "note": "방향족 베타-다이케톤 분광학 학위논문. 전문 PDF 무료 공개."},
+        {"ref": "Arnold1990", "method": "MNDO", "note": "'다이벤조일메탄은 크기 때문에 CNDO/S 계산을 수행할 수 없었다'고 명시 - 당시 저비용 방법의 한계를 보여줌."}
+      ]
+    }
+  },
+  "references": {
+    "Vallejo2011": "J. J. Vallejo, M. Mesa, C. Gallardo, Vitae 18(1) (2011) 63-71. http://www.scielo.org.co/scielo.php?script=sci_arttext&pid=S0121-40042011000100009",
+    "Mturi2008": "G. J. Mturi, B. S. Martincigh, J. Photochem. Photobiol. A 200 (2008) 410-420. doi:10.1016/j.jphotochem.2008.09.007",
+    "Langmuir2025": "Stability and Properties of UV Filter Avobenzone under Diketo/Enol Tautomerization ... Langmuir (2025). doi:10.1021/acs.langmuir.4c04108",
+    "ACSOmega2026": "In Silico Perspective on Avobenzone, Octisalate, ... ACS Omega (2026). doi:10.1021/acsomega.5c09234",
+    "Kojic2016": "M. Kojic, M. Petkovic, M. Etinski, J. Serb. Chem. Soc. 81(12) (2016) 1393-1406. doi:10.2298/JSC160531085K",
+    "Wong2020": "N. G. K. Wong et al., J. Phys. Chem. A 124 (2020). doi:10.1021/acs.jpca.0c01295",
+    "Yamaji2013": "M. Yamaji, M. Kida, J. Phys. Chem. A 117(9) (2013) 1946-1951. doi:10.1021/jp312774e",
+    "Tahir2006": "I. Tahir, K. Wijaya, A. Ahmadi, 'Analisis Spektra Transisi Elektronik Senyawa Tabir Surya Avobenzon dan Oksibenzon Melalui Kajian Interaksi dengan Pelarut Etanol', Seminar Nasional Kimia XVIII, Universitas Gadjah Mada, Yogyakarta, 2006. (원문 PDF 접근 불가)",
+    "Markov1977": "P. Markov, I. Petkov, Tetrahedron 33(9) (1977) 1013-1015. doi:10.1016/0040-4020(77)80218-4",
+    "Morita1981": "H. Morita, H. Nakanishi, Bull. Chem. Soc. Jpn. 54(2) (1981) 378-386. doi:10.1246/bcsj.54.378",
+    "Hamilton1982": "F. A. P. Hamilton, 'Spectroscopy and Photochemistry of Aromatic and Cyclic Beta-Diketones', PhD dissertation, Louisiana State University, 1982. doi:10.31390/gradschool_disstheses.3769",
+    "Arnold1990": "S. E. Arnold, 'The Effect of Structure and Geometry on the Spectroscopy of Beta-Diketones', PhD dissertation, LSU, 1990. doi:10.31390/gradschool_disstheses.5032",
+    "Kojic2019": "M. Kojic, I. Lyskov, B. Milovanovic, C. M. Marian et al., Photochem. Photobiol. Sci. 18(6) (2019) 1324. DFT/MRCI on the DBM enol."
+  }
+}

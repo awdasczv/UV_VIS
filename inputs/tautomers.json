@@ -1,0 +1,68 @@
+{
+  "molecule": {
+    "common_name": "Avobenzone",
+    "iupac_name": "1-(4-tert-butylphenyl)-3-(4-methoxyphenyl)propane-1,3-dione",
+    "inci_name": "Butyl Methoxydibenzoylmethane (BMDBM)",
+    "cas": "70356-09-1",
+    "formula": "C20H22O3",
+    "monoisotopic_mass": 310.1569,
+    "charge": 0,
+    "multiplicity": 1
+  },
+  "skeleton_convention": {
+    "description": "Ar1-C1(=O)-C2H2-C3(=O)-Ar2 (1,3-diketone backbone)",
+    "Ar1": "4-tert-butylphenyl  (전자 주는 능력 약함, 알킬)",
+    "Ar2": "4-methoxyphenyl     (강한 전자 주개, -OMe)"
+  },
+  "tautomers": [
+    {
+      "id": "enolA",
+      "label": "Chelated enol tautomer A (OH on the tert-butylphenyl side)",
+      "smiles": "CC(C)(C)c1ccc(cc1)/C(O)=C/C(=O)c1ccc(OC)cc1",
+      "smiles_note": "`/C(O)=C/C(=O)` 는 아릴기와 케톤 탄소가 trans, 따라서 에놀 OH 와 케톤 C=O 가 cis 가 되어 6원 킬레이트 고리를 닫을 수 있다. (`/C(O)=C\\C(=O)` 로 쓰면 정반대가 되어 킬레이트가 불가능하다 - 2026-07-20 검증에서 실제로 발견한 오류)",
+      "enolized_carbonyl": "C1 (tert-butylphenyl side)",
+      "carbonyl_remaining": "C3 (methoxyphenyl side)",
+      "geometry_requirement": "Z(cis)-enol; O-H...O=C 6-membered intramolecular hydrogen bond",
+      "rationale": [
+        "1,3-diketone 은 용액상에서 킬레이트 에놀형이 우세하며, 아보벤존의 강한 ~350-360 nm 흡수는 에놀형의 확장 pi 공액에서 온다.",
+        "A형에서는 C=C-C=O 공액 사슬이 methoxyphenyl 쪽 카보닐과 이어지므로 -OMe 주개와 카보닐 받개가 같은 공액 경로에 놓인다.",
+        "따라서 A형은 push-pull 성격이 커서 최저 에너지 pi->pi* 전이가 더 장파장으로 예상된다.",
+        "이 가설은 계산으로 검증한다 (보고서 항목: 토토머 선택의 영향)."
+      ]
+    },
+    {
+      "id": "enolB",
+      "label": "Chelated enol tautomer B (OH on the methoxyphenyl side)",
+      "smiles": "COc1ccc(cc1)/C(O)=C/C(=O)c1ccc(C(C)(C)C)cc1",
+      "smiles_note": "enolA 와 동일한 이유로 `=C/C(=O)` 를 사용해 OH 와 C=O 가 cis 가 되도록 한다.",
+      "enolized_carbonyl": "C3 (methoxyphenyl side)",
+      "carbonyl_remaining": "C1 (tert-butylphenyl side)",
+      "geometry_requirement": "Z(cis)-enol; O-H...O=C 6-membered intramolecular hydrogen bond",
+      "rationale": [
+        "A형과 프로톤 위치/이중결합 위치만 다른 짝 토토머. 둘은 분자 내 수소 이동(ESIPT/토토머화)으로 상호 변환된다.",
+        "B형에서는 -OMe 가 에놀 C-OH 쪽에 붙어 두 개의 주개가 같은 고리에 몰리므로 공액 push-pull 이 약해질 것으로 예상.",
+        "A vs B 상대 에너지와 lambda_max 차이는 '토토머 선택이 스펙트럼에 미치는 영향'의 핵심 근거가 된다."
+      ]
+    },
+    {
+      "id": "diketo",
+      "label": "Diketo tautomer",
+      "smiles": "CC(C)(C)c1ccc(cc1)C(=O)CC(=O)c1ccc(OC)cc1",
+      "enolized_carbonyl": null,
+      "carbonyl_remaining": "C1 and C3 (both sp2 C=O)",
+      "geometry_requirement": "sp3 CH2 bridge; 두 아릴케톤 발색단이 서로 공액되지 않고 분리됨",
+      "rationale": [
+        "가운데 CH2 가 sp3 이므로 두 개의 아릴케톤 발색단이 전자적으로 끊어진다.",
+        "그 결과 흡수는 개별 아릴케톤 수준(~260-290 nm)으로 단파장 이동하며 ~350 nm 밴드가 사라진다.",
+        "실험에서 관측되는 단파장 밴드의 귀속을 확인하기 위해 반드시 필요."
+      ]
+    }
+  ],
+  "validation_targets": {
+    "formula": "C20H22O3",
+    "heavy_atoms": 23,
+    "hydrogens": 22,
+    "enol_OH_O_distance_range_A": [1.4, 1.8],
+    "notes": "에놀형은 O-H...O 거리가 대략 1.4-1.8 A 인 강한 분자내 수소결합을 가져야 한다."
+  }
+}

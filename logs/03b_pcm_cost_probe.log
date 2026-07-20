@@ -1,0 +1,11 @@
+﻿
+--- area1.0 ---
+    tessera=1024  SCF=325s  TDDFT=566s  lambda_max=332.3 nm (f=1.141)
+
+--- area2.0 ---
+    tessera=750  SCF=202s  TDDFT=425s  lambda_max=332.3 nm (f=1.141)
+
+=== 요약 ===
+조건          tessera    SCF s   TDDFT s  lambda nm    gas 대비 이동
+area1.0        1024    324.8     565.8      332.3        +16.6
+area2.0         750    202.4     425.2      332.3        +16.6

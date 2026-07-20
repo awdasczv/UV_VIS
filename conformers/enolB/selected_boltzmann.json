@@ -1,0 +1,26 @@
+{
+  "tautomer": "enolB",
+  "target_cumulative_weight": 0.9,
+  "max_conformers": 3,
+  "achieved_cumulative_weight": 0.30120307339654395,
+  "selected": [
+    {
+      "conf_id": "enolB_c000",
+      "rel_energy_kcalmol": 0.0,
+      "boltzmann_weight": 0.10582457835671362,
+      "xyz": "conformers/enolB/enolB_c000.xyz"
+    },
+    {
+      "conf_id": "enolB_c001",
+      "rel_energy_kcalmol": 0.03770043160331112,
+      "boltzmann_weight": 0.09930061509334735,
+      "xyz": "conformers/enolB/enolB_c001.xyz"
+    },
+    {
+      "conf_id": "enolB_c002",
+      "rel_energy_kcalmol": 0.057248082138261484,
+      "boltzmann_weight": 0.09607787994648295,
+      "xyz": "conformers/enolB/enolB_c002.xyz"
+    }
+  ]
+}

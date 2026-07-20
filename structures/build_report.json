@@ -1,0 +1,79 @@
+{
+  "enolA": {
+    "formula": "C20H22O3",
+    "n_heavy_atoms": 23,
+    "n_hydrogens": 22,
+    "mol_weight": 310.393,
+    "n_carbonyl": 1,
+    "n_enol_OH": 2,
+    "n_sp3_CH2_bridge": 0,
+    "intramolecular_hbond": {
+      "atoms": {
+        "O_ketone": 14,
+        "C_ketone": 13,
+        "C_alpha": 12,
+        "C_enol": 10,
+        "O_enol": 11,
+        "H_enol": 36
+      },
+      "H_to_acceptorO_A": 1.761,
+      "O_to_O_A": 2.614,
+      "dihedral_Oenol_Cenol_Ca_Cket_deg": -1.2,
+      "dihedral_Cenol_Ca_Cket_Oket_deg": -8.1
+    },
+    "canonical_smiles_from_3d": "COc1ccc(C(=O)/C=C(\\O)c2ccc(C(C)(C)C)cc2)cc1",
+    "smiles": "CC(C)(C)c1ccc(cc1)/C(O)=C/C(=O)c1ccc(OC)cc1",
+    "label": "Chelated enol tautomer A (OH on the tert-butylphenyl side)",
+    "mmff94s_energy_kcalmol": 75.3817,
+    "n_embedded": 40,
+    "problems": [],
+    "xyz": "structures\\enolA.xyz"
+  },
+  "enolB": {
+    "formula": "C20H22O3",
+    "n_heavy_atoms": 23,
+    "n_hydrogens": 22,
+    "mol_weight": 310.393,
+    "n_carbonyl": 1,
+    "n_enol_OH": 2,
+    "n_sp3_CH2_bridge": 0,
+    "intramolecular_hbond": {
+      "atoms": {
+        "O_ketone": 12,
+        "C_ketone": 11,
+        "C_alpha": 10,
+        "C_enol": 8,
+        "O_enol": 9,
+        "H_enol": 30
+      },
+      "H_to_acceptorO_A": 1.758,
+      "O_to_O_A": 2.611,
+      "dihedral_Oenol_Cenol_Ca_Cket_deg": 1.2,
+      "dihedral_Cenol_Ca_Cket_Oket_deg": 8.0
+    },
+    "canonical_smiles_from_3d": "COc1ccc(/C(O)=C/C(=O)c2ccc(C(C)(C)C)cc2)cc1",
+    "smiles": "COc1ccc(cc1)/C(O)=C/C(=O)c1ccc(C(C)(C)C)cc1",
+    "label": "Chelated enol tautomer B (OH on the methoxyphenyl side)",
+    "mmff94s_energy_kcalmol": 75.0973,
+    "n_embedded": 40,
+    "problems": [],
+    "xyz": "structures\\enolB.xyz"
+  },
+  "diketo": {
+    "formula": "C20H22O3",
+    "n_heavy_atoms": 23,
+    "n_hydrogens": 22,
+    "mol_weight": 310.393,
+    "n_carbonyl": 2,
+    "n_enol_OH": 0,
+    "n_sp3_CH2_bridge": 1,
+    "intramolecular_hbond": null,
+    "canonical_smiles_from_3d": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+    "smiles": "CC(C)(C)c1ccc(cc1)C(=O)CC(=O)c1ccc(OC)cc1",
+    "label": "Diketo tautomer",
+    "mmff94s_energy_kcalmol": 82.0968,
+    "n_embedded": 40,
+    "problems": [],
+    "xyz": "structures\\diketo.xyz"
+  }
+}

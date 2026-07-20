@@ -1,0 +1,26 @@
+{
+  "tautomer": "diketo",
+  "target_cumulative_weight": 0.9,
+  "max_conformers": 3,
+  "achieved_cumulative_weight": 0.3239672902434292,
+  "selected": [
+    {
+      "conf_id": "diketo_c000",
+      "rel_energy_kcalmol": 0.0,
+      "boltzmann_weight": 0.10979246587867544,
+      "xyz": "conformers/diketo/diketo_c000.xyz"
+    },
+    {
+      "conf_id": "diketo_c001",
+      "rel_energy_kcalmol": 0.0028061301262833718,
+      "boltzmann_weight": 0.10927369573369122,
+      "xyz": "conformers/diketo/diketo_c001.xyz"
+    },
+    {
+      "conf_id": "diketo_c002",
+      "rel_energy_kcalmol": 0.02700169313821038,
+      "boltzmann_weight": 0.10490112863106252,
+      "xyz": "conformers/diketo/diketo_c002.xyz"
+    }
+  ]
+}

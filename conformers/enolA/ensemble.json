@@ -1,0 +1,71 @@
+{
+  "tautomer": "enolA",
+  "backend": "etkdg",
+  "solvent_xtb_alpb": "ethanol",
+  "level": "GFN2-xTB",
+  "n_raw": 200,
+  "n_unique": 9,
+  "dedup_criteria": {
+    "dE_kcal": 0.1,
+    "rmsd_A": 0.125,
+    "rmsd_type": "RDKit GetBestRMS (대칭 인식, heavy atom)",
+    "energy_window_kcal": 6.0
+  },
+  "temperature_K": 298.15,
+  "conformers": [
+    {
+      "conf_id": "enolA_c000",
+      "energy_hartree": -66.261707971534,
+      "rel_energy_kcalmol": 0.0,
+      "boltzmann_weight": 0.1305598820551651
+    },
+    {
+      "conf_id": "enolA_c001",
+      "energy_hartree": -66.261673708475,
+      "rel_energy_kcalmol": 0.021500394128288625,
+      "boltzmann_weight": 0.1259069926792128
+    },
+    {
+      "conf_id": "enolA_c002",
+      "energy_hartree": -66.261670952337,
+      "rel_energy_kcalmol": 0.02322989683653772,
+      "boltzmann_weight": 0.12553999775194447
+    },
+    {
+      "conf_id": "enolA_c003",
+      "energy_hartree": -66.261665142842,
+      "rel_energy_kcalmol": 0.026875409984489847,
+      "boltzmann_weight": 0.12476993155886401
+    },
+    {
+      "conf_id": "enolA_c004",
+      "energy_hartree": -66.261519651257,
+      "rel_energy_kcalmol": 0.11817275796962504,
+      "boltzmann_weight": 0.10695190300031618
+    },
+    {
+      "conf_id": "enolA_c005",
+      "energy_hartree": -66.261437901709,
+      "rel_energy_kcalmol": 0.16947137384132396,
+      "boltzmann_weight": 0.09808133535469823
+    },
+    {
+      "conf_id": "enolA_c006",
+      "energy_hartree": -66.261437760409,
+      "rel_energy_kcalmol": 0.1695600409340014,
+      "boltzmann_weight": 0.09806665829639967
+    },
+    {
+      "conf_id": "enolA_c007",
+      "energy_hartree": -66.261409248792,
+      "rel_energy_kcalmol": 0.18745135071554223,
+      "boltzmann_weight": 0.09514959751019286
+    },
+    {
+      "conf_id": "enolA_c008",
+      "energy_hartree": -66.261407501735,
+      "rel_energy_kcalmol": 0.18854764554282474,
+      "boltzmann_weight": 0.09497370179320672
+    }
+  ]
+}

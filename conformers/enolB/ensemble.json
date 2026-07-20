@@ -1,0 +1,83 @@
+{
+  "tautomer": "enolB",
+  "backend": "etkdg",
+  "solvent_xtb_alpb": "ethanol",
+  "level": "GFN2-xTB",
+  "n_raw": 200,
+  "n_unique": 11,
+  "dedup_criteria": {
+    "dE_kcal": 0.1,
+    "rmsd_A": 0.125,
+    "rmsd_type": "RDKit GetBestRMS (대칭 인식, heavy atom)",
+    "energy_window_kcal": 6.0
+  },
+  "temperature_K": 298.15,
+  "conformers": [
+    {
+      "conf_id": "enolB_c000",
+      "energy_hartree": -66.261634122804,
+      "rel_energy_kcalmol": 0.0,
+      "boltzmann_weight": 0.10582457835671362
+    },
+    {
+      "conf_id": "enolB_c001",
+      "energy_hartree": -66.261574043342,
+      "rel_energy_kcalmol": 0.03770043160331112,
+      "boltzmann_weight": 0.09930061509334735
+    },
+    {
+      "conf_id": "enolB_c002",
+      "energy_hartree": -66.261542892178,
+      "rel_energy_kcalmol": 0.057248082138261484,
+      "boltzmann_weight": 0.09607787994648295
+    },
+    {
+      "conf_id": "enolB_c003",
+      "energy_hartree": -66.261540863786,
+      "rel_energy_kcalmol": 0.05852091733769364,
+      "boltzmann_weight": 0.09587169742260614
+    },
+    {
+      "conf_id": "enolB_c004",
+      "energy_hartree": -66.261517829272,
+      "rel_energy_kcalmol": 0.072975293103821,
+      "boltzmann_weight": 0.09356109279404112
+    },
+    {
+      "conf_id": "enolB_c005",
+      "energy_hartree": -66.261459009053,
+      "rel_energy_kcalmol": 0.10988553779024436,
+      "boltzmann_weight": 0.08791032560863649
+    },
+    {
+      "conf_id": "enolB_c006",
+      "energy_hartree": -66.261439635891,
+      "rel_energy_kcalmol": 0.12204238049056407,
+      "boltzmann_weight": 0.08612492586729494
+    },
+    {
+      "conf_id": "enolB_c007",
+      "energy_hartree": -66.261426733491,
+      "rel_energy_kcalmol": 0.13013875872088726,
+      "boltzmann_weight": 0.08495602316547544
+    },
+    {
+      "conf_id": "enolB_c008",
+      "energy_hartree": -66.261414309678,
+      "rel_energy_kcalmol": 0.13793481908497823,
+      "boltzmann_weight": 0.08384547371394382
+    },
+    {
+      "conf_id": "enolB_c009",
+      "energy_hartree": -66.261414144061,
+      "rel_energy_kcalmol": 0.13803874531882904,
+      "boltzmann_weight": 0.0838307678887101
+    },
+    {
+      "conf_id": "enolB_c010",
+      "energy_hartree": -66.261401282973,
+      "rel_energy_kcalmol": 0.1461091998916662,
+      "boltzmann_weight": 0.08269662014274808
+    }
+  ]
+}

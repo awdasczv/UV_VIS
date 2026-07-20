@@ -1,0 +1,808 @@
+{
+  "enolA": {
+    "expected_skeleton": "COc1ccc(C(=O)C=C(O)c2ccc(C(C)(C)C)cc2)cc1",
+    "n_conformers": 9,
+    "n_problems": 0,
+    "chromophore_clusters": [
+      {
+        "cluster": 0,
+        "total_weight": 1.0,
+        "representative": "enolA_c000",
+        "members": [
+          "enolA_c000",
+          "enolA_c001",
+          "enolA_c002",
+          "enolA_c003",
+          "enolA_c004",
+          "enolA_c005",
+          "enolA_c006",
+          "enolA_c007",
+          "enolA_c008"
+        ],
+        "dihedrals": {
+          "aryl_ketone_twist_deg": 27.1,
+          "aryl_enol_twist_deg": 22.2,
+          "methoxy_twist_deg": 1.1
+        }
+      }
+    ],
+    "conformers": [
+      {
+        "conf_id": "enolA_c000",
+        "rel_energy_kcalmol": 0.0,
+        "boltzmann_weight": 0.1305598820551651,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)C=C(O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.673,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 27.1,
+          "aryl_enol_twist_deg": 22.2,
+          "methoxy_twist_deg": 1.1
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolA_c001",
+        "rel_energy_kcalmol": 0.021500394128288625,
+        "boltzmann_weight": 0.1259069926792128,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)C=C(O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.673,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 24.5,
+          "aryl_enol_twist_deg": 23.1,
+          "methoxy_twist_deg": 0.2
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolA_c002",
+        "rel_energy_kcalmol": 0.02322989683653772,
+        "boltzmann_weight": 0.12553999775194447,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)C=C(O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.672,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 26.3,
+          "aryl_enol_twist_deg": 21.6,
+          "methoxy_twist_deg": 0.4
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolA_c003",
+        "rel_energy_kcalmol": 0.026875409984489847,
+        "boltzmann_weight": 0.12476993155886401,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)C=C(O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.677,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 25.6,
+          "aryl_enol_twist_deg": 21.7,
+          "methoxy_twist_deg": 0.5
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolA_c004",
+        "rel_energy_kcalmol": 0.11817275796962504,
+        "boltzmann_weight": 0.10695190300031618,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)C=C(O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.666,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 22.6,
+          "aryl_enol_twist_deg": 25.4,
+          "methoxy_twist_deg": 1.1
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolA_c005",
+        "rel_energy_kcalmol": 0.16947137384132396,
+        "boltzmann_weight": 0.09808133535469823,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)C=C(O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.672,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 25.7,
+          "aryl_enol_twist_deg": 23.0,
+          "methoxy_twist_deg": 0.8
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolA_c006",
+        "rel_energy_kcalmol": 0.1695600409340014,
+        "boltzmann_weight": 0.09806665829639967,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)C=C(O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.674,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 24.2,
+          "aryl_enol_twist_deg": 24.0,
+          "methoxy_twist_deg": 1.4
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolA_c007",
+        "rel_energy_kcalmol": 0.18745135071554223,
+        "boltzmann_weight": 0.09514959751019286,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)C=C(O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.671,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 22.9,
+          "aryl_enol_twist_deg": 24.2,
+          "methoxy_twist_deg": 0.6
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolA_c008",
+        "rel_energy_kcalmol": 0.18854764554282474,
+        "boltzmann_weight": 0.09497370179320672,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)C=C(O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.673,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 23.6,
+          "aryl_enol_twist_deg": 24.5,
+          "methoxy_twist_deg": 1.7
+        },
+        "problems": []
+      }
+    ]
+  },
+  "enolB": {
+    "expected_skeleton": "COc1ccc(C(O)=CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+    "n_conformers": 11,
+    "n_problems": 0,
+    "chromophore_clusters": [
+      {
+        "cluster": 0,
+        "total_weight": 1.0,
+        "representative": "enolB_c000",
+        "members": [
+          "enolB_c000",
+          "enolB_c001",
+          "enolB_c002",
+          "enolB_c003",
+          "enolB_c004",
+          "enolB_c005",
+          "enolB_c006",
+          "enolB_c007",
+          "enolB_c008",
+          "enolB_c009",
+          "enolB_c010"
+        ],
+        "dihedrals": {
+          "aryl_ketone_twist_deg": 28.9,
+          "aryl_enol_twist_deg": 14.8,
+          "methoxy_twist_deg": 0.6
+        }
+      }
+    ],
+    "conformers": [
+      {
+        "conf_id": "enolB_c000",
+        "rel_energy_kcalmol": 0.0,
+        "boltzmann_weight": 0.10582457835671362,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(O)=CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.663,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 28.9,
+          "aryl_enol_twist_deg": 14.8,
+          "methoxy_twist_deg": 0.6
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolB_c001",
+        "rel_energy_kcalmol": 0.03770043160331112,
+        "boltzmann_weight": 0.09930061509334735,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(O)=CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.667,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 29.0,
+          "aryl_enol_twist_deg": 17.4,
+          "methoxy_twist_deg": 0.4
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolB_c002",
+        "rel_energy_kcalmol": 0.057248082138261484,
+        "boltzmann_weight": 0.09607787994648295,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(O)=CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.668,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 26.5,
+          "aryl_enol_twist_deg": 19.8,
+          "methoxy_twist_deg": 0.6
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolB_c003",
+        "rel_energy_kcalmol": 0.05852091733769364,
+        "boltzmann_weight": 0.09587169742260614,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(O)=CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.675,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 29.7,
+          "aryl_enol_twist_deg": 21.4,
+          "methoxy_twist_deg": 0.5
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolB_c004",
+        "rel_energy_kcalmol": 0.072975293103821,
+        "boltzmann_weight": 0.09356109279404112,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(O)=CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.669,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 26.8,
+          "aryl_enol_twist_deg": 19.2,
+          "methoxy_twist_deg": 0.4
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolB_c005",
+        "rel_energy_kcalmol": 0.10988553779024436,
+        "boltzmann_weight": 0.08791032560863649,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(O)=CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.666,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 25.4,
+          "aryl_enol_twist_deg": 21.7,
+          "methoxy_twist_deg": 1.3
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolB_c006",
+        "rel_energy_kcalmol": 0.12204238049056407,
+        "boltzmann_weight": 0.08612492586729494,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(O)=CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.665,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 26.5,
+          "aryl_enol_twist_deg": 17.0,
+          "methoxy_twist_deg": 0.1
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolB_c007",
+        "rel_energy_kcalmol": 0.13013875872088726,
+        "boltzmann_weight": 0.08495602316547544,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(O)=CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.666,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 28.8,
+          "aryl_enol_twist_deg": 17.8,
+          "methoxy_twist_deg": 0.8
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolB_c008",
+        "rel_energy_kcalmol": 0.13793481908497823,
+        "boltzmann_weight": 0.08384547371394382,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(O)=CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.665,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 29.8,
+          "aryl_enol_twist_deg": 16.9,
+          "methoxy_twist_deg": 0.3
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolB_c009",
+        "rel_energy_kcalmol": 0.13803874531882904,
+        "boltzmann_weight": 0.0838307678887101,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(O)=CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.667,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 28.2,
+          "aryl_enol_twist_deg": 17.8,
+          "methoxy_twist_deg": 0.3
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "enolB_c010",
+        "rel_energy_kcalmol": 0.1461091998916662,
+        "boltzmann_weight": 0.08269662014274808,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(O)=CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": 1.664,
+        "chromophore_dihedrals": {
+          "aryl_ketone_twist_deg": 24.3,
+          "aryl_enol_twist_deg": 23.0,
+          "methoxy_twist_deg": 0.8
+        },
+        "problems": []
+      }
+    ]
+  },
+  "diketo": {
+    "expected_skeleton": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+    "n_conformers": 26,
+    "n_problems": 0,
+    "chromophore_clusters": [
+      {
+        "cluster": 0,
+        "total_weight": 0.8144,
+        "representative": "diketo_c000",
+        "members": [
+          "diketo_c000",
+          "diketo_c001",
+          "diketo_c002",
+          "diketo_c003",
+          "diketo_c004",
+          "diketo_c005",
+          "diketo_c006",
+          "diketo_c007",
+          "diketo_c008",
+          "diketo_c009",
+          "diketo_c010",
+          "diketo_c011"
+        ],
+        "dihedrals": {
+          "aryl1_twist_deg": 1.5,
+          "aryl2_twist_deg": 3.4,
+          "backbone_C1_CH2_C3_deg": 69.9,
+          "methoxy_twist_deg": 1.0
+        }
+      },
+      {
+        "cluster": 1,
+        "total_weight": 0.1256,
+        "representative": "diketo_c012",
+        "members": [
+          "diketo_c012",
+          "diketo_c017",
+          "diketo_c018",
+          "diketo_c019",
+          "diketo_c020",
+          "diketo_c021",
+          "diketo_c022",
+          "diketo_c023",
+          "diketo_c024",
+          "diketo_c025"
+        ],
+        "dihedrals": {
+          "aryl1_twist_deg": 2.1,
+          "aryl2_twist_deg": 10.4,
+          "backbone_C1_CH2_C3_deg": 16.5,
+          "methoxy_twist_deg": 0.8
+        }
+      },
+      {
+        "cluster": 2,
+        "total_weight": 0.06,
+        "representative": "diketo_c013",
+        "members": [
+          "diketo_c013",
+          "diketo_c014",
+          "diketo_c015",
+          "diketo_c016"
+        ],
+        "dihedrals": {
+          "aryl1_twist_deg": 14.4,
+          "aryl2_twist_deg": 1.8,
+          "backbone_C1_CH2_C3_deg": 73.9,
+          "methoxy_twist_deg": 0.0
+        }
+      }
+    ],
+    "conformers": [
+      {
+        "conf_id": "diketo_c000",
+        "rel_energy_kcalmol": 0.0,
+        "boltzmann_weight": 0.10979246587867544,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 1.5,
+          "aryl2_twist_deg": 3.4,
+          "backbone_C1_CH2_C3_deg": 69.9,
+          "methoxy_twist_deg": 1.0
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c001",
+        "rel_energy_kcalmol": 0.0028061301262833718,
+        "boltzmann_weight": 0.10927369573369122,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 1.5,
+          "aryl2_twist_deg": 2.7,
+          "backbone_C1_CH2_C3_deg": 70.0,
+          "methoxy_twist_deg": 0.6
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c002",
+        "rel_energy_kcalmol": 0.02700169313821038,
+        "boltzmann_weight": 0.10490112863106252,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 1.9,
+          "aryl2_twist_deg": 2.9,
+          "backbone_C1_CH2_C3_deg": 69.9,
+          "methoxy_twist_deg": 0.7
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c003",
+        "rel_energy_kcalmol": 0.0440891614044955,
+        "boltzmann_weight": 0.10191895442526493,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 4.0,
+          "aryl2_twist_deg": 3.1,
+          "backbone_C1_CH2_C3_deg": 69.8,
+          "methoxy_twist_deg": 0.7
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c004",
+        "rel_energy_kcalmol": 0.05597987921314693,
+        "boltzmann_weight": 0.09989390783586552,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 4.1,
+          "aryl2_twist_deg": 2.7,
+          "backbone_C1_CH2_C3_deg": 69.6,
+          "methoxy_twist_deg": 0.3
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c005",
+        "rel_energy_kcalmol": 0.06091130611864195,
+        "boltzmann_weight": 0.09906591199844744,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 4.0,
+          "aryl2_twist_deg": 3.2,
+          "backbone_C1_CH2_C3_deg": 69.8,
+          "methoxy_twist_deg": 0.7
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c006",
+        "rel_energy_kcalmol": 0.07405469160035505,
+        "boltzmann_weight": 0.09689248035750529,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 3.9,
+          "aryl2_twist_deg": 3.4,
+          "backbone_C1_CH2_C3_deg": 69.9,
+          "methoxy_twist_deg": 0.7
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c007",
+        "rel_energy_kcalmol": 1.0202538530662455,
+        "boltzmann_weight": 0.019621006216490985,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 11.8,
+          "aryl2_twist_deg": 0.6,
+          "backbone_C1_CH2_C3_deg": 75.6,
+          "methoxy_twist_deg": 0.3
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c008",
+        "rel_energy_kcalmol": 1.029920484649575,
+        "boltzmann_weight": 0.019303478901336952,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 11.7,
+          "aryl2_twist_deg": 0.4,
+          "backbone_C1_CH2_C3_deg": 75.6,
+          "methoxy_twist_deg": 0.2
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c009",
+        "rel_energy_kcalmol": 1.0497910277257405,
+        "boltzmann_weight": 0.018666821565135133,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 11.8,
+          "aryl2_twist_deg": 1.2,
+          "backbone_C1_CH2_C3_deg": 75.3,
+          "methoxy_twist_deg": 0.6
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c010",
+        "rel_energy_kcalmol": 1.0527586059908365,
+        "boltzmann_weight": 0.018573558848087666,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 13.0,
+          "aryl2_twist_deg": 1.5,
+          "backbone_C1_CH2_C3_deg": 76.1,
+          "methoxy_twist_deg": 0.5
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c011",
+        "rel_energy_kcalmol": 1.1244850705247642,
+        "boltzmann_weight": 0.01645580994244599,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 12.0,
+          "aryl2_twist_deg": 5.8,
+          "backbone_C1_CH2_C3_deg": 77.2,
+          "methoxy_twist_deg": 0.6
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c012",
+        "rel_energy_kcalmol": 1.1245881483706406,
+        "boltzmann_weight": 0.016452947284248627,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 2.1,
+          "aryl2_twist_deg": 10.4,
+          "backbone_C1_CH2_C3_deg": 16.5,
+          "methoxy_twist_deg": 0.8
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c013",
+        "rel_energy_kcalmol": 1.1607179432153556,
+        "boltzmann_weight": 0.015479623121582855,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 14.4,
+          "aryl2_twist_deg": 1.8,
+          "backbone_C1_CH2_C3_deg": 73.9,
+          "methoxy_twist_deg": 0.0
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c014",
+        "rel_energy_kcalmol": 1.1699577560414545,
+        "boltzmann_weight": 0.015240090747168417,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 15.1,
+          "aryl2_twist_deg": 1.5,
+          "backbone_C1_CH2_C3_deg": 75.7,
+          "methoxy_twist_deg": 0.8
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c015",
+        "rel_energy_kcalmol": 1.1906265106122809,
+        "boltzmann_weight": 0.014717608656531524,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 16.2,
+          "aryl2_twist_deg": 1.1,
+          "backbone_C1_CH2_C3_deg": 74.9,
+          "methoxy_twist_deg": 0.4
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c016",
+        "rel_energy_kcalmol": 1.1969305931538339,
+        "boltzmann_weight": 0.014561842392021063,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 17.0,
+          "aryl2_twist_deg": 3.8,
+          "backbone_C1_CH2_C3_deg": 77.5,
+          "methoxy_twist_deg": 0.5
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c017",
+        "rel_energy_kcalmol": 1.2029728253992782,
+        "boltzmann_weight": 0.014414093645190829,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 7.9,
+          "aryl2_twist_deg": 13.0,
+          "backbone_C1_CH2_C3_deg": 19.4,
+          "methoxy_twist_deg": 0.4
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c018",
+        "rel_energy_kcalmol": 1.2169195152538892,
+        "boltzmann_weight": 0.014078758024094267,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 7.3,
+          "aryl2_twist_deg": 13.3,
+          "backbone_C1_CH2_C3_deg": 19.9,
+          "methoxy_twist_deg": 0.6
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c019",
+        "rel_energy_kcalmol": 1.225035490615069,
+        "boltzmann_weight": 0.0138872192905884,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 8.9,
+          "aryl2_twist_deg": 13.4,
+          "backbone_C1_CH2_C3_deg": 19.4,
+          "methoxy_twist_deg": 1.2
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c020",
+        "rel_energy_kcalmol": 1.2269738698883494,
+        "boltzmann_weight": 0.013841859974213881,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 9.4,
+          "aryl2_twist_deg": 14.7,
+          "backbone_C1_CH2_C3_deg": 20.7,
+          "methoxy_twist_deg": 0.8
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c021",
+        "rel_energy_kcalmol": 1.3582975854997572,
+        "boltzmann_weight": 0.011090049893830525,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 6.6,
+          "aryl2_twist_deg": 12.6,
+          "backbone_C1_CH2_C3_deg": 19.3,
+          "methoxy_twist_deg": 0.9
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c022",
+        "rel_energy_kcalmol": 1.3654889093368459,
+        "boltzmann_weight": 0.01095625730703566,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 6.2,
+          "aryl2_twist_deg": 13.7,
+          "backbone_C1_CH2_C3_deg": 19.6,
+          "methoxy_twist_deg": 0.8
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c023",
+        "rel_energy_kcalmol": 1.3666234044248917,
+        "boltzmann_weight": 0.010935298247514014,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 8.4,
+          "aryl2_twist_deg": 12.6,
+          "backbone_C1_CH2_C3_deg": 19.7,
+          "methoxy_twist_deg": 1.0
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c024",
+        "rel_energy_kcalmol": 1.3733139386751385,
+        "boltzmann_weight": 0.010812507874858646,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 8.0,
+          "aryl2_twist_deg": 12.9,
+          "backbone_C1_CH2_C3_deg": 20.2,
+          "methoxy_twist_deg": 1.0
+        },
+        "problems": []
+      },
+      {
+        "conf_id": "diketo_c025",
+        "rel_energy_kcalmol": 1.4707660357433077,
+        "boltzmann_weight": 0.009172623207112408,
+        "skeleton_matches": true,
+        "canonical_smiles": "COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1",
+        "chelate_H_to_O_A": null,
+        "chromophore_dihedrals": {
+          "aryl1_twist_deg": 10.3,
+          "aryl2_twist_deg": 15.4,
+          "backbone_C1_CH2_C3_deg": 22.1,
+          "methoxy_twist_deg": 1.3
+        },
+        "problems": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "tautomer": "diketo",
+  "backend": "etkdg",
+  "solvent_xtb_alpb": "ethanol",
+  "level": "GFN2-xTB",
+  "n_raw": 200,
+  "n_unique": 26,
+  "dedup_criteria": {
+    "dE_kcal": 0.1,
+    "rmsd_A": 0.125,
+    "rmsd_type": "RDKit GetBestRMS (대칭 인식, heavy atom)",
+    "energy_window_kcal": 6.0
+  },
+  "temperature_K": 298.15,
+  "conformers": [
+    {
+      "conf_id": "diketo_c000",
+      "energy_hartree": -66.255567192982,
+      "rel_energy_kcalmol": 0.0,
+      "boltzmann_weight": 0.10979246587867544
+    },
+    {
+      "conf_id": "diketo_c001",
+      "energy_hartree": -66.255562721129,
+      "rel_energy_kcalmol": 0.0028061301262833718,
+      "boltzmann_weight": 0.10927369573369122
+    },
+    {
+      "conf_id": "diketo_c002",
+      "energy_hartree": -66.255524163045,
+      "rel_energy_kcalmol": 0.02700169313821038,
+      "boltzmann_weight": 0.10490112863106252
+    },
+    {
+      "conf_id": "diketo_c003",
+      "energy_hartree": -66.255496932431,
+      "rel_energy_kcalmol": 0.0440891614044955,
+      "boltzmann_weight": 0.10191895442526493
+    },
+    {
+      "conf_id": "diketo_c004",
+      "energy_hartree": -66.255477983366,
+      "rel_energy_kcalmol": 0.05597987921314693,
+      "boltzmann_weight": 0.09989390783586552
+    },
+    {
+      "conf_id": "diketo_c005",
+      "energy_hartree": -66.255470124637,
+      "rel_energy_kcalmol": 0.06091130611864195,
+      "boltzmann_weight": 0.09906591199844744
+    },
+    {
+      "conf_id": "diketo_c006",
+      "energy_hartree": -66.255449179319,
+      "rel_energy_kcalmol": 0.07405469160035505,
+      "boltzmann_weight": 0.09689248035750529
+    },
+    {
+      "conf_id": "diketo_c007",
+      "energy_hartree": -66.253941314975,
+      "rel_energy_kcalmol": 1.0202538530662455,
+      "boltzmann_weight": 0.019621006216490985
+    },
+    {
+      "conf_id": "diketo_c008",
+      "energy_hartree": -66.253925910217,
+      "rel_energy_kcalmol": 1.029920484649575,
+      "boltzmann_weight": 0.019303478901336952
+    },
+    {
+      "conf_id": "diketo_c009",
+      "energy_hartree": -66.253894244491,
+      "rel_energy_kcalmol": 1.0497910277257405,
+      "boltzmann_weight": 0.018666821565135133
+    },
+    {
+      "conf_id": "diketo_c010",
+      "energy_hartree": -66.253889515354,
+      "rel_energy_kcalmol": 1.0527586059908365,
+      "boltzmann_weight": 0.018573558848087666
+    },
+    {
+      "conf_id": "diketo_c011",
+      "energy_hartree": -66.253775211957,
+      "rel_energy_kcalmol": 1.1244850705247642,
+      "boltzmann_weight": 0.01645580994244599
+    },
+    {
+      "conf_id": "diketo_c012",
+      "energy_hartree": -66.253775047692,
+      "rel_energy_kcalmol": 1.1245881483706406,
+      "boltzmann_weight": 0.016452947284248627
+    },
+    {
+      "conf_id": "diketo_c013",
+      "energy_hartree": -66.253717471199,
+      "rel_energy_kcalmol": 1.1607179432153556,
+      "boltzmann_weight": 0.015479623121582855
+    },
+    {
+      "conf_id": "diketo_c014",
+      "energy_hartree": -66.25370274662,
+      "rel_energy_kcalmol": 1.1699577560414545,
+      "boltzmann_weight": 0.015240090747168417
+    },
+    {
+      "conf_id": "diketo_c015",
+      "energy_hartree": -66.253669808863,
+      "rel_energy_kcalmol": 1.1906265106122809,
+      "boltzmann_weight": 0.014717608656531524
+    },
+    {
+      "conf_id": "diketo_c016",
+      "energy_hartree": -66.253659762668,
+      "rel_energy_kcalmol": 1.1969305931538339,
+      "boltzmann_weight": 0.014561842392021063
+    },
+    {
+      "conf_id": "diketo_c017",
+      "energy_hartree": -66.253650133758,
+      "rel_energy_kcalmol": 1.2029728253992782,
+      "boltzmann_weight": 0.014414093645190829
+    },
+    {
+      "conf_id": "diketo_c018",
+      "energy_hartree": -66.253627908293,
+      "rel_energy_kcalmol": 1.2169195152538892,
+      "boltzmann_weight": 0.014078758024094267
+    },
+    {
+      "conf_id": "diketo_c019",
+      "energy_hartree": -66.253614974663,
+      "rel_energy_kcalmol": 1.225035490615069,
+      "boltzmann_weight": 0.0138872192905884
+    },
+    {
+      "conf_id": "diketo_c020",
+      "energy_hartree": -66.253611885659,
+      "rel_energy_kcalmol": 1.2269738698883494,
+      "boltzmann_weight": 0.013841859974213881
+    },
+    {
+      "conf_id": "diketo_c021",
+      "energy_hartree": -66.253402607997,
+      "rel_energy_kcalmol": 1.3582975854997572,
+      "boltzmann_weight": 0.011090049893830525
+    },
+    {
+      "conf_id": "diketo_c022",
+      "energy_hartree": -66.253391147893,
+      "rel_energy_kcalmol": 1.3654889093368459,
+      "boltzmann_weight": 0.01095625730703566
+    },
+    {
+      "conf_id": "diketo_c023",
+      "energy_hartree": -66.25338933996,
+      "rel_energy_kcalmol": 1.3666234044248917,
+      "boltzmann_weight": 0.010935298247514014
+    },
+    {
+      "conf_id": "diketo_c024",
+      "energy_hartree": -66.253378677915,
+      "rel_energy_kcalmol": 1.3733139386751385,
+      "boltzmann_weight": 0.010812507874858646
+    },
+    {
+      "conf_id": "diketo_c025",
+      "energy_hartree": -66.253223378113,
+      "rel_energy_kcalmol": 1.4707660357433077,
+      "boltzmann_weight": 0.009172623207112408
+    }
+  ]
+}

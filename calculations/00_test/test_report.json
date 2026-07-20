@@ -1,0 +1,57 @@
+{
+  "structure": "structures\\enolA_xtbopt.xyz",
+  "note": "GFN2-xTB(ALPB ethanol) 최적화 구조에 대한 비용 측정용 단일점 계산",
+  "cases": [
+    {
+      "name": "T1_cheap_gas",
+      "functional": "B3LYP",
+      "basis": "6-31G",
+      "pcm": false,
+      "nstates": 5,
+      "tda": true,
+      "nbf": 251,
+      "scf_energy_hartree": -1000.7905606991851,
+      "scf_seconds": 76.2,
+      "tdscf_seconds": 149.4,
+      "transitions": [
+        {
+          "state": 1,
+          "energy_eV": 3.7884,
+          "wavelength_nm": 327.28,
+          "osc_strength": 0.0608
+        },
+        {
+          "state": 2,
+          "energy_eV": 3.9268,
+          "wavelength_nm": 315.74,
+          "osc_strength": 1.01238
+        },
+        {
+          "state": 3,
+          "energy_eV": 4.449,
+          "wavelength_nm": 278.68,
+          "osc_strength": 0.18526
+        },
+        {
+          "state": 4,
+          "energy_eV": 4.6329,
+          "wavelength_nm": 267.62,
+          "osc_strength": 0.00902
+        },
+        {
+          "state": 5,
+          "energy_eV": 4.7173,
+          "wavelength_nm": 262.83,
+          "osc_strength": 0.01115
+        }
+      ],
+      "brightest": {
+        "state": 2,
+        "energy_eV": 3.9268,
+        "wavelength_nm": 315.74,
+        "osc_strength": 1.01238
+      },
+      "ok": true
+    }
+  ]
+}

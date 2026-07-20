@@ -1,0 +1,26 @@
+{
+  "enolA": {
+    "n_clusters": 1,
+    "cum_weight": 1.0,
+    "selected": [
+      "enolA_c000",
+      "enolA_c004"
+    ]
+  },
+  "enolB": {
+    "n_clusters": 1,
+    "cum_weight": 1.0,
+    "selected": [
+      "enolB_c000",
+      "enolB_c010"
+    ]
+  },
+  "diketo": {
+    "n_clusters": 3,
+    "cum_weight": 0.94,
+    "selected": [
+      "diketo_c000",
+      "diketo_c012"
+    ]
+  }
+}

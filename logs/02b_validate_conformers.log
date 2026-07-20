@@ -1,0 +1,74 @@
+﻿
+=== enolA (9 개 컨포머) ===
+  기대 골격: COc1ccc(C(=O)C=C(O)c2ccc(C(C)(C)C)cc2)cc1
+  검증: 9/9 통과
+  O-H...O 거리: 최소 1.666 / 평균 1.672 / 최대 1.677 A
+  컨포머                  dE      w  발색단 비틀림각(도)
+  enolA_c000         0.00  0.131  aryl_ketone   = 27.1  aryl_enol     = 22.2  methoxy       =  1.1
+  enolA_c001         0.02  0.126  aryl_ketone   = 24.5  aryl_enol     = 23.1  methoxy       =  0.2
+  enolA_c002         0.02  0.126  aryl_ketone   = 26.3  aryl_enol     = 21.6  methoxy       =  0.4
+  enolA_c003         0.03  0.125  aryl_ketone   = 25.6  aryl_enol     = 21.7  methoxy       =  0.5
+  enolA_c004         0.12  0.107  aryl_ketone   = 22.6  aryl_enol     = 25.4  methoxy       =  1.1
+  enolA_c005         0.17  0.098  aryl_ketone   = 25.7  aryl_enol     = 23.0  methoxy       =  0.8
+  enolA_c006         0.17  0.098  aryl_ketone   = 24.2  aryl_enol     = 24.0  methoxy       =  1.4
+  enolA_c007         0.19  0.095  aryl_ketone   = 22.9  aryl_enol     = 24.2  methoxy       =  0.6
+  enolA_c008         0.19  0.095  aryl_ketone   = 23.6  aryl_enol     = 24.5  methoxy       =  1.7
+  -> 발색단 기하 기준으로 1 종류로 묶임
+     클러스터 0: 가중치 합 1.000, 대표 enolA_c000, 9 개
+
+=== enolB (11 개 컨포머) ===
+  기대 골격: COc1ccc(C(O)=CC(=O)c2ccc(C(C)(C)C)cc2)cc1
+  검증: 11/11 통과
+  O-H...O 거리: 최소 1.663 / 평균 1.667 / 최대 1.675 A
+  컨포머                  dE      w  발색단 비틀림각(도)
+  enolB_c000         0.00  0.106  aryl_ketone   = 28.9  aryl_enol     = 14.8  methoxy       =  0.6
+  enolB_c001         0.04  0.099  aryl_ketone   = 29.0  aryl_enol     = 17.4  methoxy       =  0.4
+  enolB_c002         0.06  0.096  aryl_ketone   = 26.5  aryl_enol     = 19.8  methoxy       =  0.6
+  enolB_c003         0.06  0.096  aryl_ketone   = 29.7  aryl_enol     = 21.4  methoxy       =  0.5
+  enolB_c004         0.07  0.094  aryl_ketone   = 26.8  aryl_enol     = 19.2  methoxy       =  0.4
+  enolB_c005         0.11  0.088  aryl_ketone   = 25.4  aryl_enol     = 21.7  methoxy       =  1.3
+  enolB_c006         0.12  0.086  aryl_ketone   = 26.5  aryl_enol     = 17.0  methoxy       =  0.1
+  enolB_c007         0.13  0.085  aryl_ketone   = 28.8  aryl_enol     = 17.8  methoxy       =  0.8
+  enolB_c008         0.14  0.084  aryl_ketone   = 29.8  aryl_enol     = 16.9  methoxy       =  0.3
+  enolB_c009         0.14  0.084  aryl_ketone   = 28.2  aryl_enol     = 17.8  methoxy       =  0.3
+  enolB_c010         0.15  0.083  aryl_ketone   = 24.3  aryl_enol     = 23.0  methoxy       =  0.8
+  -> 발색단 기하 기준으로 1 종류로 묶임
+     클러스터 0: 가중치 합 1.000, 대표 enolB_c000, 11 개
+
+=== diketo (26 개 컨포머) ===
+  기대 골격: COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1
+  검증: 26/26 통과
+  컨포머                  dE      w  발색단 비틀림각(도)
+  diketo_c000        0.00  0.110  aryl1         =  1.5  aryl2         =  3.4  backbone_C1_CH2_C3= 69.9  methoxy       =  1.0
+  diketo_c001        0.00  0.109  aryl1         =  1.5  aryl2         =  2.7  backbone_C1_CH2_C3= 70.0  methoxy       =  0.6
+  diketo_c002        0.03  0.105  aryl1         =  1.9  aryl2         =  2.9  backbone_C1_CH2_C3= 69.9  methoxy       =  0.7
+  diketo_c003        0.04  0.102  aryl1         =  4.0  aryl2         =  3.1  backbone_C1_CH2_C3= 69.8  methoxy       =  0.7
+  diketo_c004        0.06  0.100  aryl1         =  4.1  aryl2         =  2.7  backbone_C1_CH2_C3= 69.6  methoxy       =  0.3
+  diketo_c005        0.06  0.099  aryl1         =  4.0  aryl2         =  3.2  backbone_C1_CH2_C3= 69.8  methoxy       =  0.7
+  diketo_c006        0.07  0.097  aryl1         =  3.9  aryl2         =  3.4  backbone_C1_CH2_C3= 69.9  methoxy       =  0.7
+  diketo_c007        1.02  0.020  aryl1         = 11.8  aryl2         =  0.6  backbone_C1_CH2_C3= 75.6  methoxy       =  0.3
+  diketo_c008        1.03  0.019  aryl1         = 11.7  aryl2         =  0.4  backbone_C1_CH2_C3= 75.6  methoxy       =  0.2
+  diketo_c009        1.05  0.019  aryl1         = 11.8  aryl2         =  1.2  backbone_C1_CH2_C3= 75.3  methoxy       =  0.6
+  diketo_c010        1.05  0.019  aryl1         = 13.0  aryl2         =  1.5  backbone_C1_CH2_C3= 76.1  methoxy       =  0.5
+  diketo_c011        1.12  0.016  aryl1         = 12.0  aryl2         =  5.8  backbone_C1_CH2_C3= 77.2  methoxy       =  0.6
+  diketo_c012        1.12  0.016  aryl1         =  2.1  aryl2         = 10.4  backbone_C1_CH2_C3= 16.5  methoxy       =  0.8
+  diketo_c013        1.16  0.015  aryl1         = 14.4  aryl2         =  1.8  backbone_C1_CH2_C3= 73.9  methoxy       =  0.0
+  diketo_c014        1.17  0.015  aryl1         = 15.1  aryl2         =  1.5  backbone_C1_CH2_C3= 75.7  methoxy       =  0.8
+  diketo_c015        1.19  0.015  aryl1         = 16.2  aryl2         =  1.1  backbone_C1_CH2_C3= 74.9  methoxy       =  0.4
+  diketo_c016        1.20  0.015  aryl1         = 17.0  aryl2         =  3.8  backbone_C1_CH2_C3= 77.5  methoxy       =  0.5
+  diketo_c017        1.20  0.014  aryl1         =  7.9  aryl2         = 13.0  backbone_C1_CH2_C3= 19.4  methoxy       =  0.4
+  diketo_c018        1.22  0.014  aryl1         =  7.3  aryl2         = 13.3  backbone_C1_CH2_C3= 19.9  methoxy       =  0.6
+  diketo_c019        1.23  0.014  aryl1         =  8.9  aryl2         = 13.4  backbone_C1_CH2_C3= 19.4  methoxy       =  1.2
+  diketo_c020        1.23  0.014  aryl1         =  9.4  aryl2         = 14.7  backbone_C1_CH2_C3= 20.7  methoxy       =  0.8
+  diketo_c021        1.36  0.011  aryl1         =  6.6  aryl2         = 12.6  backbone_C1_CH2_C3= 19.3  methoxy       =  0.9
+  diketo_c022        1.37  0.011  aryl1         =  6.2  aryl2         = 13.7  backbone_C1_CH2_C3= 19.6  methoxy       =  0.8
+  diketo_c023        1.37  0.011  aryl1         =  8.4  aryl2         = 12.6  backbone_C1_CH2_C3= 19.7  methoxy       =  1.0
+  diketo_c024        1.37  0.011  aryl1         =  8.0  aryl2         = 12.9  backbone_C1_CH2_C3= 20.2  methoxy       =  1.0
+  diketo_c025        1.47  0.009  aryl1         = 10.3  aryl2         = 15.4  backbone_C1_CH2_C3= 22.1  methoxy       =  1.3
+  -> 발색단 기하 기준으로 3 종류로 묶임
+     클러스터 0: 가중치 합 0.814, 대표 diketo_c000, 12 개
+     클러스터 1: 가중치 합 0.126, 대표 diketo_c012, 10 개
+     클러스터 2: 가중치 합 0.060, 대표 diketo_c013, 4 개
+
+검증 리포트 -> conformers/validation_report.json
+전체: 모두 통과

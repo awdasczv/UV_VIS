@@ -1,0 +1,59 @@
+﻿
+=== 컨포머 탐색: enolA (backend=etkdg, solvent=ethanol) ===
+  ETKDG+MMFF: 200 개 초기 구조
+    xTB 최적화 20/200  (91s)
+    xTB 최적화 40/200  (157s)
+    xTB 최적화 60/200  (235s)
+    xTB 최적화 80/200  (307s)
+    xTB 최적화 100/200  (384s)
+    xTB 최적화 120/200  (459s)
+    xTB 최적화 140/200  (493s)
+    xTB 최적화 160/200  (531s)
+    xTB 최적화 180/200  (578s)
+    xTB 최적화 200/200  (621s)
+  xTB 최적화 완료: 200 개 성공, 621s
+  중복 제거 후: 9 개 고유 컨포머
+  대표 컨포머 3 개 선택, 누적 가중치 = 0.382
+    enolA_c000  dE=0.00 kcal/mol  w=0.131
+    enolA_c001  dE=0.02 kcal/mol  w=0.126
+    enolA_c002  dE=0.02 kcal/mol  w=0.126
+
+=== 컨포머 탐색: enolB (backend=etkdg, solvent=ethanol) ===
+  ETKDG+MMFF: 200 개 초기 구조
+    xTB 최적화 20/200  (47s)
+    xTB 최적화 40/200  (94s)
+    xTB 최적화 60/200  (141s)
+    xTB 최적화 80/200  (181s)
+    xTB 최적화 100/200  (224s)
+    xTB 최적화 120/200  (270s)
+    xTB 최적화 140/200  (327s)
+    xTB 최적화 160/200  (360s)
+    xTB 최적화 180/200  (399s)
+    xTB 최적화 200/200  (434s)
+  xTB 최적화 완료: 200 개 성공, 434s
+  중복 제거 후: 11 개 고유 컨포머
+  대표 컨포머 3 개 선택, 누적 가중치 = 0.301
+    enolB_c000  dE=0.00 kcal/mol  w=0.106
+    enolB_c001  dE=0.04 kcal/mol  w=0.099
+    enolB_c002  dE=0.06 kcal/mol  w=0.096
+
+=== 컨포머 탐색: diketo (backend=etkdg, solvent=ethanol) ===
+  ETKDG+MMFF: 200 개 초기 구조
+    xTB 최적화 20/200  (28s)
+    xTB 최적화 40/200  (49s)
+    xTB 최적화 60/200  (74s)
+    xTB 최적화 80/200  (98s)
+    xTB 최적화 100/200  (125s)
+    xTB 최적화 120/200  (146s)
+    xTB 최적화 140/200  (168s)
+    xTB 최적화 160/200  (194s)
+    xTB 최적화 180/200  (215s)
+    xTB 최적화 200/200  (241s)
+  xTB 최적화 완료: 200 개 성공, 241s
+  중복 제거 후: 26 개 고유 컨포머
+  대표 컨포머 3 개 선택, 누적 가중치 = 0.324
+    diketo_c000  dE=0.00 kcal/mol  w=0.110
+    diketo_c001  dE=0.00 kcal/mol  w=0.109
+    diketo_c002  dE=0.03 kcal/mol  w=0.105
+
+완료. conformers/search_summary.json 저장

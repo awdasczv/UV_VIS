@@ -1,0 +1,20 @@
+﻿
+=== enolA ===
+  고유 컨포머 9 개 -> 발색단 기하 1 종류
+  대표 2 개 선택, 누적 가중치 = 1.000
+    enolA_c000       클러스터0 (9개 대표)  w=0.893  aryl_ketone_twist=27.1, aryl_enol_twist=22.2, methoxy_twist=1.1
+    enolA_c004       클러스터0 (1개 대표)  w=0.107  aryl_ketone_twist=22.6, aryl_enol_twist=25.4, methoxy_twist=1.1
+
+=== enolB ===
+  고유 컨포머 11 개 -> 발색단 기하 1 종류
+  대표 2 개 선택, 누적 가중치 = 1.000
+    enolB_c000       클러스터0 (11개 대표)  w=0.917  aryl_ketone_twist=28.9, aryl_enol_twist=14.8, methoxy_twist=0.6
+    enolB_c010       클러스터0 (1개 대표)  w=0.083  aryl_ketone_twist=24.3, aryl_enol_twist=23.0, methoxy_twist=0.8
+
+=== diketo ===
+  고유 컨포머 26 개 -> 발색단 기하 3 종류
+  대표 2 개 선택, 누적 가중치 = 0.940
+    diketo_c000      클러스터0 (12개 대표)  w=0.814  aryl1_twist=1.5, aryl2_twist=3.4, backbone_C1_CH2_C3=69.9, methoxy_twist=1.0
+    diketo_c012      클러스터1 (10개 대표)  w=0.126  aryl1_twist=2.1, aryl2_twist=10.4, backbone_C1_CH2_C3=16.5, methoxy_twist=0.8
+
+총 6 개 구조를 TD-DFT 대상으로 선택했다.

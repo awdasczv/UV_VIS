@@ -1,0 +1,44 @@
+{
+  "tautomer": "enolB",
+  "selection_method": "발색단 기하 클러스터별 대표 (에너지 최저)",
+  "rationale": "컨포머들의 볼츠만 가중치가 고르게 퍼지는 이유는 스펙트럼과 무관한 알킬기 회전 때문이다. 발색단 기하로 묶어야 적은 계산으로 앙상블을 제대로 대표할 수 있다.",
+  "n_unique_conformers": 11,
+  "n_chromophore_clusters": 1,
+  "target_cumulative_weight": 0.9,
+  "max_conformers": 3,
+  "achieved_cumulative_weight": 1.0,
+  "selected": [
+    {
+      "conf_id": "enolB_c000",
+      "rel_energy_kcalmol": 0.0,
+      "boltzmann_weight": 0.917303379857252,
+      "own_boltzmann_weight": 0.10582457835671362,
+      "cluster": 0,
+      "cluster_size": 11,
+      "chromophore_dihedrals": {
+        "aryl_ketone_twist_deg": 28.9,
+        "aryl_enol_twist_deg": 14.8,
+        "methoxy_twist_deg": 0.6
+      },
+      "xyz": "conformers/enolB/enolB_c000.xyz",
+      "weight_normalized": 0.9173
+    },
+    {
+      "conf_id": "enolB_c010",
+      "rel_energy_kcalmol": 0.1461091998916662,
+      "boltzmann_weight": 0.08269662014274808,
+      "own_boltzmann_weight": 0.08269662014274808,
+      "cluster": 0,
+      "cluster_size": 1,
+      "role": "intra_cluster_check",
+      "max_dihedral_diff_from_rep_deg": 8.2,
+      "chromophore_dihedrals": {
+        "aryl_ketone_twist_deg": 24.3,
+        "aryl_enol_twist_deg": 23.0,
+        "methoxy_twist_deg": 0.8
+      },
+      "xyz": "conformers/enolB/enolB_c010.xyz",
+      "weight_normalized": 0.0827
+    }
+  ]
+}

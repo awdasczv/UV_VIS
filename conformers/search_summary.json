@@ -1,0 +1,29 @@
+{
+  "enolA": {
+    "n_unique": 9,
+    "cum_weight": 0.38200687248632237,
+    "selected": [
+      "enolA_c000",
+      "enolA_c001",
+      "enolA_c002"
+    ]
+  },
+  "enolB": {
+    "n_unique": 11,
+    "cum_weight": 0.30120307339654395,
+    "selected": [
+      "enolB_c000",
+      "enolB_c001",
+      "enolB_c002"
+    ]
+  },
+  "diketo": {
+    "n_unique": 26,
+    "cum_weight": 0.3239672902434292,
+    "selected": [
+      "diketo_c000",
+      "diketo_c001",
+      "diketo_c002"
+    ]
+  }
+}

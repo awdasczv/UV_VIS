@@ -1,0 +1,48 @@
+﻿
+=== enolA: Chelated enol tautomer A (OH on the tert-butylphenyl side) ===
+    SMILES: CC(C)(C)c1ccc(cc1)/C(O)=C/C(=O)c1ccc(OC)cc1
+    ETKDG conformer 40 개 생성, MMFF94s 최저에너지 = 75.382 kcal/mol
+    formula: C20H22O3
+    n_heavy_atoms: 23
+    n_hydrogens: 22
+    mol_weight: 310.393
+    n_carbonyl: 1
+    n_enol_OH: 2
+    n_sp3_CH2_bridge: 0
+    intramolecular_hbond: {'atoms': {'O_ketone': 14, 'C_ketone': 13, 'C_alpha': 12, 'C_enol': 10, 'O_enol': 11, 'H_enol': 36}, 'H_to_acceptorO_A': 1.761, 'O_to_O_A': 2.614, 'dihedral_Oenol_Cenol_Ca_Cket_deg': -1.2, 'dihedral_Cenol_Ca_Cket_Oket_deg': -8.1}
+    canonical_smiles_from_3d: COc1ccc(C(=O)/C=C(\O)c2ccc(C(C)(C)C)cc2)cc1
+    [검증 통과]
+    -> structures\enolA.xyz
+
+=== enolB: Chelated enol tautomer B (OH on the methoxyphenyl side) ===
+    SMILES: COc1ccc(cc1)/C(O)=C/C(=O)c1ccc(C(C)(C)C)cc1
+    ETKDG conformer 40 개 생성, MMFF94s 최저에너지 = 75.097 kcal/mol
+    formula: C20H22O3
+    n_heavy_atoms: 23
+    n_hydrogens: 22
+    mol_weight: 310.393
+    n_carbonyl: 1
+    n_enol_OH: 2
+    n_sp3_CH2_bridge: 0
+    intramolecular_hbond: {'atoms': {'O_ketone': 12, 'C_ketone': 11, 'C_alpha': 10, 'C_enol': 8, 'O_enol': 9, 'H_enol': 30}, 'H_to_acceptorO_A': 1.758, 'O_to_O_A': 2.611, 'dihedral_Oenol_Cenol_Ca_Cket_deg': 1.2, 'dihedral_Cenol_Ca_Cket_Oket_deg': 8.0}
+    canonical_smiles_from_3d: COc1ccc(/C(O)=C/C(=O)c2ccc(C(C)(C)C)cc2)cc1
+    [검증 통과]
+    -> structures\enolB.xyz
+
+=== diketo: Diketo tautomer ===
+    SMILES: CC(C)(C)c1ccc(cc1)C(=O)CC(=O)c1ccc(OC)cc1
+    ETKDG conformer 40 개 생성, MMFF94s 최저에너지 = 82.097 kcal/mol
+    formula: C20H22O3
+    n_heavy_atoms: 23
+    n_hydrogens: 22
+    mol_weight: 310.393
+    n_carbonyl: 2
+    n_enol_OH: 0
+    n_sp3_CH2_bridge: 1
+    intramolecular_hbond: None
+    canonical_smiles_from_3d: COc1ccc(C(=O)CC(=O)c2ccc(C(C)(C)C)cc2)cc1
+    [검증 통과]
+    -> structures\diketo.xyz
+
+검증 리포트 저장: structures\build_report.json
+전체 결과: 모든 구조 검증 통과
