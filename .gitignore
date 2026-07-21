@@ -41,6 +41,13 @@ calculations/**
 !calculations/**/*.xyz
 !calculations/**/*.csv
 
+# 구조 최적화가 남기는 중복 xyz 는 제외한다.
+#   opt_trj.xyz : 최적화 경로의 모든 중간 구조 (수십 KB, 재현 가능)
+#   opt.xyz     : ORCA 가 쓴 최종 구조. 우리가 optimized.xyz 로 따로 저장하므로 중복
+# 최종 구조는 optimized.xyz 하나만 추적한다.
+calculations/**/opt_trj.xyz
+calculations/**/opt.xyz
+
 # 컨포머 탐색의 원시 xtb 작업 디렉터리 (200 구조 x 3 토토머 = 파일 5000개 이상).
 conformers/*/xtb/
 conformers/*/crest_run/
