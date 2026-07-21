@@ -40,9 +40,9 @@
       ]
     },
     "tddft": {
-      "n_states": 18,
+      "n_states": 22,
       "tda": true,
-      "_n_states_note": "Psi4 로 12상태를 돌렸더니 최단파장이 218 nm 라 요구사항인 200 nm 커버에 미달했다. 18 로 올린다.",
+      "_n_states_note": "12상태 -> 최단 218 nm (미달). 18상태 -> xTB 구조에서는 196.8 nm 로 충분했으나 DFT 평면 구조에서는 202.6~208.4 nm 로 다시 미달. 평면화로 상태 밀도가 달라진 탓이다. 22 로 올린다.",
       "levels": [
         {"id": "b3lyp_def2svp",    "functional": "B3LYP",     "basis": "def2-SVP"},
         {"id": "camb3lyp_def2svp", "functional": "CAM-B3LYP", "basis": "def2-SVP"},
