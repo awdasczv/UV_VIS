@@ -46,12 +46,36 @@ TAUT_LABEL = {"enolA": "에놀 A (OH = tBu쪽)",
 
 # ------------------------------------------------------------------ 로드
 def load_results() -> list[dict]:
-    p = CALCULATIONS / "02_tddft" / "all_results.json"
-    d = load_checkpoint(p)
-    if not d:
-        print(f"TD-DFT 결과가 없습니다: {p}")
-        return []
-    return [r for r in d["results"] if r.get("ok")]
+    """
+    TD-DFT 결과를 전부 모은다.
+
+    all_results.json 을 읽지 않고 **개별 result.json 을 재귀 탐색**한다.
+    이유:
+      - all_results.json 은 실행 세션마다 덮어써지므로 여러 번에 나눠 돌린
+        결과가 모이지 않는다.
+      - 구조를 바꿔 비교하면 경로에 geom_label 이 끼어들어 위치가 달라진다.
+    개별 체크포인트가 항상 진실이므로 그것만 믿는다.
+    """
+    recs: list[dict] = []
+    for root in (CALCULATIONS / "02_tddft_orca", CALCULATIONS / "02_tddft"):
+        if not root.exists():
+            continue
+        for p in sorted(root.rglob("result.json")):
+            d = load_checkpoint(p)
+            if not d or not d.get("ok"):
+                continue
+            # 어느 구조로 계산한 것인지 꼬리표를 붙인다 (경로에서 유추)
+            parts = p.relative_to(root).parts
+            # <taut>/<conf>/<level>/<solvent>[/<geom_label>]/result.json
+            d.setdefault("geom_label",
+                         parts[4] if len(parts) >= 6 else "default")
+            d.setdefault("engine", "Psi4" if root.name == "02_tddft" else "ORCA")
+            recs.append(d)
+    if not recs:
+        print("TD-DFT 결과가 없습니다. 먼저 05b_tddft_orca.py 를 실행하세요.")
+    else:
+        print(f"  (개별 체크포인트 {len(recs)} 건 수집)")
+    return recs
 
 
 def load_config() -> dict:

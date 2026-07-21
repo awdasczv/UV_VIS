@@ -63,10 +63,22 @@ def geometry_for(taut: str, conf_id: str) -> tuple[Path, str]:
 
 
 def run_one(taut: str, conf_id: str, level: dict, solvent: str,
-            orca_cfg: dict, weight: float, rel_e: float) -> dict:
+            orca_cfg: dict, weight: float, rel_e: float,
+            geom_label: str | None = None) -> dict:
+    """
+    geom_label 에 대하여:
+      계산 결과는 (구조 × 이론수준 × 용매) 로 결정된다. 그런데 체크포인트 경로에
+      구조 정보가 없으면, GFN2-xTB 구조로 이미 돌린 조합을 DFT 최적화 구조로
+      다시 돌리려 할 때 '이미 완료됨'으로 건너뛰어 버린다.
+      그래서 구조를 바꿔 비교할 때는 geom_label 로 경로를 분리한다.
+      (기본값 None 이면 기존 경로를 그대로 써서 이전 결과와 호환된다)
+    """
     td = orca_cfg["tddft"]
     tag = f"{taut}_{conf_id}_{level['id']}_{solvent}"
     outdir = OUTROOT / taut / conf_id / level["id"] / solvent
+    if geom_label:
+        outdir = outdir / geom_label
+        tag = f"{tag}_{geom_label}"
     ck = outdir / "result.json"
 
     done = load_checkpoint(ck)
@@ -146,6 +158,9 @@ def main() -> int:
     ap.add_argument("--levels", nargs="*", default=None)
     ap.add_argument("--solvents", nargs="*", default=None)
     ap.add_argument("--max-conformers", type=int, default=None)
+    ap.add_argument("--geom-label", default=None,
+                    help="같은 조합을 다른 구조로 다시 계산할 때 결과를 분리 저장할 이름 "
+                         "(예: dftopt). 생략하면 기존 경로를 그대로 쓴다.")
     args = ap.parse_args()
 
     cfg = load_cfg()
@@ -183,10 +198,12 @@ def main() -> int:
                     rec = run_one(taut, c["conf_id"], level, solv, orca_cfg,
                                   c.get("weight_normalized",
                                         c.get("boltzmann_weight", 1.0)),
-                                  c.get("rel_energy_kcalmol", 0.0))
+                                  c.get("rel_energy_kcalmol", 0.0),
+                                  geom_label=args.geom_label)
                     all_recs.append(rec)
-                    save_checkpoint(OUTROOT / "all_results.json",
-                                    {"results": all_recs})
+                    fname = (f"all_results_{args.geom_label}.json"
+                             if args.geom_label else "all_results.json")
+                    save_checkpoint(OUTROOT / fname, {"results": all_recs})
 
     ok = [r for r in all_recs if r.get("ok")]
     print(f"\n=== 완료: {len(ok)}/{len(all_recs)} 성공 ===")
