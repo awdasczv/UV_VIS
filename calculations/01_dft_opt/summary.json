@@ -1,0 +1,28 @@
+{
+  "enolA": [
+    {
+      "engine": "ORCA 6.1.1",
+      "tautomer": "enolA",
+      "conf_id": "enolA_c000",
+      "level": "B3LYP/def2-SVP",
+      "pcm": true,
+      "solvent": "ethanol",
+      "source_xyz": "C:\\Users\\ysm04\\Documents\\etc\\uv_vis\\conformers\\enolA\\enolA_c000.xyz",
+      "wall_seconds": 2319.7,
+      "twists_before": {
+        "aryl_ketone_twist_deg": 27.1,
+        "aryl_enol_twist_deg": 22.2,
+        "chelate_H_to_O_A": 1.673
+      },
+      "ok": true,
+      "energy_hartree": -999.742797207016,
+      "n_opt_cycles": 12,
+      "optimized_xyz": "C:\\Users\\ysm04\\Documents\\etc\\uv_vis\\calculations\\01_dft_opt\\enolA\\enolA_c000\\optimized.xyz",
+      "twists_after": {
+        "aryl_ketone_twist_deg": 0.9,
+        "aryl_enol_twist_deg": 5.7,
+        "chelate_H_to_O_A": 1.514
+      }
+    }
+  ]
+}

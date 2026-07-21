@@ -1,0 +1,13 @@
+﻿엔진: ORCA (C:\ORCA_6.1.1\orca.exe)
+수준: B3LYP/def2-SVP  PCM=True (ethanol)  병렬 4
+
+=== enolA: 1 개 구조 ===
+  [최적화] enolA/enolA_c000  B3LYP/def2-SVP  용매=Ethanol
+    완료 2320초, 12 사이클, E = -999.74279721 Eh
+    발색단 기하 변화 (xTB -> DFT):
+      aryl_enol_twist_deg          22.20 ->    5.70 deg (-16.50)
+      aryl_ketone_twist_deg        27.10 ->    0.90 deg (-26.20)
+      chelate_H_to_O_A              1.67 ->    1.51 A (-0.16)
+
+=== 요약 ===
+  enolA/enolA_c000     E=-999.74279721 Eh (12 사이클, 2320초)
