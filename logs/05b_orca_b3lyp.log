@@ -1,0 +1,74 @@
+﻿엔진   : ORCA  (C:\ORCA_6.1.1\orca.exe)
+병렬   : 4 프로세스, MPI 사용 가능 = True
+수준   : ['b3lyp_def2svp']
+용매   : ['none', 'ethanol']
+상태 수: 18  (TDA=True, RIJCOSX=True)
+
+=== enolA: 컨포머 2 × 수준 1 × 용매 2 = 4 계산 ===
+  [TD-DFT] enolA_enolA_c000_b3lyp_def2svp_none
+           B3LYP/def2-SVP, 18상태, 용매=없음, 구조=GFN2-xTB
+           완료 235초 | 최강 315.2 nm (f=0.858) | HOMO->LUMO (75%); HOMO-2->LUMO (20%)
+           최단파장 196.8 nm (200 nm 커버 OK)
+  [TD-DFT] enolA_enolA_c000_b3lyp_def2svp_ethanol
+           B3LYP/def2-SVP, 18상태, 용매=Ethanol, 구조=GFN2-xTB
+           완료 733초 | 최강 334.0 nm (f=0.968) | HOMO->LUMO (88%); HOMO-3->LUMO (4%); HOMO-1-
+           최단파장 197.4 nm (200 nm 커버 OK)
+  [TD-DFT] enolA_enolA_c004_b3lyp_def2svp_none
+           B3LYP/def2-SVP, 18상태, 용매=없음, 구조=GFN2-xTB
+           완료 320초 | 최강 314.6 nm (f=0.934) | HOMO->LUMO (80%); HOMO-2->LUMO (15%); HOMO-1
+           최단파장 197.5 nm (200 nm 커버 OK)
+  [TD-DFT] enolA_enolA_c004_b3lyp_def2svp_ethanol
+           B3LYP/def2-SVP, 18상태, 용매=Ethanol, 구조=GFN2-xTB
+           완료 729초 | 최강 332.5 nm (f=1.040) | HOMO->LUMO (90%); HOMO-3->LUMO (4%); HOMO-2-
+           최단파장 198.3 nm (200 nm 커버 OK)
+
+=== enolB: 컨포머 2 × 수준 1 × 용매 2 = 4 계산 ===
+  [TD-DFT] enolB_enolB_c000_b3lyp_def2svp_none
+           B3LYP/def2-SVP, 18상태, 용매=없음, 구조=GFN2-xTB
+           완료 258초 | 최강 316.3 nm (f=1.125) | HOMO->LUMO (89%); HOMO-3->LUMO (5%)
+           최단파장 199.3 nm (200 nm 커버 OK)
+  [TD-DFT] enolB_enolB_c000_b3lyp_def2svp_ethanol
+           B3LYP/def2-SVP, 18상태, 용매=Ethanol, 구조=GFN2-xTB
+           완료 317초 | 최강 334.9 nm (f=1.229) | HOMO->LUMO (92%); HOMO-1->LUMO (3%); HOMO-2-
+           최단파장 199.3 nm (200 nm 커버 OK)
+  [TD-DFT] enolB_enolB_c010_b3lyp_def2svp_none
+           B3LYP/def2-SVP, 18상태, 용매=없음, 구조=GFN2-xTB
+           완료 256초 | 최강 316.7 nm (f=1.044) | HOMO->LUMO (89%); HOMO-3->LUMO (6%)
+           최단파장 199.4 nm (200 nm 커버 OK)
+  [TD-DFT] enolB_enolB_c010_b3lyp_def2svp_ethanol
+           B3LYP/def2-SVP, 18상태, 용매=Ethanol, 구조=GFN2-xTB
+           완료 377초 | 최강 335.2 nm (f=1.155) | HOMO->LUMO (93%); HOMO-2->LUMO (2%); HOMO-1-
+           최단파장 199.0 nm (200 nm 커버 OK)
+
+=== diketo: 컨포머 2 × 수준 1 × 용매 2 = 4 계산 ===
+  [TD-DFT] diketo_diketo_c000_b3lyp_def2svp_none
+           B3LYP/def2-SVP, 18상태, 용매=없음, 구조=GFN2-xTB
+           완료 444초 | 최강 229.2 nm (f=0.260) | HOMO-2->LUMO+1 (57%); HOMO-3->LUMO+1 (16%); 
+           최단파장 204.2 nm (200 nm 미달)
+  [TD-DFT] diketo_diketo_c000_b3lyp_def2svp_ethanol
+           B3LYP/def2-SVP, 18상태, 용매=Ethanol, 구조=GFN2-xTB
+           완료 339초 | 최강 256.9 nm (f=0.415) | HOMO->LUMO+1 (70%); HOMO-5->LUMO+1 (14%); HO
+           최단파장 204.6 nm (200 nm 미달)
+  [TD-DFT] diketo_diketo_c012_b3lyp_def2svp_none
+           B3LYP/def2-SVP, 18상태, 용매=없음, 구조=GFN2-xTB
+           완료 433초 | 최강 249.8 nm (f=0.481) | HOMO->LUMO (32%); HOMO->LUMO+1 (13%); HOMO-5
+           최단파장 205.3 nm (200 nm 미달)
+  [TD-DFT] diketo_diketo_c012_b3lyp_def2svp_ethanol
+           B3LYP/def2-SVP, 18상태, 용매=Ethanol, 구조=GFN2-xTB
+           완료 338초 | 최강 263.5 nm (f=0.604) | HOMO->LUMO+1 (51%); HOMO-4->LUMO+1 (11%); HO
+           최단파장 203.8 nm (200 nm 미달)
+
+=== 완료: 12/12 성공 ===
+토토머      컨포머            수준                 용매       lambda_max       f       초
+enolA    enolA_c000     b3lyp_def2svp      none          315.2   0.858     235
+enolA    enolA_c000     b3lyp_def2svp      ethanol       334.0   0.968     733
+enolA    enolA_c004     b3lyp_def2svp      none          314.6   0.934     320
+enolA    enolA_c004     b3lyp_def2svp      ethanol       332.5   1.040     729
+enolB    enolB_c000     b3lyp_def2svp      none          316.3   1.125     258
+enolB    enolB_c000     b3lyp_def2svp      ethanol       334.9   1.229     316
+enolB    enolB_c010     b3lyp_def2svp      none          316.7   1.044     256
+enolB    enolB_c010     b3lyp_def2svp      ethanol       335.2   1.155     377
+diketo   diketo_c000    b3lyp_def2svp      none          229.2   0.260     444
+diketo   diketo_c000    b3lyp_def2svp      ethanol       256.9   0.415     339
+diketo   diketo_c012    b3lyp_def2svp      none          249.8   0.481     433
+diketo   diketo_c012    b3lyp_def2svp      ethanol       263.5   0.604     338

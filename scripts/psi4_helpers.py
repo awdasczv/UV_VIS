@@ -185,6 +185,13 @@ FAILURE_PATTERNS = [
      "GEOMETRY_OPT_NOT_CONVERGED",
      "구조 최적화 미수렴. 대응: geom_maxiter 늘리기, opt_coordinates 바꾸기, "
      "더 좋은 초기 구조(xTB 최적화 결과) 사용, 수렴 기준 완화."),
+    (r"S matrix is not positive-definite|not positive.definite",
+     "PCM_ILL_CONDITIONED",
+     "PCM 공동 표면의 겹침행렬 S 가 양정치가 아니다. 원래 에러인데 PCMSolver 가 "
+     "패치로 경고로 낮춘 것이므로 결과를 그대로 믿으면 안 된다. "
+     "대응: Cavity Area 를 바꿔가며(1.0 / 0.6 / 1.5 / 0.3 / 2.0) 경고가 사라지는 값을 "
+     "찾고 채택한 값을 기록할 것. 그래도 안 되면 RadiiSet 을 UFF 로 바꾸거나 "
+     "Scaling=False 를 시도. 근본 해결은 ORCA 의 CPCM 사용."),
     (r"PCMSOLVER|pcmsolver.*error|cavity",
      "PCM_ERROR",
      "PCM 오류. 대응: cavity Area 키우기, RadiiSet 바꾸기, 용매 이름 철자 확인."),

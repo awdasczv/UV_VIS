@@ -27,6 +27,15 @@ $env:PATH = @(
     (Join-Path $envdir 'Scripts')
 ) -join ';' | ForEach-Object { "$_;$env:PATH" }
 
+# ORCA 6.1 + Microsoft MPI
+#   ORCA 는 병렬 실행 시 반드시 전체 경로로 호출해야 하고, 설치 폴더가 PATH 에
+#   있어야 orca_* 하위 모듈을 찾는다. MS-MPI 는 설치 후 재로그인 전까지
+#   PATH 에 안 올라오는 경우가 있어 여기서 직접 넣어준다.
+foreach ($p in @('C:\ORCA_6.1.1', 'C:\Program Files\Microsoft MPI\Bin')) {
+    if (Test-Path $p) { $env:PATH = "$p;$env:PATH" }
+}
+if (Test-Path 'C:\ORCA_6.1.1\orca.exe') { $env:ORCA_EXE = 'C:\ORCA_6.1.1\orca.exe' }
+
 # 노트북 4코어 / 8스레드. 물리 코어 수에 맞춘다.
 $env:OMP_NUM_THREADS   = '4'
 $env:MKL_NUM_THREADS   = '4'

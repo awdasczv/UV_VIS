@@ -52,9 +52,14 @@ class Geometry:
         )
 
     def write(self, path: Path, comment: str | None = None) -> None:
+        # 소수점 자리수는 to_xyz_block() 과 반드시 같아야 한다.
+        # 예전에 여기만 8자리였는데, 앙상블 파일(10자리)에서 좌표를 읽어
+        # 개별 파일로 다시 쓰면 반올림 경계에서 마지막 자리가 어긋났다.
+        # (크기는 1e-8 A 로 물리적으로 무의미하지만, 개별 xyz 를 git 추적 대상에서
+        #  빼고 앙상블에서 복원하는 방식을 쓰므로 왕복이 정확히 일치해야 한다.)
         c = self.comment if comment is None else comment
         lines = [str(self.natoms), c]
-        lines += [f"{s:2s} {x:14.8f} {y:14.8f} {z:14.8f}"
+        lines += [f"{s:2s} {x:16.10f} {y:16.10f} {z:16.10f}"
                   for s, (x, y, z) in zip(self.symbols, self.coords)]
         path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
