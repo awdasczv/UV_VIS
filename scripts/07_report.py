@@ -37,6 +37,28 @@ def load(path: Path):
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
 
 
+def load_all_results() -> list[dict]:
+    """
+    TD-DFT 결과를 개별 result.json 재귀 탐색으로 모은다.
+    (06_build_spectra.py 와 같은 방식. all_results.json 은 세션마다 덮어써지고
+     geom_label 이 끼면 경로도 달라지므로 개별 체크포인트만 믿는다.)
+    """
+    recs: list[dict] = []
+    for root in (CALCULATIONS / "02_tddft_orca", CALCULATIONS / "02_tddft"):
+        if not root.exists():
+            continue
+        for p in sorted(root.rglob("result.json")):
+            d = load_checkpoint(p)
+            if not d or not d.get("ok"):
+                continue
+            parts = p.relative_to(root).parts
+            d.setdefault("geom_label",
+                         parts[4] if len(parts) >= 6 else "default")
+            d.setdefault("engine", "Psi4" if root.name == "02_tddft" else "ORCA")
+            recs.append(d)
+    return recs
+
+
 def brightest_of(recs: list[dict], weighted: bool = True) -> dict | None:
     """
     한 그룹(같은 토토머·수준·용매)의 대표 lambda_max.
@@ -72,11 +94,11 @@ def main() -> int:
     RESULTS.mkdir(parents=True, exist_ok=True)
     ref = load(INPUTS / "experimental_reference.json")
     cfg = load(INPUTS / "calc_config.json")
-    td = load_checkpoint(CALCULATIONS / "02_tddft" / "all_results.json")
-    if not td:
-        print("TD-DFT 결과가 없습니다. 먼저 05_tddft.py 를 실행하세요.")
+    results = load_all_results()
+    if not results:
+        print("TD-DFT 결과가 없습니다. 먼저 05b_tddft_orca.py 를 실행하세요.")
         return 1
-    results = [r for r in td["results"] if r.get("ok")]
+    print(f"TD-DFT 결과 {len(results)} 건 수집")
 
     exp_enol = ref["experimental"]["enol_band"]["primary_target"]["lambda_max_nm"]
     exp_keto = ref["experimental"]["diketo_band"]["primary_target"]["lambda_max_nm"]

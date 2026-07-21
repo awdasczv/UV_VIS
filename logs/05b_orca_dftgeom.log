@@ -1,0 +1,20 @@
+﻿엔진   : ORCA  (C:\ORCA_6.1.1\orca.exe)
+병렬   : 4 프로세스, MPI 사용 가능 = True
+수준   : ['b3lyp_def2svp', 'b3lyp_631+gd']
+용매   : ['ethanol']
+상태 수: 18  (TDA=True, RIJCOSX=True)
+
+=== enolA: 컨포머 1 × 수준 2 × 용매 1 = 2 계산 ===
+  [TD-DFT] enolA_enolA_c000_b3lyp_def2svp_ethanol_dftopt
+           B3LYP/def2-SVP, 18상태, 용매=Ethanol, 구조=DFT
+           완료 343초 | 최강 344.9 nm (f=1.318) | HOMO->LUMO (97%)
+           최단파장 202.6 nm (200 nm 미달)
+  [TD-DFT] enolA_enolA_c000_b3lyp_631+gd_ethanol_dftopt
+           B3LYP/6-31+G(d), 18상태, 용매=Ethanol, 구조=DFT
+           완료 764초 | 최강 352.5 nm (f=1.350) | HOMO->LUMO (98%)
+           최단파장 208.4 nm (200 nm 미달)
+
+=== 완료: 2/2 성공 ===
+토토머      컨포머            수준                 용매       lambda_max       f       초
+enolA    enolA_c000     b3lyp_def2svp      ethanol       344.9   1.318     343
+enolA    enolA_c000     b3lyp_631+gd       ethanol       352.5   1.350     764
