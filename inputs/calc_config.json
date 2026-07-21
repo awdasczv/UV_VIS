@@ -25,6 +25,20 @@
     "rijcosx": true,
     "aux_basis": "def2/J",
     "_rijcosx_note": "Coulomb 은 RI, 정확교환은 COSX 수치격자로 근사. 하이브리드 범함수의 가장 비싼 부분을 줄인다. ORCA 속도 이점의 핵심.",
+
+    "optimization": {
+      "functional": "B3LYP",
+      "basis": "def2-SVP",
+      "pcm": true,
+      "solvent": "ethanol",
+      "_note": [
+        "기저셋 비교 실험에서 큰 기저셋들이 모두 340~341 nm 로 수렴했는데(수렴값 약 340.5 nm),",
+        "문헌은 같은 B3LYP/6-31+G(d)/PCM 으로 360.8 nm 를 보고했다.",
+        "함수/기저셋/용매가 같으므로 남은 변수는 구조뿐이다.",
+        "구조 최적화는 lambda_max 만큼 기저셋에 민감하지 않으므로 def2-SVP 로 충분하다.",
+        "최적화된 구조에 대해 TD-DFT 는 다시 큰 기저셋으로 돌린다."
+      ]
+    },
     "tddft": {
       "n_states": 18,
       "tda": true,

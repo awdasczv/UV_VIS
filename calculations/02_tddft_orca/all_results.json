@@ -967,6 +967,490 @@
       },
       "shortest_wavelength_nm": 204.4,
       "covers_200nm": false
+    },
+    {
+      "engine": "ORCA 6.1.1",
+      "tautomer": "enolA",
+      "conf_id": "enolA_c000",
+      "level_id": "b3lyp_def2tzvp",
+      "functional": "B3LYP",
+      "basis": "def2-TZVP",
+      "solvent": "ethanol",
+      "pcm": true,
+      "solvent_model": "CPCM",
+      "tda": true,
+      "n_states": 18,
+      "rijcosx": true,
+      "nprocs": 4,
+      "geometry_source": "GFN2-xTB",
+      "geometry_file": "C:\\Users\\ysm04\\Documents\\etc\\uv_vis\\conformers\\enolA\\enolA_c000.xyz",
+      "boltzmann_weight": 0.89305,
+      "rel_energy_kcalmol": 0.0,
+      "wall_seconds": 2127.3,
+      "ok": true,
+      "scf_energy_hartree": -1000.708340237341,
+      "n_basis": 845,
+      "n_occupied": 83,
+      "transitions": [
+        {
+          "state": 1,
+          "energy_eV": 3.64619,
+          "wavelength_nm": 340.0,
+          "osc_strength": 1.075774,
+          "orbital_transitions": [
+            {
+              "from": "HOMO",
+              "to": "LUMO",
+              "weight": 0.931
+            },
+            {
+              "from": "HOMO-3",
+              "to": "LUMO",
+              "weight": 0.0206
+            },
+            {
+              "from": "HOMO-4",
+              "to": "LUMO",
+              "weight": 0.0145
+            }
+          ],
+          "orbital_transitions_str": "HOMO->LUMO (93%); HOMO-3->LUMO (2%); HOMO-4->LUMO (1%)"
+        },
+        {
+          "state": 2,
+          "energy_eV": 3.91188,
+          "wavelength_nm": 316.9,
+          "osc_strength": 0.122517,
+          "orbital_transitions": [
+            {
+              "from": "HOMO-3",
+              "to": "LUMO",
+              "weight": 0.4265
+            },
+            {
+              "from": "HOMO-4",
+              "to": "LUMO",
+              "weight": 0.3005
+            },
+            {
+              "from": "HOMO-2",
+              "to": "LUMO",
+              "weight": 0.0868
+            }
+          ],
+          "orbital_transitions_str": "HOMO-3->LUMO (43%); HOMO-4->LUMO (30%); HOMO-2->LUMO (9%)"
+        },
+        {
+          "state": 3,
+          "energy_eV": 4.21317,
+          "wavelength_nm": 294.3,
+          "osc_strength": 0.188844,
+          "orbital_transitions": [
+            {
+              "from": "HOMO-1",
+              "to": "LUMO",
+              "weight": 0.8361
+            },
+            {
+              "from": "HOMO-4",
+              "to": "LUMO",
+              "weight": 0.0602
+            },
+            {
+              "from": "HOMO-3",
+              "to": "LUMO",
+              "weight": 0.0337
+            }
+          ],
+          "orbital_transitions_str": "HOMO-1->LUMO (84%); HOMO-4->LUMO (6%); HOMO-3->LUMO (3%)"
+        },
+        {
+          "state": 4,
+          "energy_eV": 4.43075,
+          "wavelength_nm": 279.8,
+          "osc_strength": 0.007275,
+          "orbital_transitions": [
+            {
+              "from": "HOMO-2",
+              "to": "LUMO",
+              "weight": 0.7793
+            },
+            {
+              "from": "HOMO-3",
+              "to": "LUMO",
+              "weight": 0.0659
+            },
+            {
+              "from": "HOMO",
+              "to": "LUMO+3",
+              "weight": 0.061
+            }
+          ],
+          "orbital_transitions_str": "HOMO-2->LUMO (78%); HOMO-3->LUMO (7%); HOMO->LUMO+3 (6%)"
+        },
+        {
+          "state": 5,
+          "energy_eV": 4.53577,
+          "wavelength_nm": 273.3,
+          "osc_strength": 0.011504,
+          "orbital_transitions": [
+            {
+              "from": "HOMO-4",
+              "to": "LUMO",
+              "weight": 0.5068
+            },
+            {
+              "from": "HOMO-3",
+              "to": "LUMO",
+              "weight": 0.3306
+            },
+            {
+              "from": "HOMO",
+              "to": "LUMO+2",
+              "weight": 0.0958
+            }
+          ],
+          "orbital_transitions_str": "HOMO-4->LUMO (51%); HOMO-3->LUMO (33%); HOMO->LUMO+2 (10%)"
+        },
+        {
+          "state": 6,
+          "energy_eV": 4.97235,
+          "wavelength_nm": 249.3,
+          "osc_strength": 0.02873,
+          "orbital_transitions": [
+            {
+              "from": "HOMO-5",
+              "to": "LUMO",
+              "weight": 0.764
+            },
+            {
+              "from": "HOMO-1",
+              "to": "LUMO+1",
+              "weight": 0.0464
+            },
+            {
+              "from": "HOMO-3",
+              "to": "LUMO",
+              "weight": 0.0362
+            }
+          ],
+          "orbital_transitions_str": "HOMO-5->LUMO (76%); HOMO-1->LUMO+1 (5%); HOMO-3->LUMO (4%)"
+        },
+        {
+          "state": 7,
+          "energy_eV": 5.11701,
+          "wavelength_nm": 242.3,
+          "osc_strength": 0.074376,
+          "orbital_transitions": [
+            {
+              "from": "HOMO",
+              "to": "LUMO+2",
+              "weight": 0.5818
+            },
+            {
+              "from": "HOMO",
+              "to": "LUMO+1",
+              "weight": 0.1996
+            },
+            {
+              "from": "HOMO-4",
+              "to": "LUMO",
+              "weight": 0.0475
+            }
+          ],
+          "orbital_transitions_str": "HOMO->LUMO+2 (58%); HOMO->LUMO+1 (20%); HOMO-4->LUMO (5%)"
+        },
+        {
+          "state": 8,
+          "energy_eV": 5.18289,
+          "wavelength_nm": 239.2,
+          "osc_strength": 0.029992,
+          "orbital_transitions": [
+            {
+              "from": "HOMO",
+              "to": "LUMO+1",
+              "weight": 0.3454
+            },
+            {
+              "from": "HOMO",
+              "to": "LUMO+3",
+              "weight": 0.264
+            },
+            {
+              "from": "HOMO",
+              "to": "LUMO+2",
+              "weight": 0.147
+            }
+          ],
+          "orbital_transitions_str": "HOMO->LUMO+1 (35%); HOMO->LUMO+3 (26%); HOMO->LUMO+2 (15%)"
+        },
+        {
+          "state": 9,
+          "energy_eV": 5.26621,
+          "wavelength_nm": 235.4,
+          "osc_strength": 0.012879,
+          "orbital_transitions": [
+            {
+              "from": "HOMO",
+              "to": "LUMO+3",
+              "weight": 0.4549
+            },
+            {
+              "from": "HOMO",
+              "to": "LUMO+1",
+              "weight": 0.259
+            },
+            {
+              "from": "HOMO-2",
+              "to": "LUMO+1",
+              "weight": 0.0937
+            }
+          ],
+          "orbital_transitions_str": "HOMO->LUMO+3 (45%); HOMO->LUMO+1 (26%); HOMO-2->LUMO+1 (9%)"
+        },
+        {
+          "state": 10,
+          "energy_eV": 5.42817,
+          "wavelength_nm": 228.4,
+          "osc_strength": 0.046464,
+          "orbital_transitions": [
+            {
+              "from": "HOMO-1",
+              "to": "LUMO+2",
+              "weight": 0.7205
+            },
+            {
+              "from": "HOMO-3",
+              "to": "LUMO+1",
+              "weight": 0.063
+            },
+            {
+              "from": "HOMO-1",
+              "to": "LUMO+1",
+              "weight": 0.0358
+            }
+          ],
+          "orbital_transitions_str": "HOMO-1->LUMO+2 (72%); HOMO-3->LUMO+1 (6%); HOMO-1->LUMO+1 (4%)"
+        },
+        {
+          "state": 11,
+          "energy_eV": 5.49522,
+          "wavelength_nm": 225.6,
+          "osc_strength": 0.160541,
+          "orbital_transitions": [
+            {
+              "from": "HOMO-1",
+              "to": "LUMO+1",
+              "weight": 0.7961
+            },
+            {
+              "from": "HOMO-1",
+              "to": "LUMO+2",
+              "weight": 0.0613
+            },
+            {
+              "from": "HOMO",
+              "to": "LUMO+4",
+              "weight": 0.0231
+            }
+          ],
+          "orbital_transitions_str": "HOMO-1->LUMO+1 (80%); HOMO-1->LUMO+2 (6%); HOMO->LUMO+4 (2%)"
+        },
+        {
+          "state": 12,
+          "energy_eV": 5.64201,
+          "wavelength_nm": 219.8,
+          "osc_strength": 0.01168,
+          "orbital_transitions": [
+            {
+              "from": "HOMO-1",
+              "to": "LUMO+3",
+              "weight": 0.6359
+            },
+            {
+              "from": "HOMO-2",
+              "to": "LUMO+1",
+              "weight": 0.1477
+            },
+            {
+              "from": "HOMO",
+              "to": "LUMO+3",
+              "weight": 0.1398
+            }
+          ],
+          "orbital_transitions_str": "HOMO-1->LUMO+3 (64%); HOMO-2->LUMO+1 (15%); HOMO->LUMO+3 (14%)"
+        },
+        {
+          "state": 13,
+          "energy_eV": 5.76572,
+          "wavelength_nm": 215.0,
+          "osc_strength": 0.003803,
+          "orbital_transitions": [
+            {
+              "from": "HOMO-3",
+              "to": "LUMO+1",
+              "weight": 0.4328
+            },
+            {
+              "from": "HOMO-4",
+              "to": "LUMO+1",
+              "weight": 0.3835
+            },
+            {
+              "from": "HOMO-2",
+              "to": "LUMO+1",
+              "weight": 0.0653
+            }
+          ],
+          "orbital_transitions_str": "HOMO-3->LUMO+1 (43%); HOMO-4->LUMO+1 (38%); HOMO-2->LUMO+1 (7%)"
+        },
+        {
+          "state": 14,
+          "energy_eV": 5.859,
+          "wavelength_nm": 211.6,
+          "osc_strength": 0.001774,
+          "orbital_transitions": [
+            {
+              "from": "HOMO-6",
+              "to": "LUMO",
+              "weight": 0.9165
+            },
+            {
+              "from": "HOMO-11",
+              "to": "LUMO",
+              "weight": 0.0317
+            },
+            {
+              "from": "HOMO-6",
+              "to": "LUMO+1",
+              "weight": 0.0224
+            }
+          ],
+          "orbital_transitions_str": "HOMO-6->LUMO (92%); HOMO-11->LUMO (3%); HOMO-6->LUMO+1 (2%)"
+        },
+        {
+          "state": 15,
+          "energy_eV": 5.93813,
+          "wavelength_nm": 208.8,
+          "osc_strength": 0.017173,
+          "orbital_transitions": [
+            {
+              "from": "HOMO-3",
+              "to": "LUMO+2",
+              "weight": 0.4414
+            },
+            {
+              "from": "HOMO-4",
+              "to": "LUMO+2",
+              "weight": 0.3668
+            },
+            {
+              "from": "HOMO-2",
+              "to": "LUMO+2",
+              "weight": 0.119
+            }
+          ],
+          "orbital_transitions_str": "HOMO-3->LUMO+2 (44%); HOMO-4->LUMO+2 (37%); HOMO-2->LUMO+2 (12%)"
+        },
+        {
+          "state": 16,
+          "energy_eV": 5.96743,
+          "wavelength_nm": 207.8,
+          "osc_strength": 0.046157,
+          "orbital_transitions": [
+            {
+              "from": "HOMO-2",
+              "to": "LUMO+1",
+              "weight": 0.3356
+            },
+            {
+              "from": "HOMO-5",
+              "to": "LUMO+3",
+              "weight": 0.2657
+            },
+            {
+              "from": "HOMO-1",
+              "to": "LUMO+3",
+              "weight": 0.1981
+            }
+          ],
+          "orbital_transitions_str": "HOMO-2->LUMO+1 (34%); HOMO-5->LUMO+3 (27%); HOMO-1->LUMO+3 (20%)"
+        },
+        {
+          "state": 17,
+          "energy_eV": 6.08031,
+          "wavelength_nm": 203.9,
+          "osc_strength": 0.004662,
+          "orbital_transitions": [
+            {
+              "from": "HOMO-7",
+              "to": "LUMO",
+              "weight": 0.9115
+            },
+            {
+              "from": "HOMO-7",
+              "to": "LUMO+1",
+              "weight": 0.0241
+            },
+            {
+              "from": "HOMO-11",
+              "to": "LUMO",
+              "weight": 0.0123
+            }
+          ],
+          "orbital_transitions_str": "HOMO-7->LUMO (91%); HOMO-7->LUMO+1 (2%); HOMO-11->LUMO (1%)"
+        },
+        {
+          "state": 18,
+          "energy_eV": 6.21442,
+          "wavelength_nm": 199.5,
+          "osc_strength": 0.006887,
+          "orbital_transitions": [
+            {
+              "from": "HOMO-5",
+              "to": "LUMO+1",
+              "weight": 0.5366
+            },
+            {
+              "from": "HOMO-8",
+              "to": "LUMO",
+              "weight": 0.1111
+            },
+            {
+              "from": "HOMO",
+              "to": "LUMO+4",
+              "weight": 0.1072
+            }
+          ],
+          "orbital_transitions_str": "HOMO-5->LUMO+1 (54%); HOMO-8->LUMO (11%); HOMO->LUMO+4 (11%)"
+        }
+      ],
+      "brightest": {
+        "state": 1,
+        "energy_eV": 3.64619,
+        "wavelength_nm": 340.0,
+        "osc_strength": 1.075774,
+        "orbital_transitions": [
+          {
+            "from": "HOMO",
+            "to": "LUMO",
+            "weight": 0.931
+          },
+          {
+            "from": "HOMO-3",
+            "to": "LUMO",
+            "weight": 0.0206
+          },
+          {
+            "from": "HOMO-4",
+            "to": "LUMO",
+            "weight": 0.0145
+          }
+        ],
+        "orbital_transitions_str": "HOMO->LUMO (93%); HOMO-3->LUMO (2%); HOMO-4->LUMO (1%)"
+      },
+      "shortest_wavelength_nm": 199.5,
+      "covers_200nm": true
     }
   ]
 }
