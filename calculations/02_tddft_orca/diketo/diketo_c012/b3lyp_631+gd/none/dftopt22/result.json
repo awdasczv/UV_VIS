@@ -571,5 +571,7 @@
     "orbital_transitions_str": "HOMO->LUMO (56%); HOMO-5->LUMO (15%); HOMO->LUMO+2 (8%)"
   },
   "shortest_wavelength_nm": 206.0,
-  "covers_200nm": false
+  "covers_200nm": false,
+  "n_electrons": 166,
+  "n_out_of_range_orbital_indices": 0
 }

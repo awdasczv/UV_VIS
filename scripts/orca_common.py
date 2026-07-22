@@ -153,6 +153,35 @@ def _orbital_label(idx: int, homo: int) -> str:
     return "LUMO" if d == 0 else f"LUMO+{d}"
 
 
+def _flag_state(orbs: list[dict], nmo: int | None, homo: int | None) -> str | None:
+    """
+    들뜬상태의 전이 기여로부터 '의심스러운/인위적 해'를 판정한다.
+
+    ORCA TDA 는 요청한 상태 수(nroots)가 물리적으로 의미있는 저에너지
+    다양체보다 많으면, 계수가 정확히 +-1.000 이고 유일한 기여가 가장 높은
+    가상궤도로만 가는 '가짜 뿌리(spurious root)'를 만들어낸다. 진동자 세기는
+    0 이라 스펙트럼에는 무해하지만, 이런 전이는 물리적 의미가 없으므로 표시해 둔다.
+
+    반환: 문제 없으면 None, 있으면 사유 문자열.
+    """
+    if not orbs or nmo is None or homo is None:
+        return None
+    top_virtual = nmo - 1                       # 가장 높은 가상궤도 인덱스
+    lumo = homo + 1
+    n_virtual = nmo - lumo
+    # 유일한(또는 거의 유일한) 기여가 가상궤도 공간의 최상단 2% 안쪽으로 가고
+    # 그 가중치가 0.98 이상이면 인위적 해로 본다.
+    dominant = max(orbs, key=lambda o: o["weight"])
+    if dominant["weight"] >= 0.98:
+        to = dominant["to"]
+        if to.startswith("LUMO+"):
+            off = int(to.split("+")[1])
+            if lumo + off >= top_virtual - max(2, int(0.02 * n_virtual)):
+                return (f"의심: 계수≈1 이 최상단 가상궤도({to})로만 감. "
+                        "ORCA TDA 의 인위적 뿌리로 추정 (f≈0, 스펙트럼 무해).")
+    return None
+
+
 def parse_output(out_path: Path) -> dict:
     """ORCA 출력에서 필요한 것들을 뽑아낸다."""
     text = out_path.read_text(encoding="utf-8", errors="replace")
@@ -169,6 +198,8 @@ def parse_output(out_path: Path) -> dict:
 
     m = _RE_NBF.search(text)
     res["n_basis"] = int(m.group(1)) if m else None
+    nmo = res["n_basis"]                        # MO 개수 = 기저함수 개수
+    n_bad_index = 0                             # 유효범위를 벗어난 오비탈 인덱스 개수
 
     ms = _RE_ENERGY.findall(text)
     res["scf_energy_hartree"] = float(ms[-1]) if ms else None
@@ -189,14 +220,22 @@ def parse_output(out_path: Path) -> dict:
             cm = _RE_CONTRIB.match(ln)
             if cm:
                 i, _, a, _, w = cm.groups()
+                occ_idx, vir_idx = int(i), int(a)
+                # 인덱스 유효범위 검사: 0 <= occ <= HOMO,  LUMO <= vir <= 최고 MO.
+                # 벗어나면 파서가 엉뚱한 숫자를 읽은 것이므로 버리고 센다.
+                if homo is not None and nmo is not None:
+                    if not (0 <= occ_idx <= homo and homo < vir_idx < nmo):
+                        n_bad_index += 1
+                        continue
                 if homo is not None:
                     contribs[cur].append({
-                        "from": _orbital_label(int(i), homo),
-                        "to": _orbital_label(int(a), homo),
+                        "from": _orbital_label(occ_idx, homo),
+                        "to": _orbital_label(vir_idx, homo),
                         "weight": round(float(w), 4),
                     })
             elif ln.strip() == "" and contribs.get(cur):
                 cur = None
+    res["n_out_of_range_orbital_indices"] = n_bad_index
 
     # --- 흡수 스펙트럼 ---
     # ORCA 는 같은 형식의 표를 여러 번 찍는다 (전기 쌍극자 / 속도 쌍극자 /
@@ -217,9 +256,11 @@ def parse_output(out_path: Path) -> dict:
             if m:
                 started = True
                 state = int(m.group(1))
-                orbs = sorted(contribs.get(state, []),
-                              key=lambda d: -d["weight"])[:3]
-                trans.append({
+                all_orbs = sorted(contribs.get(state, []),
+                                  key=lambda d: -d["weight"])
+                orbs = all_orbs[:3]
+                flag = _flag_state(all_orbs, nmo, homo)
+                entry = {
                     "state": state,
                     "energy_eV": round(float(m.group(2)), 5),
                     "wavelength_nm": round(float(m.group(4)), 3),
@@ -227,7 +268,10 @@ def parse_output(out_path: Path) -> dict:
                     "orbital_transitions": orbs,
                     "orbital_transitions_str": "; ".join(
                         f"{o['from']}->{o['to']} ({o['weight']*100:.0f}%)" for o in orbs),
-                })
+                }
+                if flag:
+                    entry["flag"] = flag
+                trans.append(entry)
             elif started:
                 # 표가 끝났다 (빈 줄 또는 구분선). 다음 블록은 읽지 않는다.
                 break

@@ -106,6 +106,7 @@ def write_transitions_csv(results: list[dict]) -> pd.DataFrame:
                 "wavelength_nm": t["wavelength_nm"],
                 "oscillator_strength": t["osc_strength"],
                 "major_orbital_transitions": t["orbital_transitions_str"],
+                "flag": t.get("flag", ""),
             })
     df = pd.DataFrame(rows)
     out = RESULTS / "transitions.csv"
