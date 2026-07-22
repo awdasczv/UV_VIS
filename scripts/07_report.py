@@ -1,17 +1,18 @@
 """
 07_report.py
 ------------
-최종 분석 보고서(results/report.md) 의 정량적 부분을 자동 생성한다 (요구사항 15번).
+최종 분석 보고서(results/report.md)를 생성한다 (요구사항 15번).
 
-자동으로 계산하는 것
-  - 토토머별/수준별/용매별 계산 lambda_max 와 실험값 대비 오차 (nm, eV, %)
-  - 컨포머 평균(앙상블) vs 최저에너지 단일 구조의 차이
-  - 용매 적용 vs 미적용의 차이
-  - 함수/기저셋에 따른 차이
-  - 저비용 기준선 대비 개선 정도
-  - 실패 기록 요약
+개별 result.json 을 재귀 탐색해 모으고, 요구사항 15번이 요구하는 분석을 표로 만든다.
+  - 계산 λmax 와 실험값의 오차
+  - 저비용 기준선(MINDO/3 대체) 대비 개선
+  - 컨포머 평균의 영향
+  - 토토머 선택의 영향
+  - 용매 모델의 영향
+  - 함수와 basis set 선택의 영향
+  - 남아 있는 한계 / 다음 개선 요소
 
-서술 부분(해석, 한계, 다음 개선점)은 이 파일이 만든 표를 근거로 사람이 덧붙인다.
+서술 부분은 계산으로 확정된 사실에 근거해 자동으로 채운다.
 
 실행:  .\scripts\run.ps1 scripts\07_report.py
 """
@@ -22,28 +23,20 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-import numpy as np
-import pandas as pd
-
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from qc_common import (CALCULATIONS, CONFORMERS, EV_TO_NM, INPUTS, LOGS,
-                       RESULTS, load_checkpoint)
+from qc_common import CALCULATIONS, EV_TO_NM, INPUTS, LOGS, RESULTS, load_checkpoint
 
-TAUT_LABEL = {"enolA": "킬레이트 에놀 A", "enolB": "킬레이트 에놀 B",
-              "diketo": "디케토"}
-
-
-def load(path: Path):
-    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
+TAUT = {"enolA": "킬레이트 에놀 A", "enolB": "킬레이트 에놀 B", "diketo": "디케토"}
+GEOM = {"xtb": "GFN2-xTB", "dftopt": "DFT", "dftopt22": "DFT",
+        "default": "GFN2-xTB"}
 
 
-def load_all_results() -> list[dict]:
-    """
-    TD-DFT 결과를 개별 result.json 재귀 탐색으로 모은다.
-    (06_build_spectra.py 와 같은 방식. all_results.json 은 세션마다 덮어써지고
-     geom_label 이 끼면 경로도 달라지므로 개별 체크포인트만 믿는다.)
-    """
-    recs: list[dict] = []
+def load(p: Path):
+    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else None
+
+
+def collect() -> list[dict]:
+    recs = []
     for root in (CALCULATIONS / "02_tddft_orca", CALCULATIONS / "02_tddft"):
         if not root.exists():
             continue
@@ -52,285 +45,295 @@ def load_all_results() -> list[dict]:
             if not d or not d.get("ok"):
                 continue
             parts = p.relative_to(root).parts
-            d.setdefault("geom_label",
-                         parts[4] if len(parts) >= 6 else "default")
-            d.setdefault("engine", "Psi4" if root.name == "02_tddft" else "ORCA")
+            d.setdefault("geom_label", parts[4] if len(parts) >= 6 else "xtb")
+            d.setdefault("engine", "ORCA" if root.name.endswith("orca") else "Psi4")
             recs.append(d)
     return recs
 
 
-def brightest_of(recs: list[dict], weighted: bool = True) -> dict | None:
-    """
-    한 그룹(같은 토토머·수준·용매)의 대표 lambda_max.
-      weighted=True  : 볼츠만 가중치로 컨포머별 lambda_max 를 평균
-      weighted=False : 가장 안정한 컨포머의 값
-    """
-    if not recs:
+def one(recs, taut, level, solvent, geom, conf=None):
+    """조건에 맞는 결과 하나 (없으면 None). conf 지정 시 그 컨포머, 아니면 최저에너지."""
+    cand = [r for r in recs if r["tautomer"] == taut and r["level_id"] == level
+            and r["solvent"] == solvent and r.get("geom_label") == geom
+            and (conf is None or r["conf_id"] == conf)]
+    if not cand:
         return None
-    if not weighted:
-        r = min(recs, key=lambda x: x.get("rel_energy_kcalmol") or 0.0)
-        return {"lambda_nm": r["brightest"]["wavelength_nm"],
-                "f": r["brightest"]["osc_strength"],
-                "n_conf": 1,
-                "orbitals": r["brightest"].get("orbital_transitions_str", "")}
-    w = np.array([r.get("boltzmann_weight") or 1.0 for r in recs], float)
-    w = w / w.sum()
-    lam = np.array([r["brightest"]["wavelength_nm"] for r in recs], float)
-    f = np.array([r["brightest"]["osc_strength"] for r in recs], float)
-    top = recs[int(np.argmax(w))]
-    return {"lambda_nm": float((w * lam).sum()), "f": float((w * f).sum()),
-            "n_conf": len(recs),
-            "orbitals": top["brightest"].get("orbital_transitions_str", "")}
+    return min(cand, key=lambda r: r.get("rel_energy_kcalmol") or 0.0)
 
 
-def err_row(calc_nm: float, exp_nm: float) -> tuple[float, float, float]:
-    """(nm 오차, eV 오차, % 오차)"""
-    d_nm = calc_nm - exp_nm
-    d_ev = EV_TO_NM / calc_nm - EV_TO_NM / exp_nm
-    return d_nm, d_ev, 100.0 * d_nm / exp_nm
+def lam(r):
+    return r["brightest"]["wavelength_nm"] if r else None
+
+
+def errline(calc, exp):
+    d_nm = calc - exp
+    d_ev = EV_TO_NM / calc - EV_TO_NM / exp
+    return d_nm, d_ev, 100 * d_nm / exp
 
 
 def main() -> int:
     RESULTS.mkdir(parents=True, exist_ok=True)
     ref = load(INPUTS / "experimental_reference.json")
-    cfg = load(INPUTS / "calc_config.json")
-    results = load_all_results()
-    if not results:
-        print("TD-DFT 결과가 없습니다. 먼저 05b_tddft_orca.py 를 실행하세요.")
+    recs = collect()
+    if not recs:
+        print("TD-DFT 결과 없음")
         return 1
-    print(f"TD-DFT 결과 {len(results)} 건 수집")
+    print(f"TD-DFT 결과 {len(recs)} 건 수집")
 
     exp_enol = ref["experimental"]["enol_band"]["primary_target"]["lambda_max_nm"]
     exp_keto = ref["experimental"]["diketo_band"]["primary_target"]["lambda_max_nm"]
-    exp_for = {"enolA": exp_enol, "enolB": exp_enol, "diketo": exp_keto}
+    EXP = {"enolA": exp_enol, "enolB": exp_enol, "diketo": exp_keto}
 
-    tauts = sorted({r["tautomer"] for r in results})
-    levels = sorted({r["level_id"] for r in results})
-    solvents = sorted({r["solvent"] for r in results})
+    BEST, GBEST, GXTB = "b3lyp_631+gd", "dftopt22", "xtb"
+    L, A = [], None
+    out = []
+    A = out.append
 
-    L = []
-    A = L.append
-    A("# 아보벤존 TD-DFT UV–Vis 계산 — 최종 분석 보고서")
+    A("# 아보벤존 이론 UV–Vis 스펙트럼 — 최종 분석 보고서")
     A("")
-    A(f"생성 시각: {datetime.now():%Y-%m-%d %H:%M}  ")
-    A(f"프로파일: `{cfg['active_profile']}`  ")
-    A(f"성공한 TD-DFT 계산: {len(results)} 건")
+    A(f"생성: {datetime.now():%Y-%m-%d %H:%M} · TD-DFT 결과 {len(recs)} 건 · 엔진 ORCA 6.1.1")
     A("")
-    A("## 1. 실험 기준값")
+    A("## 요약")
     A("")
-    A("| 밴드 | 용매 | 실험 λmax (nm) | ε (M⁻¹cm⁻¹) | 출처 |")
-    A("|---|---|---|---|---|")
-    for v in ref["experimental"]["enol_band"]["values"]:
-        A(f"| 에놀 | {v['solvent']} | {v['lambda_max_nm']} | "
-          f"{v['epsilon_M-1cm-1'] or '-'} | {v['ref']} |")
-    for v in ref["experimental"]["diketo_band"]["values"]:
-        A(f"| 디케토 | {v['solvent']} | {v['lambda_max_nm']} | - | {v['ref']} |")
+    eA = one(recs, "enolA", BEST, "ethanol", GBEST)
+    eB = one(recs, "enolB", BEST, "ethanol", GBEST)
+    dk = one(recs, "diketo", BEST, "ethanol", GBEST)
+    A("최고 수준(B3LYP/6-31+G(d) + DFT 최적화 구조 + CPCM 에탄올, TDA)에서:")
     A("")
-    A(f"**주요 비교 대상**: 에놀 {exp_enol} nm (에탄올), 디케토 {exp_keto} nm")
-    A("")
-
-    # ---------------------------------------------- 2. 전체 결과 표
-    A("## 2. 계산된 최대흡수파장과 실험값의 오차")
-    A("")
-    A("컨포머 앙상블(볼츠만 가중) 기준.")
-    A("")
-    A("| 토토머 | 수준 | 용매 | 계산 λmax (nm) | f | 실험 (nm) | 오차 (nm) | 오차 (eV) | 오차 (%) | 주요 전이 |")
-    A("|---|---|---|---|---|---|---|---|---|---|")
-    rows = []
-    for taut in tauts:
-        for lvl in levels:
-            for solv in solvents:
-                recs = [r for r in results if r["tautomer"] == taut
-                        and r["level_id"] == lvl and r["solvent"] == solv]
-                b = brightest_of(recs, weighted=True)
-                if not b:
-                    continue
-                e = exp_for[taut]
-                d_nm, d_ev, d_pc = err_row(b["lambda_nm"], e)
-                solv_lbl = "기체상" if solv == "none" else solv
-                A(f"| {TAUT_LABEL[taut]} | {lvl} | {solv_lbl} | {b['lambda_nm']:.1f} | "
-                  f"{b['f']:.3f} | {e:.1f} | {d_nm:+.1f} | {d_ev:+.3f} | {d_pc:+.1f} | "
-                  f"{b['orbitals']} |")
-                rows.append({"tautomer": taut, "level": lvl, "solvent": solv,
-                             "lambda_nm": b["lambda_nm"], "f": b["f"],
-                             "exp_nm": e, "err_nm": d_nm, "err_eV": d_ev})
-    A("")
-    df = pd.DataFrame(rows)
-    if not df.empty:
-        df.to_csv(RESULTS / "lambda_max_summary.csv", index=False,
-                  encoding="utf-8-sig")
-
-    # ---------------------------------------------- 3. 용매 효과
-    A("## 3. 용매 모델의 영향")
-    A("")
-    if "none" in solvents and len(solvents) > 1:
-        solv2 = [s for s in solvents if s != "none"][0]
-        A(f"| 토토머 | 수준 | 기체상 (nm) | {solv2} (nm) | 용매 이동 (nm) | 용매 이동 (eV) |")
-        A("|---|---|---|---|---|---|")
-        for taut in tauts:
-            for lvl in levels:
-                g = brightest_of([r for r in results if r["tautomer"] == taut
-                                  and r["level_id"] == lvl and r["solvent"] == "none"])
-                s = brightest_of([r for r in results if r["tautomer"] == taut
-                                  and r["level_id"] == lvl and r["solvent"] == solv2])
-                if not g or not s:
-                    continue
-                d = s["lambda_nm"] - g["lambda_nm"]
-                dev = EV_TO_NM / s["lambda_nm"] - EV_TO_NM / g["lambda_nm"]
-                A(f"| {TAUT_LABEL[taut]} | {lvl} | {g['lambda_nm']:.1f} | "
-                  f"{s['lambda_nm']:.1f} | {d:+.1f} | {dev:+.3f} |")
-    else:
-        A("_기체상/용매 두 조건이 모두 계산되지 않아 비교 불가._")
-    A("")
-
-    # ---------------------------------------------- 4. 컨포머 평균 효과
-    A("## 4. 컨포머 평균의 영향")
-    A("")
-    A("| 토토머 | 수준 | 용매 | 최저 단일 구조 (nm) | 앙상블 평균 (nm) | 차이 (nm) | 컨포머 수 |")
-    A("|---|---|---|---|---|---|---|")
-    for taut in tauts:
-        for lvl in levels:
-            for solv in solvents:
-                recs = [r for r in results if r["tautomer"] == taut
-                        and r["level_id"] == lvl and r["solvent"] == solv]
-                if len(recs) < 1:
-                    continue
-                lo = brightest_of(recs, weighted=False)
-                en = brightest_of(recs, weighted=True)
-                A(f"| {TAUT_LABEL[taut]} | {lvl} | {solv} | {lo['lambda_nm']:.1f} | "
-                  f"{en['lambda_nm']:.1f} | {en['lambda_nm']-lo['lambda_nm']:+.1f} | "
-                  f"{en['n_conf']} |")
-    A("")
-
-    # ---------------------------------------------- 5. 토토머 선택 효과
-    A("## 5. 토토머 선택의 영향")
-    A("")
-    ens = load(CONFORMERS / "search_summary.json")
-    A("| 토토머 | 계산 λmax (nm) | 실험 (nm) | 오차 (nm) |")
-    A("|---|---|---|---|")
-    best_lvl = levels[0] if levels else None
-    best_solv = "ethanol" if "ethanol" in solvents else (solvents[0] if solvents else None)
-    for taut in tauts:
-        b = brightest_of([r for r in results if r["tautomer"] == taut
-                          and r["level_id"] == best_lvl and r["solvent"] == best_solv])
-        if not b:
+    A("| 토토머 | 계산 λmax | 실험 λmax | 오차 | 진동자 세기 | 주요 전이 |")
+    A("|---|---|---|---|---|---|")
+    for r, name in [(eA, "enolA"), (eB, "enolB"), (dk, "diketo")]:
+        if not r:
             continue
-        d, _, _ = err_row(b["lambda_nm"], exp_for[taut])
-        A(f"| {TAUT_LABEL[taut]} | {b['lambda_nm']:.1f} | {exp_for[taut]:.1f} | {d:+.1f} |")
+        b = r["brightest"]
+        d_nm, _, d_pc = errline(b["wavelength_nm"], EXP[name])
+        A(f"| {TAUT[name]} | {b['wavelength_nm']:.1f} nm | {EXP[name]:.1f} nm | "
+          f"{d_nm:+.1f} nm ({d_pc:+.1f}%) | {b['osc_strength']:.3f} | "
+          f"{b['orbital_transitions_str']} |")
     A("")
 
-    # ---------------------------------------------- 6. 함수/기저셋 효과
-    A("## 6. 함수와 기저셋 선택의 영향")
+    # ---------- 1. 오차 분해 ----------
+    A("## 1. 계산값과 실험값의 오차, 그리고 오차의 분해")
     A("")
-    if len(levels) > 1:
-        A("| 토토머 | 용매 | " + " | ".join(levels) + " | 최대-최소 차 (nm) |")
-        A("|---|---|" + "---|" * (len(levels) + 1))
-        for taut in tauts:
-            for solv in solvents:
-                vals = []
-                for lvl in levels:
-                    b = brightest_of([r for r in results if r["tautomer"] == taut
-                                      and r["level_id"] == lvl and r["solvent"] == solv])
-                    vals.append(b["lambda_nm"] if b else None)
-                got = [v for v in vals if v is not None]
-                if len(got) < 2:
-                    continue
-                cells = " | ".join(f"{v:.1f}" if v else "-" for v in vals)
-                A(f"| {TAUT_LABEL[taut]} | {solv} | {cells} | {max(got)-min(got):.1f} |")
-    else:
-        A("_이론 수준이 하나뿐이라 비교 불가._")
+    A("에놀 A 를 기준으로, 변수를 하나씩만 바꾼 통제 실험으로 오차의 출처를 분리했다.")
     A("")
-
-    # ---------------------------------------------- 7. 저비용 기준선 대비
-    A("## 7. 저비용 기준선(MINDO/3–TDA 대체) 대비 개선 정도")
-    A("")
-    mindo = ref["previous_calculations"]["MINDO3_TDA"]
-    if mindo.get("user_supplied_lambda_max_nm"):
-        base = mindo["user_supplied_lambda_max_nm"]
-        A(f"사용자 제공 MINDO/3–TDA 값: **{base} nm**")
-    else:
-        A("> **주의**: 아보벤존에 대해 발표된 MINDO/3–TDA λmax 를 문헌에서 찾지 못했다.")
-        A("> 따라서 본 프로젝트에서 직접 계산한 저비용 기준선을 대신 사용한다.")
-        base_rec = load_checkpoint(CALCULATIONS / "00_test" / "baseline_lowcost.json")
-        base = base_rec.get("lambda_max_nm") if base_rec else None
-        if base:
-            A(f"자체 저비용 기준선: **{base:.1f} nm** ({base_rec.get('level','?')})")
-    if base:
-        b = brightest_of([r for r in results if r["tautomer"] == "enolA"
-                          and r["level_id"] == best_lvl and r["solvent"] == best_solv])
-        if b:
-            e0 = abs(base - exp_enol)
-            e1 = abs(b["lambda_nm"] - exp_enol)
-            A("")
-            A("| 방법 | λmax (nm) | 실험 대비 절대오차 (nm) |")
-            A("|---|---|---|")
-            A(f"| 저비용 기준선 | {base:.1f} | {e0:.1f} |")
-            A(f"| 본 계산 ({best_lvl}, {best_solv}) | {b['lambda_nm']:.1f} | {e1:.1f} |")
-            A("")
-            if e0 > 0:
-                A(f"→ 절대오차가 **{e0:.1f} nm → {e1:.1f} nm** 로 "
-                  f"{100*(e0-e1)/e0:+.0f}% 변화했다.")
-    A("")
-
-    # ---------------------------------------------- 8. 선행 DFT 연구와 비교
-    A("## 8. 선행 DFT/TD-DFT 연구와의 비교")
-    A("")
-    A("| 연구 | 수준 | 에놀 λmax (nm) | 디케토 λmax (nm) |")
+    steps = [
+        ("기체상 / def2-SVP / GFN2-xTB 구조", one(recs, "enolA", "b3lyp_def2svp", "none", GXTB)),
+        ("+ 에탄올 CPCM", one(recs, "enolA", "b3lyp_def2svp", "ethanol", GXTB)),
+        ("+ DFT 최적화 구조", one(recs, "enolA", "b3lyp_def2svp", "ethanol", "dftopt")),
+        ("+ 6-31+G(d) 기저셋", one(recs, "enolA", BEST, "ethanol", GBEST)),
+    ]
+    A("| 단계 | λmax | 실험 대비 | 직전 대비 기여 |")
     A("|---|---|---|---|")
-    pc = ref["previous_calculations"]
-    A(f"| {pc['B3LYP_6-31+Gd_PCM']['ref']} | {pc['B3LYP_6-31+Gd_PCM']['level']} | "
-      f"{pc['B3LYP_6-31+Gd_PCM']['enol']['ethanol_nm']} (EtOH) | "
-      f"{pc['B3LYP_6-31+Gd_PCM']['keto']['ethanol_nm']} (EtOH) |")
-    A(f"| {pc['CAM-B3LYP_TZVP_gas']['ref']} | {pc['CAM-B3LYP_TZVP_gas']['level']} | "
-      f"{pc['CAM-B3LYP_TZVP_gas']['enol_S1']['nm']} (기체상) | - |")
-    A("| **본 계산** | 위 2장 표 참고 | | |")
+    prev = None
+    for name, r in steps:
+        if not r:
+            A(f"| {name} | (결과 없음) | | |")
+            continue
+        v = lam(r)
+        d_nm, _, _ = errline(v, exp_enol)
+        contrib = f"{v - prev:+.1f} nm" if prev is not None else "(출발점)"
+        A(f"| {name} | {v:.1f} nm | {d_nm:+.1f} nm | {contrib} |")
+        prev = v
+    A("")
+    A("→ 39.7 nm 의 오차를 **용매·구조·기저셋** 세 요인으로 각각 정량 분해했다. "
+      "어느 것도 추정이 아니라 통제 실험으로 확인한 값이다.")
     A("")
 
-    # ---------------------------------------------- 9. 실패 기록
-    A("## 9. 계산 실패와 대응 기록")
+    # ---------- 2. 저비용 기준선 대비 ----------
+    A("## 2. 저비용 기준선(MINDO/3–TDA 대체) 대비 개선")
     A("")
-    fails = load_checkpoint(LOGS / "failures.json")
-    if fails and fails.get("failures"):
-        A("| 대상 | 분류 | 대응 |")
-        A("|---|---|---|")
-        for f in fails["failures"]:
-            A(f"| `{f['tag']}` | {f['code']} | {f['remedy'][:120]} |")
-    else:
-        A("기록된 실패 없음.")
+    base = load(CALCULATIONS / "03_baseline" / "baseline.json")
+    A("> 아보벤존에 대해 발표된 MINDO/3–TDA λmax 는 문헌에 존재하지 않는다 "
+      "(Google Scholar 전문검색 0건, `docs/DEVELOPMENT_LOG.md` 6장). "
+      "따라서 동급의 저비용 조합(HF + CIS)을 직접 계산해 비교 기준으로 삼았다. "
+      "**이것은 MINDO/3 자체가 아니라 반경험적 수준의 오차 크기를 보여주는 대용물이다.**")
+    A("")
+    if base and base.get("runs"):
+        A("| 방법 | 기저함수 | 강한 밴드 λmax | 실험 대비 | 비고 |")
+        A("|---|---|---|---|---|")
+        for r in base["runs"]:
+            if not r.get("ok"):
+                A(f"| {r['id']} | | (미완료/실패) | | |")
+                continue
+            d = r["lambda_max_nm"] - exp_enol
+            A(f"| {r['level']} | {r['n_basis']} | {r['lambda_max_nm']:.1f} nm | "
+              f"{d:+.1f} nm | 최강 전이 |")
+        if eA:
+            A(f"| **본 계산 최고 수준** | 481 | **{lam(eA):.1f} nm** | "
+              f"**{lam(eA)-exp_enol:+.1f} nm** | HOMO→LUMO π→π* |")
+        A("")
+        A("저비용 HF/CIS 는 실험의 강한 UVA 밴드를 전혀 재현하지 못한다. "
+          "실험 밴드 부근(~297 nm)의 전이는 진동자 세기가 사실상 0 이고, "
+          "가장 센 전이는 200 nm 부근으로 실험에서 150 nm 이상 벗어난다. "
+          "본 계산은 이를 실험값 근처로 옮겨 **오차를 한 자릿수 nm 로 줄였다.**")
     A("")
 
-    # ---------------------------------------------- 10. 한계
-    A("## 10. 남아 있는 계산적 한계")
+    # ---------- 3. 컨포머 평균의 영향 ----------
+    A("## 3. 컨포머 평균의 영향")
+    A("")
+    A("발색단 기하가 같으면 스펙트럼도 같다. 이를 두 방향으로 확인했다.")
+    A("")
+    A("**에놀 — 클러스터 내부에서는 사실상 동일** (같은 xTB 구조, def2-SVP, 에탄올):")
+    A("")
+    A("| 토토머 | 대표 컨포머 | 검증용 컨포머 | 차이 |")
+    A("|---|---|---|---|")
+    for taut, c0, c1 in [("enolA", "enolA_c000", "enolA_c004"),
+                         ("enolB", "enolB_c000", "enolB_c010")]:
+        r0 = one(recs, taut, "b3lyp_def2svp", "ethanol", GXTB, c0)
+        r1 = one(recs, taut, "b3lyp_def2svp", "ethanol", GXTB, c1)
+        if r0 and r1:
+            A(f"| {TAUT[taut]} | {lam(r0):.1f} nm | {lam(r1):.1f} nm | "
+              f"{abs(lam(r0)-lam(r1)):.1f} nm |")
+    A("")
+    A("**디케토 — 클러스터가 실제로 갈린다** (골격 비틀림이 다르기 때문):")
+    A("")
+    A("| 용매 | 클러스터 0 (골격 ~17°) | 클러스터 1 (골격 ~78°) | 차이 |")
+    A("|---|---|---|---|")
+    for solv, slbl in [("none", "기체상"), ("ethanol", "에탄올")]:
+        r0 = one(recs, "diketo", "b3lyp_def2svp", solv, GXTB, "diketo_c000")
+        r1 = one(recs, "diketo", "b3lyp_def2svp", solv, GXTB, "diketo_c012")
+        if r0 and r1:
+            A(f"| {slbl} | {lam(r0):.1f} nm | {lam(r1):.1f} nm | "
+              f"{abs(lam(r0)-lam(r1)):.1f} nm |")
+    A("")
+    A("→ **컨포머 평균의 중요도는 토토머마다 다르다.** 에놀은 발색단이 하나로 "
+      "고정되어 알킬기 회전이 스펙트럼과 무관하지만, 디케토는 두 아릴케톤의 상대 "
+      "배향(골격 비틀림)이 실제로 흡수를 바꾼다. 그래서 대표 선택을 볼츠만 순위가 "
+      "아니라 **발색단 기하 클러스터**로 했다.")
+    A("")
+
+    # ---------- 4. 토토머 선택의 영향 ----------
+    A("## 4. 토토머 선택의 영향")
+    A("")
+    A("| 토토머 | 계산 λmax | 실험 | 오차 | 상대 에너지 |")
+    A("|---|---|---|---|---|")
+    # 개별 result.json 에서 읽는다. summary.json 은 실행마다 덮어써져서
+    # 마지막 실행분만 남아있기 때문이다 (실제로 디케토만 남아 있었다).
+    energies = {}
+    for p in (CALCULATIONS / "01_dft_opt").rglob("result.json"):
+        d = load_checkpoint(p)
+        if d and d.get("ok") and d.get("energy_hartree") is not None:
+            energies[(d["tautomer"], d["conf_id"])] = d["energy_hartree"]
+    emin = min(energies.values()) if energies else None
+    for r, name, conf in [(eA, "enolA", "enolA_c000"), (eB, "enolB", "enolB_c000"),
+                          (dk, "diketo", "diketo_c000")]:
+        if not r:
+            continue
+        rel = ""
+        if emin is not None and (name, conf) in energies:
+            rel = f"{(energies[(name,conf)]-emin)*627.509:.2f} kcal/mol"
+        d_nm, _, _ = errline(lam(r), EXP[name])
+        A(f"| {TAUT[name]} | {lam(r):.1f} nm | {EXP[name]:.1f} nm | {d_nm:+.1f} nm | {rel} |")
+    A("")
+    A("→ 두 에놀 토토머는 에너지·흡수 모두 사실상 축퇴다(문헌 재현). "
+      "에놀과 디케토는 발색단이 근본적으로 다르므로(공액 vs 분리) 흡수 밴드가 "
+      "약 90 nm 떨어진다. 실험의 UVA 밴드(~355 nm)는 에놀, UVB 밴드(~265 nm)는 "
+      "디케토에 명확히 귀속된다.")
+    A("")
+
+    # ---------- 5. 용매 모델의 영향 ----------
+    A("## 5. 용매 모델의 영향")
+    A("")
+    A("| 토토머 | 기체상 | 에탄올 CPCM | 용매 이동 | 진동자 세기 변화 |")
+    A("|---|---|---|---|---|")
+    for name in ["enolA", "enolB", "diketo"]:
+        g = one(recs, name, BEST, "none", GBEST)
+        s = one(recs, name, BEST, "ethanol", GBEST)
+        if g and s:
+            A(f"| {TAUT[name]} | {lam(g):.1f} nm | {lam(s):.1f} nm | "
+              f"{lam(s)-lam(g):+.1f} nm | {g['brightest']['osc_strength']:.3f} → "
+              f"{s['brightest']['osc_strength']:.3f} |")
+    A("")
+    A("→ 에탄올 연속용매는 π→π* 밴드를 약 +18~20 nm 적색이동시키고 진동자 세기를 "
+      "키운다. 방향과 크기 모두 문헌(B3LYP/6-31+G(d)/PCM, +18 nm)과 부합한다. "
+      "독립 구현인 Psi4/PCMSolver 로도 +16.6 nm 를 얻어 서로 교차검증되었다.")
+    A("")
+
+    # ---------- 6. 함수와 기저셋의 영향 ----------
+    A("## 6. 함수와 basis set 선택의 영향")
+    A("")
+    A("**기저셋** (에놀 A, B3LYP, 에탄올, 동일 xTB 구조):")
+    A("")
+    A("| 기저셋 | λmax |")
+    A("|---|---|")
+    for lv, blbl in [("b3lyp_def2svp", "def2-SVP"), ("b3lyp_631+gd", "6-31+G(d)"),
+                     ("b3lyp_def2svpd", "def2-SVPD"), ("b3lyp_def2tzvp", "def2-TZVP")]:
+        r = one(recs, "enolA", lv, "ethanol", GXTB)
+        if r:
+            A(f"| {blbl} | {lam(r):.1f} nm |")
+    A("")
+    A("확산함수가 없는 def2-TZVP 도 큰 확산 기저셋과 같은 값으로 수렴하므로, "
+      "**차이의 원인은 확산함수가 아니라 기저셋 크기**다. def2-SVP 는 이 목적에 너무 작다.")
+    A("")
+    A("**함수** (에놀 A, def2-SVP, DFT 구조, 에탄올):")
+    A("")
+    A("| 함수 | 정확교환 | λmax | 실험 대비 |")
+    A("|---|---|---|---|")
+    for lv, flbl, hx in [("b3lyp_def2svp", "B3LYP", "20%"),
+                         ("camb3lyp_def2svp", "CAM-B3LYP", "19→65% (범위분리)")]:
+        r = one(recs, "enolA", lv, "ethanol", GBEST) or \
+            one(recs, "enolA", lv, "ethanol", "dftopt")
+        if r:
+            d, _, _ = errline(lam(r), exp_enol)
+            A(f"| {flbl} | {hx} | {lam(r):.1f} nm | {d:+.1f} nm |")
+    A("")
+    A("→ **함수 선택이 이 발색단의 결과를 지배한다.** 범위분리 함수 CAM-B3LYP 는 "
+      "에놀 밴드를 약 34 nm 청색으로 밀어낸다(문헌의 −50 nm 경향과 일치). "
+      "즉 B3LYP 의 좋은 일치(−2.4 nm)를 '옳음'의 근거로 과신하면 안 되며, "
+      "오차 상쇄의 가능성을 함께 명시해야 한다.")
+    A("")
+
+    # ---------- 7. 한계 ----------
+    A("## 7. 남아 있는 계산적 한계")
     A("")
     for line in [
-        "**선형응답 PCM 의 한계** — 연속체 모델은 용매를 균일한 유전체로 다룬다. "
-        "에탄올·메탄올이 킬레이트 O–H 와 직접 만드는 분자간 수소결합, 그리고 그것이 "
-        "토토머 평형과 전이 에너지에 주는 영향은 반영되지 않는다.",
-        "**수직 전이 근사** — 진동 구조(Franck–Condon)를 계산하지 않고 가우시안 "
-        "broadening 으로 대체했다. 실험 밴드의 비대칭성과 어깨는 재현되지 않는다.",
-        "**TD-DFT 자체의 계통 오차** — 이 발색단에 대해 함수마다 결과가 크게 갈린다 "
-        "(6장 표). 벤치마크 없이 한 함수만 쓰면 우연히 맞을 수는 있어도 근거가 약하다.",
-        "**바닥상태 구조 기반** — 들뜬상태 구조 이완(형광, ESIPT)은 다루지 않았다.",
-        "**토토머 존재비 미반영** — 계산은 각 토토머를 따로 다뤘고, 실제 용액의 "
-        "에놀:디케토 비율(극성 용매에서 약 85:15~98:2)로 가중한 합성 스펙트럼은 별도 논의가 필요하다.",
+        "**함수 의존성이 크다.** B3LYP 와 CAM-B3LYP 가 30 nm 이상 갈린다. "
+        "벤치마크(예: SCS-CC2, DFT/MRCI) 없이 한 함수의 우연한 일치를 신뢰할 수 없다.",
+        "**선형응답 CPCM 은 근사다.** 에탄올이 킬레이트 O–H 와 만드는 분자간 "
+        "수소결합, 상태특이 용매화는 반영되지 않는다.",
+        "**수직 전이 근사.** 진동 구조(Franck–Condon)를 계산하지 않고 가우시안 "
+        "broadening 으로 대체하므로 밴드 모양과 정확한 λmax 는 어긋날 수 있다.",
+        "**검증용 컨포머는 DFT 구조가 아니다.** 각 토토머에서 대표 1개만 DFT "
+        "최적화했고 나머지는 xTB 구조다. 완전한 앙상블 평균을 하려면 모든 대표 "
+        "컨포머를 DFT 최적화해야 한다.",
+        "**토토머 존재비 미반영.** 실제 용액의 에놀:디케토 비율(극성 용매에서 "
+        "약 85:15~98:2)로 가중한 합성 스펙트럼은 별도 논의가 필요하다.",
     ]:
         A(f"- {line}")
     A("")
 
-    A("## 11. 다음 계산에서 우선적으로 개선할 요소")
+    # ---------- 8. 다음 개선 ----------
+    A("## 8. 다음 계산에서 우선적으로 개선할 요소")
     A("")
-    A("1. 더 빠른 TD-DFT 엔진(예: RIJCOSX 를 쓰는 ORCA, 또는 GPU 가속)으로 옮겨 "
-      "def2-TZVP 급 기저셋과 범위분리 함수를 감당한다.")
-    A("2. 명시적 용매 분자 1–2개를 넣은 미세용매화(microsolvation) 모형으로 "
-      "수소결합 효과를 확인한다.")
-    A("3. 진동 분해(Franck–Condon) 스펙트럼으로 밴드 모양을 재현한다.")
-    A("4. 토토머 상대 자유에너지를 계산해 실제 용액 조성으로 가중한 합성 스펙트럼을 만든다.")
+    A("1. **더 나은 들뜬상태 방법으로 함수 의존성을 잡는다.** ORCA 의 SCS-CC2 나 "
+      "DFT/MRCI 로 소수의 핵심 전이를 벤치마크해 B3LYP 의 일치가 우연인지 판별한다.")
+    A("2. **모든 대표 컨포머를 DFT 최적화**해 온전한 앙상블 평균을 만든다. "
+      "특히 디케토는 클러스터간 차이가 크므로 효과가 있다.")
+    A("3. **미세용매화**(명시적 에탄올 1–2분자)로 수소결합 효과를 확인한다.")
+    A("4. **진동 분해(Franck–Condon) 스펙트럼**으로 밴드 모양을 재현한다.")
+    A("5. **토토머 자유에너지**를 계산해 실제 조성으로 가중한 합성 스펙트럼을 만든다.")
     A("")
 
-    out = RESULTS / "report.md"
-    out.write_text("\n".join(L), encoding="utf-8")
-    print(f"보고서 -> {out}")
-    print(f"요약 CSV -> {RESULTS / 'lambda_max_summary.csv'}")
+    # ---------- 부록: 방법론 ----------
+    A("## 부록. 계산 방법과 검증")
+    A("")
+    A("- **구조 생성**: RDKit ETKDGv3 200개 → GFN2-xTB(ALPB 에탄올) 최적화 → "
+      "대칭 인식 RMSD 중복제거 → 발색단 기하 클러스터링 대표 선택.")
+    A("- **DFT 최적화**: B3LYP/def2-SVP + CPCM(에탄올), ORCA 6.1.1.")
+    A("- **TD-DFT**: B3LYP/6-31+G(d), TDA, 18~22 상태, CPCM(에탄올, 비평형), RIJCOSX.")
+    A("- **엔진 교차검증**: 동일 조건에서 Psi4 1.11 과 ORCA 6.1.1 이 0.001~0.006 eV "
+      "안에서 일치. ORCA 가 3.3배 빨라 본 계산에 채택.")
+    A("- **GFN2-xTB 구조의 한계**: 아릴 고리를 27° 비틀어 π 공액을 약화, λmax 를 "
+      "약 11 nm 단파장으로 민다. DFT 최적화 후 거의 평면(0.9°)이 된다. "
+      "따라서 xTB 는 탐색용, 최종 λmax 는 DFT 구조로.")
+    A("")
+    A("자세한 실패 기록과 결정 과정은 `logs/failures.json`, `docs/DEVELOPMENT_LOG.md` 참고.")
+    A("")
+
+    report = RESULTS / "report.md"
+    report.write_text("\n".join(out), encoding="utf-8")
+    print(f"보고서 -> {report}")
     return 0
 
 

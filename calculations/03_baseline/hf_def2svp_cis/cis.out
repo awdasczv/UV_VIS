@@ -1896,3 +1896,83 @@ Number of trial vectors determined             ...     60
 
 
                        ****Iteration    0****
+   Time for iteration     :  TOTAL=657.4 TRAFO=5.0 2-EL=652.3
+   Size of expansion space: 36
+   Lowest Energy          :     0.205538460166
+   Maximum Energy change  :     0.331231377636 (vector 11)
+   Maximum residual norm  :     0.024769509625
+
+                       ****Iteration    1****
+   Time for iteration     :  TOTAL=170.8 TRAFO=0.7 2-EL=170.0
+   Size of expansion space: 48
+   Lowest Energy          :     0.185864659082
+   Maximum Energy change  :     0.042977293187 (vector 4)
+   Maximum residual norm  :     0.002139800037
+
+                       ****Iteration    2****
+   Time for iteration     :  TOTAL=162.5 TRAFO=0.7 2-EL=161.8
+   Size of expansion space: 60
+   Lowest Energy          :     0.183788854485
+   Maximum Energy change  :     0.006608653875 (vector 11)
+   Maximum residual norm  :     0.000498786440
+   Rebuilding the expansion space
+
+                       ****Iteration    3****
+   Time for iteration     :  TOTAL=338.1 TRAFO=1.2 2-EL=336.8
+   Size of expansion space: 24
+   Lowest Energy          :     0.183705119781
+   Maximum Energy change  :     0.000921268897 (vector 11)
+   Maximum residual norm  :     0.000125486336
+
+                       ****Iteration    4****
+   Time for iteration     :  TOTAL=140.5 TRAFO=0.8 2-EL=139.8
+   Size of expansion space: 36
+   Lowest Energy          :     0.183694102739
+   Maximum Energy change  :     0.000331723380 (vector 11)
+   Maximum residual norm  :     0.000054319957
+
+                       ****Iteration    5****
+   Time for iteration     :  TOTAL=155.1 TRAFO=0.5 2-EL=154.6
+   Size of expansion space: 48
+   Lowest Energy          :     0.183693031827
+   Maximum Energy change  :     0.000174259879 (vector 11)
+   Maximum residual norm  :     0.000046028418
+
+                       ****Iteration    6****
+   Time for iteration     :  TOTAL=189.1 TRAFO=0.9 2-EL=188.2
+   Size of expansion space: 60
+   Lowest Energy          :     0.183692968224
+   Maximum Energy change  :     0.000217248108 (vector 11)
+   Maximum residual norm  :     0.000065048357
+   Rebuilding the expansion space
+
+                       ****Iteration    7****
+   Time for iteration     :  TOTAL=411.1 TRAFO=1.0 2-EL=410.0
+   Size of expansion space: 24
+   Lowest Energy          :     0.183692962654
+   Maximum Energy change  :     0.000113395356 (vector 11)
+   Maximum residual norm  :     0.000018373857
+
+                       ****Iteration    8****
+   Time for iteration     :  TOTAL=185.5 TRAFO=0.6 2-EL=184.9
+   Size of expansion space: 36
+   Lowest Energy          :     0.183692961689
+   Maximum Energy change  :     0.000063264317 (vector 11)
+   Maximum residual norm  :     0.000013626488
+
+                       ****Iteration    9****
+   Time for iteration     :  TOTAL=188.3 TRAFO=0.8 2-EL=187.5
+   Size of expansion space: 48
+   Lowest Energy          :     0.183692961604
+   Maximum Energy change  :     0.000057978270 (vector 11)
+   Maximum residual norm  :     0.000015078794
+
+                       ****Iteration   10****
+   Time for iteration     :  TOTAL=168.1 TRAFO=0.6 2-EL=167.4
+   Size of expansion space: 60
+   Lowest Energy          :     0.183692961597
+   Maximum Energy change  :     0.000061815605 (vector 11)
+   Maximum residual norm  :     0.000019049575
+   Rebuilding the expansion space
+
+                       ****Iteration   11****
