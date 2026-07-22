@@ -94,7 +94,9 @@ def write_transitions_csv(results: list[dict]) -> pd.DataFrame:
                 "functional": r["functional"],
                 "basis": r["basis"],
                 "solvent": r["solvent"],
+                "geom_label": r.get("geom_label", ""),
                 "geometry_source": r.get("geometry_source", ""),
+                "engine": r.get("engine", ""),
                 "rel_energy_kcalmol": r.get("rel_energy_kcalmol"),
                 "boltzmann_weight": r.get("boltzmann_weight"),
                 "state": t["state"],
@@ -167,6 +169,22 @@ def group(results: list[dict], **kw) -> list[dict]:
             if all(r.get(k) == v for k, v in kw.items())]
 
 
+# 어떤 데이터를 "최종/대표"로 쓸지 명시한다.
+#   최고 수준 : B3LYP/6-31+G(d) + DFT 최적화 구조(dftopt22)
+#   공정 앙상블: B3LYP/def2-SVP + xTB 구조 (모든 컨포머가 같은 조건이라 평균이 의미 있음.
+#               dftopt22 는 대표만 DFT 구조라 앙상블 평균에 부적합)
+BEST_LEVEL = "b3lyp_631+gd"
+BEST_GEOM = "dftopt22"
+ENSEMBLE_LEVEL = "b3lyp_def2svp"
+ENSEMBLE_GEOM = "xtb"
+
+
+def pick(results, tautomer, level, solvent, geom):
+    return [r for r in results if r.get("tautomer") == tautomer
+            and r.get("level_id") == level and r.get("solvent") == solvent
+            and r.get("geom_label") == geom]
+
+
 # ------------------------------------------------------------------ 그래프
 def annotate_peak(ax, grid, y, color, label, ymax_frac=1.0):
     """곡선의 최대점에 직접 라벨을 단다 (팔레트 대비 WARN 대응 = relief rule)."""
@@ -207,50 +225,78 @@ def make_figure(results: list[dict], cfg: dict, grid: np.ndarray,
                 fwhm_list: list[float], out: Path) -> None:
     markers = cfg["experimental_markers_nm"]
     base_fwhm = fwhm_list[len(fwhm_list) // 2]
-    levels = sorted({r["level_id"] for r in results})
-    main_level = levels[0] if levels else None
-    solvents = sorted({r["solvent"] for r in results})
-    solv_pref = "ethanol" if "ethanol" in solvents else solvents[0]
 
     plt.rcParams["font.family"] = ["Malgun Gothic", "sans-serif"]
     plt.rcParams["axes.unicode_minus"] = False
-    fig, axes = plt.subplots(2, 2, figsize=(13, 9), facecolor=SURFACE)
-    fig.suptitle("아보벤존 TD-DFT UV–Vis 스펙트럼 비교",
-                 fontsize=14, color=INK, x=0.02, ha="left", y=0.98)
+    fig, axes = plt.subplots(2, 3, figsize=(18, 10), facecolor=SURFACE)
+    fig.suptitle("아보벤존 TD-DFT UV–Vis 스펙트럼 — 최고 수준 B3LYP/6-31+G(d), DFT 구조, CPCM",
+                 fontsize=14, color=INK, x=0.02, ha="left", y=0.99)
 
-    # --- 패널 A: 토토머 비교 (용매 적용, 앙상블 평균) ---
+    # --- 패널 A: 토토머 비교 (최고 수준, 에탄올, 대표 구조) ---
     ax = axes[0, 0]
     for i, taut in enumerate(["enolA", "enolB", "diketo"]):
-        recs = group(results, tautomer=taut, level_id=main_level, solvent=solv_pref)
+        recs = pick(results, taut, BEST_LEVEL, "ethanol", BEST_GEOM)
         if not recs:
             continue
-        y = series_spectrum(recs, grid, base_fwhm, weighted=True)
+        y = series_spectrum(recs, grid, base_fwhm, weighted=False)  # 대표(최저) 구조
         c = PALETTE[i]
         ax.plot(grid, y, color=c, linewidth=2.0, label=TAUT_LABEL[taut])
         annotate_peak(ax, grid, y, c, TAUT_LABEL[taut].split(" (")[0])
-    style_axes(ax, f"A. 토토머 비교  ({main_level}, {solv_pref}, 앙상블 평균, "
-                   f"FWHM {base_fwhm} eV)")
+    style_axes(ax, "A. 토토머 비교 (에탄올, 대표 구조)")
     ax.legend(fontsize=8, frameon=False, labelcolor=INK2)
     mark_experimental(ax, markers)
 
-    # --- 패널 B: 용매 효과 (enolA) ---
+    # --- 패널 B: 용매 효과 (enolA, 최고 수준, 기체상 vs 에탄올) ---
     ax = axes[0, 1]
-    for i, solv in enumerate(solvents):
-        recs = group(results, tautomer="enolA", level_id=main_level, solvent=solv)
+    for i, solv in enumerate(["none", "ethanol"]):
+        recs = pick(results, "enolA", BEST_LEVEL, solv, BEST_GEOM)
         if not recs:
             continue
-        y = series_spectrum(recs, grid, base_fwhm, weighted=True)
+        y = series_spectrum(recs, grid, base_fwhm, weighted=False)
         c = PALETTE[i]
-        lbl = "용매 미적용 (기체상)" if solv == "none" else f"PCM ({solv})"
+        lbl = "용매 미적용 (기체상)" if solv == "none" else "CPCM (에탄올)"
         ax.plot(grid, y, color=c, linewidth=2.0, label=lbl)
         annotate_peak(ax, grid, y, c, lbl)
-    style_axes(ax, f"B. 용매 모델의 영향  (에놀 A, {main_level}, 앙상블 평균)")
+    style_axes(ax, "B. 용매 모델의 영향 (에놀 A)")
     ax.legend(fontsize=8, frameon=False, labelcolor=INK2)
     mark_experimental(ax, markers)
 
-    # --- 패널 C: 단일 최저구조 vs 앙상블 평균 ---
+    # --- 패널 C: 구조의 영향 (enolA, xTB vs DFT 구조) ---
+    ax = axes[0, 2]
+    for i, (geom, lbl) in enumerate([("xtb", "GFN2-xTB 구조"),
+                                     (BEST_GEOM, "DFT 최적화 구조")]):
+        recs = pick(results, "enolA", BEST_LEVEL, "ethanol", geom)
+        if not recs:
+            continue
+        y = series_spectrum(recs, grid, base_fwhm, weighted=False)
+        c = PALETTE[i]
+        ax.plot(grid, y, color=c, linewidth=2.0,
+                linestyle=(0, (5, 2)) if geom == "xtb" else "-", label=lbl)
+        annotate_peak(ax, grid, y, c, lbl)
+    style_axes(ax, "C. 구조의 영향 (에놀 A, 에탄올)")
+    ax.legend(fontsize=8, frameon=False, labelcolor=INK2)
+    mark_experimental(ax, markers)
+
+    # --- 패널 D: 함수의 영향 (enolA, B3LYP vs CAM-B3LYP, def2-SVP, DFT 구조) ---
     ax = axes[1, 0]
-    recs = group(results, tautomer="enolA", level_id=main_level, solvent=solv_pref)
+    for i, (lvl, lbl) in enumerate([("b3lyp_def2svp", "B3LYP"),
+                                    ("camb3lyp_def2svp", "CAM-B3LYP")]):
+        recs = pick(results, "enolA", lvl, "ethanol", BEST_GEOM)
+        if not recs:  # b3lyp_def2svp 대표는 dftopt 라벨일 수 있으니 보조 탐색
+            recs = pick(results, "enolA", lvl, "ethanol", "dftopt")
+        if not recs:
+            continue
+        y = series_spectrum(recs, grid, base_fwhm, weighted=False)
+        c = PALETTE[i]
+        ax.plot(grid, y, color=c, linewidth=2.0, label=lbl)
+        annotate_peak(ax, grid, y, c, lbl)
+    style_axes(ax, "D. 함수의 영향 (에놀 A, def2-SVP, DFT 구조)")
+    ax.legend(fontsize=8, frameon=False, labelcolor=INK2)
+    mark_experimental(ax, markers)
+
+    # --- 패널 E: 컨포머 평균 (디케토, 공정 앙상블 = xTB 구조 def2-SVP) ---
+    ax = axes[1, 1]
+    recs = pick(results, "diketo", ENSEMBLE_LEVEL, "ethanol", ENSEMBLE_GEOM)
     if recs:
         for i, (weighted, lbl) in enumerate([(False, "최저에너지 단일 구조"),
                                              (True, "컨포머 앙상블 평균")]):
@@ -259,22 +305,21 @@ def make_figure(results: list[dict], cfg: dict, grid: np.ndarray,
             ax.plot(grid, y, color=c, linewidth=2.0,
                     linestyle="-" if weighted else (0, (5, 2)), label=lbl)
             annotate_peak(ax, grid, y, c, lbl)
-    style_axes(ax, f"C. 컨포머 평균의 영향  (에놀 A, {main_level}, {solv_pref})")
+    style_axes(ax, "E. 컨포머 평균의 영향 (디케토, def2-SVP)")
     ax.legend(fontsize=8, frameon=False, labelcolor=INK2)
     mark_experimental(ax, markers)
 
-    # --- 패널 D: 선폭(broadening) 비교 ---
-    ax = axes[1, 1]
-    # 선폭은 순서가 있는 값이므로 단일 색상 ramp(파랑 계열) 사용
+    # --- 패널 F: 선폭 비교 (enolA, 최고 수준) ---
+    ax = axes[1, 2]
     blue_ramp = ["#86b6ef", "#2a78d6", "#0d366b"]
-    recs = group(results, tautomer="enolA", level_id=main_level, solvent=solv_pref)
+    recs = pick(results, "enolA", BEST_LEVEL, "ethanol", BEST_GEOM)
     if recs:
         for i, fw in enumerate(fwhm_list):
-            y = series_spectrum(recs, grid, fw, weighted=True)
+            y = series_spectrum(recs, grid, fw, weighted=False)
             c = blue_ramp[min(i, len(blue_ramp) - 1)]
             ax.plot(grid, y, color=c, linewidth=2.0, label=f"FWHM {fw:.2f} eV")
             annotate_peak(ax, grid, y, c, f"{fw:.2f} eV")
-    style_axes(ax, f"D. 가우시안 선폭 비교  (에놀 A, {main_level}, {solv_pref})")
+    style_axes(ax, "F. 가우시안 선폭 비교 (에놀 A)")
     ax.legend(fontsize=8, frameon=False, labelcolor=INK2)
     mark_experimental(ax, markers)
 
@@ -305,19 +350,21 @@ def main() -> int:
     write_transitions_csv(results)
     write_conformer_csv()
 
-    # 모든 시리즈의 연속 스펙트럼
+    # 모든 시리즈의 연속 스펙트럼 (구조 라벨까지 구분)
     print("  연속 스펙트럼 계산 중...")
     spec = {"wavelength_nm": grid}
-    for level in sorted({r["level_id"] for r in results}):
-        for solv in sorted({r["solvent"] for r in results}):
-            for taut in sorted({r["tautomer"] for r in results}):
-                recs = group(results, tautomer=taut, level_id=level, solvent=solv)
-                if not recs:
-                    continue
-                for fw in fwhm_list:
-                    for weighted, wtag in [(True, "ensemble"), (False, "lowest")]:
-                        key = f"{taut}|{level}|{solv}|fwhm{fw:.2f}|{wtag}"
-                        spec[key] = series_spectrum(recs, grid, fw, weighted)
+    combos = {(r["tautomer"], r["level_id"], r["solvent"], r.get("geom_label", "?"))
+              for r in results}
+    for taut, level, solv, geom in sorted(combos):
+        recs = [r for r in results if r["tautomer"] == taut
+                and r["level_id"] == level and r["solvent"] == solv
+                and r.get("geom_label", "?") == geom]
+        if not recs:
+            continue
+        for fw in fwhm_list:
+            for weighted, wtag in [(True, "ensemble"), (False, "lowest")]:
+                key = f"{taut}|{level}|{solv}|{geom}|fwhm{fw:.2f}|{wtag}"
+                spec[key] = series_spectrum(recs, grid, fw, weighted)
     df = pd.DataFrame(spec)
     out = RESULTS / "spectra_all.csv"
     df.to_csv(out, index=False, encoding="utf-8-sig")
