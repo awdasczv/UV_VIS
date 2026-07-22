@@ -1,0 +1,231 @@
+{
+  "config": {
+    "_comment": [
+      "모든 계산 수준을 여기서 한 곳에 정의한다. 스크립트는 이 파일만 읽는다.",
+      "다른 PC(예: 더 빠른 데스크탑)로 옮길 때는 이 파일의 profile 만 바꾸면 된다.",
+      "함수/기저셋 이름은 반드시 scripts/00_probe_engine.py 로 실제 사용 가능함을 확인한 것만 쓴다."
+    ],
+    "active_profile": "laptop_4core",
+    "active_engine": "orca",
+    "_engine_note": [
+      "동일 조건(enolA_c000, B3LYP/6-31G(d), TDA 12상태, 기체상)으로 두 엔진을 실측 비교했다.",
+      "  Psi4 4코어 : 812 초",
+      "  ORCA 1코어 : 494 초",
+      "  ORCA 4코어 : 249 초  -> Psi4 대비 3.3배",
+      "결과는 사실상 동일 (최강 전이 314.2 nm vs 314.3 nm, 0.001 eV 차이).",
+      "독립적인 두 코드가 일치하므로 양쪽 다 신뢰할 수 있고, 더 빠른 ORCA 를 본 계산에 쓴다.",
+      "덤으로 Psi4/PCMSolver 의 'S matrix is not positive-definite' 문제를 ORCA CPCM 으로 우회한다."
+    ],
+    "orca": {
+      "exe": "C:\\ORCA_6.1.1\\orca.exe",
+      "nprocs": 4,
+      "maxcore_mb": 2500,
+      "rijcosx": true,
+      "aux_basis": "def2/J",
+      "_rijcosx_note": "Coulomb 은 RI, 정확교환은 COSX 수치격자로 근사. 하이브리드 범함수의 가장 비싼 부분을 줄인다. ORCA 속도 이점의 핵심.",
+      "optimization": {
+        "functional": "B3LYP",
+        "basis": "def2-SVP",
+        "pcm": true,
+        "solvent": "ethanol",
+        "_note": [
+          "기저셋 비교 실험에서 큰 기저셋들이 모두 340~341 nm 로 수렴했는데(수렴값 약 340.5 nm),",
+          "문헌은 같은 B3LYP/6-31+G(d)/PCM 으로 360.8 nm 를 보고했다.",
+          "함수/기저셋/용매가 같으므로 남은 변수는 구조뿐이다.",
+          "구조 최적화는 lambda_max 만큼 기저셋에 민감하지 않으므로 def2-SVP 로 충분하다.",
+          "최적화된 구조에 대해 TD-DFT 는 다시 큰 기저셋으로 돌린다."
+        ]
+      },
+      "tddft": {
+        "n_states": 22,
+        "tda": true,
+        "_n_states_note": "12상태 -> 최단 218 nm (미달). 18상태 -> xTB 구조에서는 196.8 nm 로 충분했으나 DFT 평면 구조에서는 202.6~208.4 nm 로 다시 미달. 평면화로 상태 밀도가 달라진 탓이다. 22 로 올린다.",
+        "levels": [
+          {
+            "id": "b3lyp_def2svp",
+            "functional": "B3LYP",
+            "basis": "def2-SVP"
+          },
+          {
+            "id": "camb3lyp_def2svp",
+            "functional": "CAM-B3LYP",
+            "basis": "def2-SVP"
+          },
+          {
+            "id": "b3lyp_631+gd",
+            "functional": "B3LYP",
+            "basis": "6-31+G(d)",
+            "_purpose": "문헌(ACS Omega 2026, B3LYP/6-31+G(d)/PCM -> 360.8 nm)을 직접 재현해 확산함수의 효과를 분리한다."
+          },
+          {
+            "id": "b3lyp_def2svpd",
+            "functional": "B3LYP",
+            "basis": "def2-SVPD",
+            "_purpose": "def2-SVP 에 확산함수만 추가한 것. 확산함수 가설의 직접 검증."
+          },
+          {
+            "id": "b3lyp_def2tzvp",
+            "functional": "B3LYP",
+            "basis": "def2-TZVP",
+            "_purpose": "확산함수 없이 기저셋 크기만 키운 대조군."
+          },
+          {
+            "id": "pbe0_def2svp",
+            "functional": "PBE0",
+            "basis": "def2-SVP",
+            "_purpose": "정확교환 25%로 B3LYP(20%)와 CAM-B3LYP(장거리 65%) 사이. 함수 의존성의 추세를 본다."
+          }
+        ],
+        "_basis_study_note": "B3LYP/def2-SVP 로 얻은 에놀 lambda_max 는 334.0 nm 로 실험(354.9)보다 -20.9 nm 낮다. 그런데 문헌은 같은 B3LYP 에 6-31+G(d) 로 360.8 nm 를 얻었다. 원인 후보는 (a) 확산함수 부재, (b) 구조(xTB vs DFT)다. 위 세 기저셋으로 (a)를 가린다.",
+        "solvents": [
+          "none",
+          "ethanol"
+        ]
+      }
+    },
+    "profiles": {
+      "laptop_4core": {
+        "description": "i5-1135G7 4코어 노트북. 비용을 최우선으로 낮춘 설정.",
+        "memory": "6 GB",
+        "nthreads": 4,
+        "conformer_search": {
+          "backend": "etkdg",
+          "n_initial": 200,
+          "xtb_solvent": "ethanol",
+          "target_cumulative_weight": 0.9,
+          "max_conformers": 3
+        },
+        "geometry_optimization": {
+          "enabled": true,
+          "scope": "lowest_only",
+          "functional": "B3LYP-D3BJ",
+          "basis": "6-31G(d)",
+          "pcm": true,
+          "solvent": "ethanol",
+          "geom_maxiter": 60,
+          "_note": "scope=lowest_only 이면 토토머별 최저에너지 컨포머 1개만 DFT 재최적화하고 나머지는 GFN2-xTB 구조를 그대로 쓴다."
+        },
+        "tddft": {
+          "n_states": 12,
+          "tda": true,
+          "pcm_area": 1.0,
+          "_pcm_area_note": "표면조각 넓이(A^2). 아보벤존에서 1.0 과 2.0 의 lambda_max 차이가 0.07 nm 로 수렴 확인됨. Psi4 예제 기본값 0.3 은 불필요하게 촘촘하다.",
+          "levels": [
+            {
+              "id": "b3lyp_631gd",
+              "functional": "B3LYP",
+              "basis": "6-31G(d)"
+            },
+            {
+              "id": "camb3lyp_631gd",
+              "functional": "CAM-B3LYP",
+              "basis": "6-31G(d)"
+            }
+          ],
+          "solvents": [
+            "none",
+            "ethanol"
+          ]
+        }
+      },
+      "desktop_5600x": {
+        "description": "Ryzen 5 5600X 6코어 데스크탑. 더 높은 수준까지 감당 가능.",
+        "memory": "16 GB",
+        "nthreads": 6,
+        "conformer_search": {
+          "backend": "etkdg",
+          "n_initial": 500,
+          "xtb_solvent": "ethanol",
+          "target_cumulative_weight": 0.95,
+          "max_conformers": 3
+        },
+        "geometry_optimization": {
+          "enabled": true,
+          "scope": "all_selected",
+          "functional": "B3LYP-D3BJ",
+          "basis": "def2-SVP",
+          "pcm": true,
+          "solvent": "ethanol",
+          "geom_maxiter": 100
+        },
+        "tddft": {
+          "n_states": 15,
+          "tda": true,
+          "levels": [
+            {
+              "id": "b3lyp_631+gd",
+              "functional": "B3LYP",
+              "basis": "6-31+G(d)"
+            },
+            {
+              "id": "pbe0_def2svp",
+              "functional": "PBE0",
+              "basis": "def2-SVP"
+            },
+            {
+              "id": "camb3lyp_def2svp",
+              "functional": "CAM-B3LYP",
+              "basis": "def2-SVP"
+            },
+            {
+              "id": "wb97xd_def2svp",
+              "functional": "WB97X-D",
+              "basis": "def2-SVP"
+            }
+          ],
+          "solvents": [
+            "none",
+            "ethanol"
+          ]
+        }
+      }
+    },
+    "spectrum": {
+      "grid_nm": {
+        "min": 200.0,
+        "max": 500.0,
+        "step": 0.5
+      },
+      "broadening_fwhm_eV": [
+        0.2,
+        0.3,
+        0.4
+      ],
+      "_note": "선폭은 최소 3개를 비교한다 (요구사항 12번). 0.3 eV 가 유기 발색단에서 흔히 쓰는 값."
+    },
+    "experimental_markers_nm": {
+      "enol_ethanol": 354.9,
+      "enol_methanol": 358.0,
+      "diketo": 265.0
+    }
+  },
+  "n_tddft_results": 36,
+  "levels": [
+    "b3lyp_631+gd",
+    "b3lyp_631gd",
+    "b3lyp_def2svp",
+    "b3lyp_def2svpd",
+    "b3lyp_def2tzvp",
+    "camb3lyp_def2svp"
+  ],
+  "solvents": [
+    "ethanol",
+    "none"
+  ],
+  "tautomers": [
+    "diketo",
+    "enolA",
+    "enolB"
+  ],
+  "spectrum_grid_nm": {
+    "min": 200.0,
+    "max": 500.0,
+    "step": 0.5,
+    "n_points": 601
+  },
+  "broadening_fwhm_eV": [
+    0.2,
+    0.3,
+    0.4
+  ]
+}

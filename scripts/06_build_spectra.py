@@ -67,8 +67,10 @@ def load_results() -> list[dict]:
             # 어느 구조로 계산한 것인지 꼬리표를 붙인다 (경로에서 유추)
             parts = p.relative_to(root).parts
             # <taut>/<conf>/<level>/<solvent>[/<geom_label>]/result.json
+            # geom_label 이 없는(5단계) 경로는 GFN2-xTB 구조를 쓴 것이므로 "xtb".
+            # (make_figure 의 BEST_GEOM/ENSEMBLE_GEOM 상수와 이름을 맞춰야 한다)
             d.setdefault("geom_label",
-                         parts[4] if len(parts) >= 6 else "default")
+                         parts[4] if len(parts) >= 6 else "xtb")
             d.setdefault("engine", "Psi4" if root.name == "02_tddft" else "ORCA")
             recs.append(d)
     if not recs:
@@ -213,17 +215,20 @@ def style_axes(ax, title: str, xlabel: bool = True):
     ax.set_ylabel("몰흡광계수 ε (L mol⁻¹ cm⁻¹)", fontsize=9, color=INK2)
 
 
-def mark_experimental(ax, markers: dict):
-    for name, lam in markers.items():
+def mark_experimental(ax, bands: list[float]):
+    """해당 패널에 관련된 실험 밴드만 표시한다 (겹치는 마커 방지)."""
+    for lam in bands:
         ax.axvline(lam, color=MUTED, linestyle=(0, (4, 3)), linewidth=1.2, zorder=1)
         ax.annotate(f"실험 {lam:.0f} nm", xy=(lam, ax.get_ylim()[1]),
-                    xytext=(3, -12), textcoords="offset points",
-                    fontsize=7.5, color=INK2, rotation=90, va="top")
+                    xytext=(-11, -6), textcoords="offset points",
+                    fontsize=7.5, color=INK2, rotation=90, va="top", ha="right")
 
 
 def make_figure(results: list[dict], cfg: dict, grid: np.ndarray,
                 fwhm_list: list[float], out: Path) -> None:
     markers = cfg["experimental_markers_nm"]
+    ENOL = [markers["enol_ethanol"]]        # 354.9 nm
+    DIKETO = [markers["diketo"]]            # 265.0 nm
     base_fwhm = fwhm_list[len(fwhm_list) // 2]
 
     plt.rcParams["font.family"] = ["Malgun Gothic", "sans-serif"]
@@ -244,7 +249,7 @@ def make_figure(results: list[dict], cfg: dict, grid: np.ndarray,
         annotate_peak(ax, grid, y, c, TAUT_LABEL[taut].split(" (")[0])
     style_axes(ax, "A. 토토머 비교 (에탄올, 대표 구조)")
     ax.legend(fontsize=8, frameon=False, labelcolor=INK2)
-    mark_experimental(ax, markers)
+    mark_experimental(ax, ENOL + DIKETO)
 
     # --- 패널 B: 용매 효과 (enolA, 최고 수준, 기체상 vs 에탄올) ---
     ax = axes[0, 1]
@@ -259,7 +264,7 @@ def make_figure(results: list[dict], cfg: dict, grid: np.ndarray,
         annotate_peak(ax, grid, y, c, lbl)
     style_axes(ax, "B. 용매 모델의 영향 (에놀 A)")
     ax.legend(fontsize=8, frameon=False, labelcolor=INK2)
-    mark_experimental(ax, markers)
+    mark_experimental(ax, ENOL)
 
     # --- 패널 C: 구조의 영향 (enolA, xTB vs DFT 구조) ---
     ax = axes[0, 2]
@@ -275,7 +280,7 @@ def make_figure(results: list[dict], cfg: dict, grid: np.ndarray,
         annotate_peak(ax, grid, y, c, lbl)
     style_axes(ax, "C. 구조의 영향 (에놀 A, 에탄올)")
     ax.legend(fontsize=8, frameon=False, labelcolor=INK2)
-    mark_experimental(ax, markers)
+    mark_experimental(ax, ENOL)
 
     # --- 패널 D: 함수의 영향 (enolA, B3LYP vs CAM-B3LYP, def2-SVP, DFT 구조) ---
     ax = axes[1, 0]
@@ -292,7 +297,7 @@ def make_figure(results: list[dict], cfg: dict, grid: np.ndarray,
         annotate_peak(ax, grid, y, c, lbl)
     style_axes(ax, "D. 함수의 영향 (에놀 A, def2-SVP, DFT 구조)")
     ax.legend(fontsize=8, frameon=False, labelcolor=INK2)
-    mark_experimental(ax, markers)
+    mark_experimental(ax, ENOL)
 
     # --- 패널 E: 컨포머 평균 (디케토, 공정 앙상블 = xTB 구조 def2-SVP) ---
     ax = axes[1, 1]
@@ -307,7 +312,7 @@ def make_figure(results: list[dict], cfg: dict, grid: np.ndarray,
             annotate_peak(ax, grid, y, c, lbl)
     style_axes(ax, "E. 컨포머 평균의 영향 (디케토, def2-SVP)")
     ax.legend(fontsize=8, frameon=False, labelcolor=INK2)
-    mark_experimental(ax, markers)
+    mark_experimental(ax, DIKETO)
 
     # --- 패널 F: 선폭 비교 (enolA, 최고 수준) ---
     ax = axes[1, 2]
@@ -321,7 +326,7 @@ def make_figure(results: list[dict], cfg: dict, grid: np.ndarray,
             annotate_peak(ax, grid, y, c, f"{fw:.2f} eV")
     style_axes(ax, "F. 가우시안 선폭 비교 (에놀 A)")
     ax.legend(fontsize=8, frameon=False, labelcolor=INK2)
-    mark_experimental(ax, markers)
+    mark_experimental(ax, ENOL)
 
     for ax in axes.ravel():
         ax.set_xlim(grid.min(), grid.max())
