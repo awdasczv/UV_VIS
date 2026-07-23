@@ -1,5 +1,7 @@
 {
   "principal_species": "dhhb",
+  "principal_level": "b3lyp_631+gd",
+  "_principal_level_note": "성분 라이브러리는 모든 성분을 같은 방법(B3LYP/6-31+G(d))으로 계산해 계통오차를 일관되게 유지한다(제형 합산 + ML 잔차 보정 전략). DHHB 의 UVA 밴드는 강한 도너(NEt2)->억셉터(C=O) 전하이동이라 B3LYP 는 +37 nm 적색, CAM-B3LYP 는 -36 nm 청색으로 실험(~354 nm)을 감싼다. 이 CT 계통오차가 ML 잔차 보정의 학습 대상이다. camb3lyp_631+gd 결과는 이를 실증하는 진단으로 함께 보관한다.",
   "molecule": {
     "common_name": "Diethylamino Hydroxybenzoyl Hexyl Benzoate (DHHB)",
     "inci_name": "Diethylamino Hydroxybenzoyl Hexyl Benzoate",
