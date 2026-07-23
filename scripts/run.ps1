@@ -22,6 +22,18 @@ param(
 )
 
 $root = Split-Path -Parent $PSScriptRoot
+
+# -Molecule 은 위치 파라미터라, 이름 없이 부르면 첫 토큰(대개 스크립트 경로)을
+# 삼켜버린다. $Molecule 이 실제 molecules/<name> 디렉터리가 아니면 그것은 분자명이
+# 아니라 인자다 -> 인자 목록 앞으로 되돌리고 기본 분자를 쓴다.
+# (명시적으로 '-Molecule dhhb' 를 준 경우엔 dhhb 가 실제 디렉터리이므로 그대로 유지)
+# 실제 분자는 molecules/<name>/config.json 을 가진다. config.json 이 없으면
+# 그 토큰은 분자명이 아니라 인자다 (대개 스크립트 경로).
+if (-not (Test-Path (Join-Path $root "molecules\$Molecule\config.json"))) {
+    if ($Molecule) { $Args = @($Molecule) + $Args }
+    $Molecule = 'avobenzone'
+}
+
 $env:MAMBA_ROOT_PREFIX = Join-Path $root '.mamba'
 $envdir = Join-Path $root '.mamba\envs\qc'
 $env:UV_MOLECULE = $Molecule
