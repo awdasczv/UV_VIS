@@ -32,7 +32,7 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from qc_common import (CONFORMERS, LOGS, ROOT, STRUCTURES, Geometry,
+from qc_common import (CONFORMERS, LOGS, MOL_CONFIG, ROOT, STRUCTURES, Geometry,
                        boltzmann_weights, read_multi_xyz, read_xyz,
                        rel_energies_kcal, save_checkpoint,
                        select_by_cumulative_weight)
@@ -202,7 +202,7 @@ def backend_etkdg(taut: str, nconf: int, solvent: str | None, outdir: Path):
     from rdkit.Chem import AllChem
     RDLogger.DisableLog("rdApp.warning")
 
-    spec = json.loads((ROOT / "inputs" / "tautomers.json").read_text(encoding="utf-8"))
+    spec = json.loads(MOL_CONFIG.read_text(encoding="utf-8"))
     smi = next(t["smiles"] for t in spec["tautomers"] if t["id"] == taut)
 
     mol = Chem.AddHs(Chem.MolFromSmiles(smi))

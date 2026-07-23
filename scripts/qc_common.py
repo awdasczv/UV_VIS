@@ -12,18 +12,38 @@ from __future__ import annotations
 
 import json
 import math
+import os
 from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
 
 ROOT = Path(__file__).resolve().parent.parent
-INPUTS = ROOT / "inputs"
-STRUCTURES = ROOT / "structures"
-CONFORMERS = ROOT / "conformers"
-CALCULATIONS = ROOT / "calculations"
-RESULTS = ROOT / "results"
-LOGS = ROOT / "logs"
+
+# ------------------------------------------------------------------ 분자 네임스페이스
+# 2026-07-23: 성분(분자)이 여러 개로 늘어나는 최종 목표에 맞춰, 분자별로 데이터를
+#   molecules/<name>/{structures,conformers,calculations,results,config.json} 아래에 둔다.
+#   어떤 분자를 다룰지는 환경변수 UV_MOLECULE 로 고른다 (기본 avobenzone).
+#   run.ps1 -Molecule <name> 이 이 환경변수를 세팅한다. 스크립트는 파이썬 시작 시점에
+#   상속받으므로 별도 인자 없이 전 스크립트가 같은 분자를 바라본다.
+MOLECULE = os.environ.get("UV_MOLECULE", "avobenzone")
+MOLECULES = ROOT / "molecules"
+MOL_ROOT = MOLECULES / MOLECULE
+
+INPUTS = ROOT / "inputs"                       # 공용 설정(calc_config.json) - 분자 무관
+STRUCTURES = MOL_ROOT / "structures"
+CONFORMERS = MOL_ROOT / "conformers"
+CALCULATIONS = MOL_ROOT / "calculations"
+RESULTS = MOL_ROOT / "results"
+LOGS = ROOT / "logs"                           # 진단 로그는 공용 (파일명에 종 이름 포함)
+
+MOL_CONFIG = MOL_ROOT / "config.json"                       # 분자 정의(구.tautomers.json)
+EXPERIMENTAL_REF = MOL_ROOT / "experimental_reference.json"  # 분자별 실험 참조값
+
+
+def molecule_dir(name: str) -> Path:
+    """다른 분자의 루트 경로가 필요할 때 (예: 여러 성분 스펙트럼을 한 뷰어에 모을 때)."""
+    return MOLECULES / name
 
 # 물리 상수
 HARTREE_TO_EV = 27.211386245988

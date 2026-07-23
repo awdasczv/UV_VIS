@@ -33,7 +33,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from orca_common import build_input, parse_output, run_orca
-from qc_common import CALCULATIONS, CONFORMERS, INPUTS, read_xyz, save_checkpoint
+from qc_common import (CALCULATIONS, CONFORMERS, EXPERIMENTAL_REF, INPUTS,
+                       read_xyz, save_checkpoint)
 
 OUT = CALCULATIONS / "03_baseline"
 NSTATES = 12
@@ -48,7 +49,7 @@ BASELINES = [
 
 
 def main() -> int:
-    ref = json.loads((INPUTS / "experimental_reference.json").read_text(encoding="utf-8"))
+    ref = json.loads(EXPERIMENTAL_REF.read_text(encoding="utf-8"))
     exp = ref["experimental"]["enol_band"]["primary_target"]["lambda_max_nm"]
 
     xyz = CONFORMERS / "enolA" / "enolA_c000.xyz"

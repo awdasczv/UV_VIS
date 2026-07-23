@@ -24,7 +24,8 @@ from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from qc_common import CALCULATIONS, EV_TO_NM, INPUTS, LOGS, RESULTS, load_checkpoint
+from qc_common import (CALCULATIONS, EV_TO_NM, EXPERIMENTAL_REF, INPUTS, LOGS,
+                       RESULTS, load_checkpoint)
 
 TAUT = {"enolA": "킬레이트 에놀 A", "enolB": "킬레이트 에놀 B", "diketo": "디케토"}
 GEOM = {"xtb": "GFN2-xTB", "dftopt": "DFT", "dftopt22": "DFT",
@@ -73,7 +74,7 @@ def errline(calc, exp):
 
 def main() -> int:
     RESULTS.mkdir(parents=True, exist_ok=True)
-    ref = load(INPUTS / "experimental_reference.json")
+    ref = load(EXPERIMENTAL_REF)
     recs = collect()
     if not recs:
         print("TD-DFT 결과 없음")

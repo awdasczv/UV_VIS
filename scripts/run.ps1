@@ -9,9 +9,14 @@
 #    - 네이티브 실행파일이 stderr 로 배너를 찍어도 PowerShell 이 오류로 오해하지 않게 한다.
 #
 #  사용법:
-#    .\scripts\run.ps1 scripts\03_dft_optimize.py --tautomer enolA
+#    .\scripts\run.ps1 scripts\05b_tddft_orca.py --tautomers enolA
+#    .\scripts\run.ps1 -Molecule dhhb scripts\02_conformer_search.py --tautomers dhhb
+#
+#  -Molecule <이름> 은 환경변수 UV_MOLECULE 를 세팅한다. 파이썬 쪽 qc_common.py 가
+#  이 값을 읽어 molecules/<이름>/ 아래로 모든 경로를 잡는다 (기본 avobenzone).
 # =============================================================
 param(
+    [string]$Molecule = 'avobenzone',
     [Parameter(ValueFromRemainingArguments = $true)]
     [string[]]$Args
 )
@@ -19,6 +24,7 @@ param(
 $root = Split-Path -Parent $PSScriptRoot
 $env:MAMBA_ROOT_PREFIX = Join-Path $root '.mamba'
 $envdir = Join-Path $root '.mamba\envs\qc'
+$env:UV_MOLECULE = $Molecule
 
 $env:PATH = @(
     $envdir,
@@ -39,7 +45,7 @@ if (Test-Path 'C:\ORCA_6.1.1\orca.exe') { $env:ORCA_EXE = 'C:\ORCA_6.1.1\orca.ex
 # 노트북 4코어 / 8스레드. 물리 코어 수에 맞춘다.
 $env:OMP_NUM_THREADS   = '4'
 $env:MKL_NUM_THREADS   = '4'
-$env:PSI_SCRATCH       = Join-Path $root 'calculations\_scratch'
+$env:PSI_SCRATCH       = Join-Path $root "molecules\$Molecule\calculations\_scratch"
 New-Item -ItemType Directory -Force -Path $env:PSI_SCRATCH | Out-Null
 
 $py = Join-Path $envdir 'python.exe'

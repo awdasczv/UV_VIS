@@ -28,9 +28,12 @@ RDLogger.DisableLog("rdApp.warning")
 #                     Oket Cket  Ca    Cenol Oenol
 CHELATE_SMARTS = Chem.MolFromSmarts("[OX1]=[CX3][CX3H0,CX3H1]=[CX3][OX2H]")
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from qc_common import MOL_CONFIG, STRUCTURES  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
-SPEC = ROOT / "inputs" / "tautomers.json"
-OUTDIR = ROOT / "structures"
+SPEC = MOL_CONFIG
+OUTDIR = STRUCTURES
 N_EMBED = 40
 SEED = 20260720
 

@@ -25,7 +25,7 @@ from rdkit import Chem, RDLogger
 from rdkit.Chem import rdDetermineBonds
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from qc_common import CONFORMERS, INPUTS, read_xyz, save_checkpoint
+from qc_common import CONFORMERS, MOL_CONFIG, read_xyz, save_checkpoint
 
 RDLogger.DisableLog("rdApp.*")
 
@@ -176,11 +176,11 @@ def cluster_by_chromophore(entries: list[dict], tol_deg: float = 12.0) -> list[l
 
 
 def main() -> int:
-    spec = json.loads((INPUTS / "tautomers.json").read_text(encoding="utf-8"))
+    spec = json.loads(MOL_CONFIG.read_text(encoding="utf-8"))
     expected = {t["id"]: canonical(t["smiles"]) for t in spec["tautomers"]}
 
     report, all_ok = {}, True
-    for taut in ["enolA", "enolB", "diketo"]:
+    for taut in [t["id"] for t in spec["tautomers"]]:
         ens_path = CONFORMERS / taut / "ensemble.json"
         if not ens_path.exists():
             print(f"[건너뜀] {taut}: ensemble.json 없음")

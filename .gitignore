@@ -9,8 +9,8 @@ tools/
 #  계산 중간 산출물 (재현 가능, 용량이 큼)
 # ---------------------------------------------------------------
 # Psi4 scratch (DF 메트릭 파일 하나가 45 MB 씩 나온다)
-calculations/_scratch/
-calculations/**/scratch/
+molecules/*/calculations/_scratch/
+molecules/*/calculations/**/scratch/
 *.180
 *.npy
 psi.*
@@ -33,29 +33,30 @@ timer.dat
 #
 # 되살리는 것: 입력(.inp) / 사람이 읽는 전체 로그(.out) / 파싱 결과(.json) / 구조(.xyz)
 # 이 넷만 있으면 계산을 그대로 재현하고 검증할 수 있다.
-calculations/**
-!calculations/**/
-!calculations/**/*.inp
-!calculations/**/*.out
-!calculations/**/*.json
-!calculations/**/*.xyz
-!calculations/**/*.csv
+# (2026-07-23 분자별 네임스페이스 molecules/<name>/ 도입에 맞춰 경로 재조정)
+molecules/*/calculations/**
+!molecules/*/calculations/**/
+!molecules/*/calculations/**/*.inp
+!molecules/*/calculations/**/*.out
+!molecules/*/calculations/**/*.json
+!molecules/*/calculations/**/*.xyz
+!molecules/*/calculations/**/*.csv
 
 # 구조 최적화가 남기는 중복 xyz 는 제외한다.
 #   opt_trj.xyz : 최적화 경로의 모든 중간 구조 (수십 KB, 재현 가능)
 #   opt.xyz     : ORCA 가 쓴 최종 구조. 우리가 optimized.xyz 로 따로 저장하므로 중복
 # 최종 구조는 optimized.xyz 하나만 추적한다.
-calculations/**/opt_trj.xyz
-calculations/**/opt.xyz
+molecules/*/calculations/**/opt_trj.xyz
+molecules/*/calculations/**/opt.xyz
 
 # 컨포머 탐색의 원시 xtb 작업 디렉터리 (200 구조 x 3 토토머 = 파일 5000개 이상).
-conformers/*/xtb/
-conformers/*/crest_run/
+molecules/*/conformers/*/xtb/
+molecules/*/conformers/*/crest_run/
 
 # 개별 컨포머 xyz 는 추적하지 않는다.
-# 같은 좌표가 conformers/<토토머>/conformers.xyz 안에 전부 들어 있어 중복이다.
+# 같은 좌표가 molecules/<name>/conformers/<종>/conformers.xyz 안에 전부 들어 있어 중복이다.
 # 필요하면 scripts/02d_extract_conformers.py 로 언제든 복원한다.
-conformers/*/*_c[0-9][0-9][0-9].xyz
+molecules/*/conformers/*/*_c[0-9][0-9][0-9].xyz
 xtbopt.log
 xtbrestart
 xtbtopo.mol
