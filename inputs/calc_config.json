@@ -49,6 +49,8 @@
 
         {"id": "b3lyp_631+gd",   "functional": "B3LYP", "basis": "6-31+G(d)",
          "_purpose": "문헌(ACS Omega 2026, B3LYP/6-31+G(d)/PCM -> 360.8 nm)을 직접 재현해 확산함수의 효과를 분리한다."},
+        {"id": "camb3lyp_631+gd", "functional": "CAM-B3LYP", "basis": "6-31+G(d)",
+         "_purpose": "b3lyp_631+gd 와 같은 기저셋에서 함수만 범위분리로 바꿔 전하이동(CT) 전이의 B3LYP 적색이동 오차를 교정. DHHB 처럼 도너->억셉터 CT 성격이 강한 발색단에서 필요."},
         {"id": "b3lyp_def2svpd", "functional": "B3LYP", "basis": "def2-SVPD",
          "_purpose": "def2-SVP 에 확산함수만 추가한 것. 확산함수 가설의 직접 검증."},
         {"id": "b3lyp_def2tzvp", "functional": "B3LYP", "basis": "def2-TZVP",

@@ -1,6 +1,7 @@
 {
   "principal_species": "enolA",
-  "_principal_species_note": "용액상 아보벤존은 ~98% 킬레이트 에놀형이고, 강한 UVA 흡수는 에놀에서 온다. 성분 스펙트럼(제형 합산용)의 대표로 에놀 A 를 쓴다.",
+  "principal_level": "b3lyp_631+gd",
+  "_principal_species_note": "용액상 아보벤존은 ~98% 킬레이트 에놀형이고, 강한 UVA 흡수는 에놀에서 온다. 성분 스펙트럼(제형 합산용)의 대표로 에놀 A 를 쓴다. 순수 ppi* 밴드라 B3LYP/6-31+G(d) 가 실험을 -2.4 nm 로 잘 맞춘다.",
   "molecule": {
     "common_name": "Avobenzone",
     "iupac_name": "1-(4-tert-butylphenyl)-3-(4-methoxyphenyl)propane-1,3-dione",

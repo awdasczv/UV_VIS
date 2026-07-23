@@ -95,12 +95,29 @@ def collect_molecule(mol_dir: Path) -> dict | None:
     cand = [r for r in results if r.get("tautomer") == species]
     if not cand:
         return None
+    # 분자별 기준 이론수준(config.principal_level)이 있으면 우선. 발색단 성격에 따라
+    # 최적 함수가 다르기 때문이다 (아보벤존 순수 ppi* -> B3LYP, DHHB CT -> CAM-B3LYP).
+    plevel = cfg.get("principal_level")
+    if plevel:
+        pref = [r for r in cand if r.get("level_id") == plevel]
+        if pref:
+            cand = pref
     best = max(cand, key=result_score)
 
     lam = [t["wavelength_nm"] for t in best["transitions"]]
     osc = [t["osc_strength"] for t in best["transitions"]]
     eps = gaussian_spectrum(lam, osc, GRID, fwhm_ev=FWHM_EV)
-    b = best.get("brightest") or {}
+
+    # 주 흡수 밴드(lambda_max) = '밝은' 전이 중 가장 장파장의 것.
+    # 왜 brightest(f 최대)가 아닌가: DHHB 는 f 최대 전이가 296 nm 이지만, 실제
+    # 자외선차단에 쓰이고 실험 lambda_max(~354 nm)로 관측되는 UVA 밴드는 그보다
+    # 장파장의 S1(도너->억셉터 CT, HOMO->LUMO)이다. 가장 장파장의 밝은 전이를
+    # 골라야 이 주 흡수 밴드를 집는다.
+    BRIGHT_F = 0.10
+    bright = [t for t in best["transitions"] if t["osc_strength"] >= BRIGHT_F]
+    band = (max(bright, key=lambda t: t["wavelength_nm"])
+            if bright else (best.get("brightest") or {}))
+    b = band
 
     # 실험 lambda_max (스키마가 분자마다 조금 달라 관대하게 탐색)
     exp_nm, exp_conf = None, None
