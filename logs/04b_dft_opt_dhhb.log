@@ -1,0 +1,12 @@
+엔진: ORCA (C:\ORCA_6.1.1\orca.exe)
+수준: B3LYP/def2-SVP  PCM=True (ethanol)  병렬 4
+
+=== dhhb: 2 개 구조 ===
+  [최적화] dhhb/dhhb_c000  B3LYP/def2-SVP  용매=Ethanol
+    완료 6004초, 19 사이클, E = -1287.22153493 Eh
+  [최적화] dhhb/dhhb_c131  B3LYP/def2-SVP  용매=Ethanol
+    완료 5009초, 14 사이클, E = -1287.21852050 Eh
+
+=== 요약 ===
+  dhhb/dhhb_c000      E=-1287.22153493 Eh (19 사이클, 6004초)
+  dhhb/dhhb_c131      E=-1287.21852050 Eh (14 사이클, 5009초)

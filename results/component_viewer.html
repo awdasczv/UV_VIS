@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>선크림 성분 흡수 스펙트럼</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --panel:#ffffff; --ink:#1a1f2b; --muted:#5b6472;
+    --grid:#e3e7ee; --line:#c7ccd6; --uva:#efe6fb; --uvb:#e6f0fb; --accent:#2a78d6;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0f1319; --panel:#161b24; --ink:#e7ebf2; --muted:#95a0b2;
+           --grid:#232a36; --line:#39424f; --uva:#241a3a; --uvb:#152437; --accent:#5aa0ee; }
+  }
+  :root[data-theme=light]{ --bg:#f7f8fa; --panel:#fff; --ink:#1a1f2b; --muted:#5b6472;
+    --grid:#e3e7ee; --line:#c7ccd6; --uva:#efe6fb; --uvb:#e6f0fb; --accent:#2a78d6; }
+  :root[data-theme=dark]{ --bg:#0f1319; --panel:#161b24; --ink:#e7ebf2; --muted:#95a0b2;
+    --grid:#232a36; --line:#39424f; --uva:#241a3a; --uvb:#152437; --accent:#5aa0ee; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;font-size:14px}
+  .wrap{max-width:1080px;margin:0 auto;padding:22px 18px 60px}
+  h1{font-size:20px;margin:0 0 2px;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:18px}
+  .card{background:var(--panel);border:1px solid var(--grid);border-radius:12px;
+    padding:16px;margin-bottom:16px}
+  .chartwrap{position:relative}
+  svg{width:100%;height:auto;display:block;touch-action:none}
+  .ctl{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:12px}
+  .ctl label{display:flex;gap:6px;align-items:center;color:var(--muted);cursor:pointer}
+  .pill{font-variant-numeric:tabular-nums}
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--grid)}
+  th{color:var(--muted);font-weight:600}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .sw{width:11px;height:11px;border-radius:3px;display:inline-block;vertical-align:middle;margin-right:7px}
+  .comp{display:flex;flex-direction:column;gap:9px}
+  .comprow{display:grid;grid-template-columns:150px 1fr 46px;gap:10px;align-items:center}
+  .comprow input[type=range]{width:100%}
+  .comprow .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  button{background:transparent;border:1px solid var(--line);color:var(--ink);
+    border-radius:8px;padding:5px 11px;cursor:pointer;font-size:13px}
+  button:hover{border-color:var(--accent)}
+  .tip{position:absolute;pointer-events:none;background:var(--panel);border:1px solid var(--line);
+    border-radius:8px;padding:8px 10px;font-size:12px;opacity:0;transition:opacity .08s;
+    box-shadow:0 6px 20px rgba(0,0,0,.14);min-width:150px}
+  .tip b{font-variant-numeric:tabular-nums}
+  .muted{color:var(--muted)}
+</style></head>
+<body><div class="wrap">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+    <div>
+      <h1>선크림 성분 흡수 스펙트럼</h1>
+      <div class="sub">계산된 성분별 스펙트럼과 이들의 Beer-Lambert 가중합.
+        최종 목표(복합 제형 예측)를 향한 성분 라이브러리.</div>
+    </div>
+    <button id="theme">🌓 테마</button>
+  </div>
+
+  <div class="card">
+    <div class="ctl">
+      <label><input type="checkbox" id="norm"> 정규화(피크=1)</label>
+      <label><input type="checkbox" id="showsum" checked> 성분 합 표시</label>
+      <label><input type="checkbox" id="showexp" checked> 실험 λmax 마커</label>
+      <span class="muted pill" id="readout"></span>
+    </div>
+    <div class="chartwrap">
+      <svg id="chart" viewBox="0 0 900 460" preserveAspectRatio="xMidYMid meet"></svg>
+      <div class="tip" id="tip"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sub" style="margin:0 0 10px">성분 가중치 (Beer-Lambert 합 = Σ wᵢ·εᵢ).
+      농도를 대신하는 상대 가중치다 — 실제 제형 비율을 넣어보며 합 스펙트럼을 확인.</div>
+    <div class="comp" id="comp"></div>
+  </div>
+
+  <div class="card">
+    <table><thead><tr>
+      <th>성분</th><th>주 흡수 종</th><th>이론수준</th>
+      <th class="num">계산 λmax</th><th class="num">실험 λmax</th><th class="num">오차</th>
+    </tr></thead><tbody id="tbody"></tbody></table>
+    <div class="sub" style="margin-top:10px">FWHM 0.30 eV 가우시안 broadening,
+      절대 몰흡광계수 ε (L·mol⁻¹·cm⁻¹). 용매·구조는 각 성분 최고수준(에탄올/DFT 구조).</div>
+  </div>
+</div>
+<script>
+const DATA = {"grid": [200.0, 201.0, 202.0, 203.0, 204.0, 205.0, 206.0, 207.0, 208.0, 209.0, 210.0, 211.0, 212.0, 213.0, 214.0, 215.0, 216.0, 217.0, 218.0, 219.0, 220.0, 221.0, 222.0, 223.0, 224.0, 225.0, 226.0, 227.0, 228.0, 229.0, 230.0, 231.0, 232.0, 233.0, 234.0, 235.0, 236.0, 237.0, 238.0, 239.0, 240.0, 241.0, 242.0, 243.0, 244.0, 245.0, 246.0, 247.0, 248.0, 249.0, 250.0, 251.0, 252.0, 253.0, 254.0, 255.0, 256.0, 257.0, 258.0, 259.0, 260.0, 261.0, 262.0, 263.0, 264.0, 265.0, 266.0, 267.0, 268.0, 269.0, 270.0, 271.0, 272.0, 273.0, 274.0, 275.0, 276.0, 277.0, 278.0, 279.0, 280.0, 281.0, 282.0, 283.0, 284.0, 285.0, 286.0, 287.0, 288.0, 289.0, 290.0, 291.0, 292.0, 293.0, 294.0, 295.0, 296.0, 297.0, 298.0, 299.0, 300.0, 301.0, 302.0, 303.0, 304.0, 305.0, 306.0, 307.0, 308.0, 309.0, 310.0, 311.0, 312.0, 313.0, 314.0, 315.0, 316.0, 317.0, 318.0, 319.0, 320.0, 321.0, 322.0, 323.0, 324.0, 325.0, 326.0, 327.0, 328.0, 329.0, 330.0, 331.0, 332.0, 333.0, 334.0, 335.0, 336.0, 337.0, 338.0, 339.0, 340.0, 341.0, 342.0, 343.0, 344.0, 345.0, 346.0, 347.0, 348.0, 349.0, 350.0, 351.0, 352.0, 353.0, 354.0, 355.0, 356.0, 357.0, 358.0, 359.0, 360.0, 361.0, 362.0, 363.0, 364.0, 365.0, 366.0, 367.0, 368.0, 369.0, 370.0, 371.0, 372.0, 373.0, 374.0, 375.0, 376.0, 377.0, 378.0, 379.0, 380.0, 381.0, 382.0, 383.0, 384.0, 385.0, 386.0, 387.0, 388.0, 389.0, 390.0, 391.0, 392.0, 393.0, 394.0, 395.0, 396.0, 397.0, 398.0, 399.0, 400.0, 401.0, 402.0, 403.0, 404.0, 405.0, 406.0, 407.0, 408.0, 409.0, 410.0, 411.0, 412.0, 413.0, 414.0, 415.0, 416.0, 417.0, 418.0, 419.0, 420.0, 421.0, 422.0, 423.0, 424.0, 425.0, 426.0, 427.0, 428.0, 429.0, 430.0, 431.0, 432.0, 433.0, 434.0, 435.0, 436.0, 437.0, 438.0, 439.0, 440.0, 441.0, 442.0, 443.0, 444.0, 445.0, 446.0, 447.0, 448.0, 449.0, 450.0, 451.0, 452.0, 453.0, 454.0, 455.0, 456.0, 457.0, 458.0, 459.0, 460.0, 461.0, 462.0, 463.0, 464.0, 465.0, 466.0, 467.0, 468.0, 469.0, 470.0, 471.0, 472.0, 473.0, 474.0, 475.0, 476.0, 477.0, 478.0, 479.0, 480.0, 481.0, 482.0, 483.0, 484.0, 485.0, 486.0, 487.0, 488.0, 489.0, 490.0, 491.0, 492.0, 493.0, 494.0, 495.0, 496.0, 497.0, 498.0, 499.0, 500.0], "series": [{"molecule": "avobenzone", "display_name": "Avobenzone", "species": "enolA", "level": "B3LYP/6-31+G(d)", "solvent": "ethanol", "geometry_source": "DFT", "calc_lambda_max_nm": 352.5, "calc_osc": 1.35, "exp_lambda_max_nm": 354.9, "exp_confidence": "Vallejo2011", "eps": [630.6, 1074.2, 1719.0, 2589.0, 3676.2, 4929.6, 6253.5, 7517.6, 8579.7, 9314.3, 9640.5, 9539.9, 9060.4, 8305.6, 7413.2, 6531.1, 5795.9, 5319.3, 5181.7, 5432.2, 6090.9, 7150.4, 8575.6, 10301.8, 12233.2, 14245.0, 16191.0, 17916.3, 19275.9, 20153.0, 20476.2, 20228.7, 19450.8, 18232.5, 16699.8, 14997.2, 13268.9, 11643.7, 10223.7, 9078.2, 8242.5, 7720.3, 7488.7, 7504.2, 7709.4, 8039.1, 8426.4, 8807.7, 9127.4, 9341.1, 9417.5, 9340.0, 9105.6, 8724.1, 8214.8, 7604.2, 6922.8, 6201.7, 5470.7, 4756.3, 4080.6, 3460.7, 2908.9, 2432.9, 2036.9, 1722.0, 1486.6, 1327.9, 1241.4, 1222.1, 1264.0, 1360.8, 1505.8, 1692.0, 1912.3, 2159.9, 2428.2, 2711.5, 3005.3, 3306.3, 3612.8, 3924.9, 4244.2, 4573.7, 4917.3, 5279.3, 5663.8, 6073.8, 6510.8, 6974.1, 7460.2, 7962.9, 8473.2, 8979.5, 9468.2, 9924.4, 10332.7, 10678.1, 10946.9, 11127.7, 11211.8, 11194.0, 11072.7, 10850.2, 10532.2, 10127.8, 9648.8, 9109.3, 8525.2, 7913.1, 7290.4, 6674.6, 6082.8, 5532.2, 5039.3, 4620.8, 4293.2, 4073.6, 3980.0, 4031.2, 4247.6, 4651.4, 5266.0, 6116.8, 7230.1, 8632.9, 10352.0, 12413.3, 14840.4, 17653.1, 20866.7, 24490.1, 28524.4, 32962.2, 37786.2, 42968.5, 48470.7, 54243.3, 60226.5, 66351.2, 72539.8, 78708.3, 84768.3, 90628.8, 96199.1, 101391.1, 106121.5, 110314.4, 113903.2, 116832.7, 119059.8, 120555.4, 121303.9, 121304.4, 120569.2, 119124.1, 117006.4, 114264.0, 110953.7, 107139.1, 102889.0, 98275.5, 93372.0, 88251.4, 82984.8, 77639.9, 72280.1, 66963.1, 61740.7, 56658.1, 51753.7, 47059.1, 42599.3, 38393.0, 34452.7, 30785.6, 27394.2, 24276.5, 21426.9, 18836.9, 16495.5, 14389.9, 12505.8, 10828.3, 9341.7, 8030.4, 6879.0, 5872.3, 4995.9, 4236.2, 3580.2, 3016.1, 2532.9, 2120.4, 1769.7, 1472.6, 1221.7, 1010.7, 833.7, 685.8, 562.6, 460.2, 375.5, 305.6, 248.1, 200.9, 162.2, 130.7, 105.1, 84.3, 67.4, 53.8, 42.9, 34.1, 27.0, 21.4, 16.9, 13.3, 10.5, 8.2, 6.4, 5.0, 3.9, 3.1, 2.4, 1.9, 1.4, 1.1, 0.9, 0.7, 0.5, 0.4, 0.3, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}], "palette": ["#2a78d6", "#e8710a", "#1a9e5f", "#c0392b", "#7b48c8", "#0f9bd1", "#d64b9a", "#8a6d00"]};
+const G = DATA.grid, S = DATA.series, PAL = DATA.palette;
+S.forEach((s,i)=>{ s.color = PAL[i%PAL.length]; s.weight = 1; s.on = true; });
+
+const NM0=G[0], NM1=G[G.length-1];
+const svg=document.getElementById('chart'), tip=document.getElementById('tip');
+const W=900,H=460, mL=58,mR=16,mT=16,mB=42;
+const px=nm=>mL+(nm-NM0)/(NM1-NM0)*(W-mL-mR);
+const nmAt=x=>NM0+(x-mL)/(W-mL-mR)*(NM1-NM0);
+let curMaxY=1;
+
+function weightedSum(){ const y=G.map(()=>0);
+  S.forEach(s=>{ if(!s.on) return; for(let i=0;i<G.length;i++) y[i]+=s.weight*s.eps[i]; });
+  return y; }
+function seriesY(s){ return s.eps; }
+
+function draw(){
+  const norm=document.getElementById('norm').checked;
+  const showsum=document.getElementById('showsum').checked;
+  const showexp=document.getElementById('showexp').checked;
+  const active=S.filter(s=>s.on);
+  let maxY=0;
+  const disp=[];
+  active.forEach(s=>{ let y=seriesY(s);
+    if(norm){ const mx=Math.max(...y)||1; y=y.map(v=>v/mx); }
+    disp.push({s,y}); maxY=Math.max(maxY,...y); });
+  let sumY=null;
+  if(showsum){ sumY=weightedSum();
+    if(norm){ const mx=Math.max(...sumY)||1; sumY=sumY.map(v=>v/mx); }
+    maxY=Math.max(maxY,...sumY); }
+  maxY=maxY*1.08||1; curMaxY=maxY;
+  const py=v=>H-mB-(v/maxY)*(H-mT-mB);
+
+  let el='';
+  // UVB / UVA 밴드
+  el+=`<rect x="${px(280)}" y="${mT}" width="${px(315)-px(280)}" height="${H-mT-mB}" fill="var(--uvb)"/>`;
+  el+=`<rect x="${px(315)}" y="${mT}" width="${px(400)-px(315)}" height="${H-mT-mB}" fill="var(--uva)"/>`;
+  el+=`<text x="${(px(280)+px(315))/2}" y="${mT+13}" fill="var(--muted)" font-size="11" text-anchor="middle">UVB</text>`;
+  el+=`<text x="${(px(315)+px(400))/2}" y="${mT+13}" fill="var(--muted)" font-size="11" text-anchor="middle">UVA</text>`;
+  // x 그리드/눈금
+  for(let nm=250;nm<=450;nm+=50){ el+=`<line x1="${px(nm)}" y1="${mT}" x2="${px(nm)}" y2="${H-mB}" stroke="var(--grid)"/>`;
+    el+=`<text x="${px(nm)}" y="${H-mB+16}" fill="var(--muted)" font-size="11" text-anchor="middle">${nm}</text>`; }
+  el+=`<text x="${(mL+W-mR)/2}" y="${H-6}" fill="var(--muted)" font-size="12" text-anchor="middle">파장 (nm)</text>`;
+  // y 눈금
+  for(let k=0;k<=4;k++){ const v=maxY*k/4, yy=py(v);
+    el+=`<line x1="${mL}" y1="${yy}" x2="${W-mR}" y2="${yy}" stroke="var(--grid)"/>`;
+    el+=`<text x="${mL-8}" y="${yy+4}" fill="var(--muted)" font-size="11" text-anchor="end">${norm?v.toFixed(2):Math.round(v)}</text>`; }
+  el+=`<text transform="translate(15,${(mT+H-mB)/2}) rotate(-90)" fill="var(--muted)" font-size="12" text-anchor="middle">${norm?'정규화 흡광':'ε (L·mol⁻¹·cm⁻¹)'}</text>`;
+
+  const path=y=>{ let d=''; for(let i=0;i<G.length;i++){ d+=(i?'L':'M')+px(G[i]).toFixed(1)+' '+py(y[i]).toFixed(1);} return d; };
+  disp.forEach(({s,y})=>{ el+=`<path d="${path(y)}" fill="none" stroke="${s.color}" stroke-width="2"/>`; });
+  if(sumY){ el+=`<path d="${path(sumY)}" fill="none" stroke="var(--ink)" stroke-width="2.4" stroke-dasharray="2 4"/>`; }
+  // 실험 마커
+  if(showexp){ active.forEach(s=>{ if(!s.exp_lambda_max_nm) return;
+    const x=px(s.exp_lambda_max_nm);
+    el+=`<line x1="${x}" y1="${mT}" x2="${x}" y2="${H-mB}" stroke="${s.color}" stroke-width="1.3" stroke-dasharray="4 3" opacity=".8"/>`;
+    el+=`<text x="${x}" y="${mT+28}" fill="${s.color}" font-size="10" text-anchor="middle">${s.exp_lambda_max_nm}</text>`; }); }
+  el+=`<line id="cross" x1="0" y1="${mT}" x2="0" y2="${H-mB}" stroke="var(--line)" opacity="0"/>`;
+  svg.innerHTML=el;
+}
+
+function renderComp(){
+  const c=document.getElementById('comp'); c.innerHTML='';
+  S.forEach((s,i)=>{ const row=document.createElement('div'); row.className='comprow';
+    row.innerHTML=`<div class="nm"><span class="sw" style="background:${s.color}"></span>
+      <label style="display:inline"><input type="checkbox" ${s.on?'checked':''} data-on="${i}"> ${s.display_name}</label></div>
+      <input type="range" min="0" max="2" step="0.05" value="${s.weight}" data-w="${i}">
+      <span class="pill" data-wv="${i}">${s.weight.toFixed(2)}</span>`;
+    c.appendChild(row); });
+  c.querySelectorAll('[data-w]').forEach(r=>r.addEventListener('input',e=>{
+    const i=+e.target.dataset.w; S[i].weight=+e.target.value;
+    document.querySelector(`[data-wv="${i}"]`).textContent=S[i].weight.toFixed(2); draw(); }));
+  c.querySelectorAll('[data-on]').forEach(r=>r.addEventListener('change',e=>{
+    S[+e.target.dataset.on].on=e.target.checked; draw(); }));
+}
+
+function renderTable(){
+  const tb=document.getElementById('tbody'); tb.innerHTML='';
+  S.forEach(s=>{ const err=(s.calc_lambda_max_nm&&s.exp_lambda_max_nm)?
+      (s.calc_lambda_max_nm-s.exp_lambda_max_nm):null;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><span class="sw" style="background:${s.color}"></span>${s.display_name}</td>
+      <td>${s.species}</td><td class="muted">${s.level} · ${s.solvent} · ${s.geometry_source}</td>
+      <td class="num">${s.calc_lambda_max_nm??'–'}</td>
+      <td class="num">${s.exp_lambda_max_nm??'–'}${s.exp_confidence==='approximate'?'*':''}</td>
+      <td class="num">${err==null?'–':(err>0?'+':'')+err.toFixed(1)}</td>`;
+    tb.appendChild(tr); });
+}
+
+svg.addEventListener('pointermove',e=>{
+  const r=svg.getBoundingClientRect(); const x=(e.clientX-r.left)/r.width*W;
+  if(x<mL||x>W-mR){ tip.style.opacity=0; return; }
+  const nm=nmAt(x); const idx=Math.round(nm-NM0);
+  const cross=document.getElementById('cross'); if(cross){cross.setAttribute('x1',x);cross.setAttribute('x2',x);cross.setAttribute('opacity','.5');}
+  const norm=document.getElementById('norm').checked;
+  let rows=`<b>${nm.toFixed(0)} nm</b>`;
+  S.filter(s=>s.on).forEach(s=>{ let v=s.eps[idx]; rows+=`<br><span class="sw" style="background:${s.color}"></span>${Math.round(v)}`; });
+  tip.innerHTML=rows; tip.style.opacity=1;
+  let tx=e.clientX-r.left+14; if(tx>r.width-140) tx=e.clientX-r.left-150;
+  tip.style.left=tx+'px'; tip.style.top=(e.clientY-r.top+12)+'px';
+  document.getElementById('readout').textContent=`${nm.toFixed(0)} nm 에서 읽는 중`;
+});
+svg.addEventListener('pointerleave',()=>{ tip.style.opacity=0;
+  const cross=document.getElementById('cross'); if(cross)cross.setAttribute('opacity','0'); });
+
+['norm','showsum','showexp'].forEach(id=>document.getElementById(id).addEventListener('change',draw));
+document.getElementById('theme').addEventListener('click',()=>{
+  const cur=document.documentElement.getAttribute('data-theme');
+  const next=cur==='dark'?'light':(cur==='light'?'dark':(matchMedia('(prefers-color-scheme: dark)').matches?'light':'dark'));
+  document.documentElement.setAttribute('data-theme',next); draw(); });
+
+renderComp(); renderTable(); draw();
+</script></body></html>

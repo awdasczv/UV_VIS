@@ -1,0 +1,36 @@
+{
+  "dhhb": [
+    {
+      "engine": "ORCA 6.1.1",
+      "tautomer": "dhhb",
+      "conf_id": "dhhb_c000",
+      "level": "B3LYP/def2-SVP",
+      "pcm": true,
+      "solvent": "ethanol",
+      "source_xyz": "C:\\Users\\ysm04\\Documents\\etc\\uv_vis\\molecules\\dhhb\\conformers\\dhhb\\dhhb_c000.xyz",
+      "wall_seconds": 6003.8,
+      "twists_before": null,
+      "ok": true,
+      "energy_hartree": -1287.221534932623,
+      "n_opt_cycles": 19,
+      "optimized_xyz": "C:\\Users\\ysm04\\Documents\\etc\\uv_vis\\molecules\\dhhb\\calculations\\01_dft_opt\\dhhb\\dhhb_c000\\optimized.xyz",
+      "twists_after": null
+    },
+    {
+      "engine": "ORCA 6.1.1",
+      "tautomer": "dhhb",
+      "conf_id": "dhhb_c131",
+      "level": "B3LYP/def2-SVP",
+      "pcm": true,
+      "solvent": "ethanol",
+      "source_xyz": "C:\\Users\\ysm04\\Documents\\etc\\uv_vis\\molecules\\dhhb\\conformers\\dhhb\\dhhb_c131.xyz",
+      "wall_seconds": 5009.4,
+      "twists_before": null,
+      "ok": true,
+      "energy_hartree": -1287.218520495824,
+      "n_opt_cycles": 14,
+      "optimized_xyz": "C:\\Users\\ysm04\\Documents\\etc\\uv_vis\\molecules\\dhhb\\calculations\\01_dft_opt\\dhhb\\dhhb_c131\\optimized.xyz",
+      "twists_after": null
+    }
+  ]
+}
