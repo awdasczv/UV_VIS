@@ -141,6 +141,20 @@ def chromophore_dihedrals(mol, geom) -> dict | None:
             if n2:
                 out["aryl2_twist_deg"] = tors(o2, c2, ar2, n2[0])
             out["backbone_C1_CH2_C3_deg"] = tors(c1, ch2, c2, o2)
+        else:
+            # 다이아릴 케톤(벤조페논류: DHHB 등). 두 아릴 고리가 중앙 C=O 와
+            # 이루는 비틀림각이 pi 공액(=흡수 파장)을 지배하는 발색단 자유도다.
+            bp = mol.GetSubstructMatches(Chem.MolFromSmarts("[c][CX3](=[OX1])[c]"))
+            if bp:
+                ar1, c, o, ar2 = bp[0]
+                n1 = [n.GetIdx() for n in mol.GetAtomWithIdx(ar1).GetNeighbors()
+                      if n.GetIdx() != c and n.GetSymbol() == "C"]
+                n2 = [n.GetIdx() for n in mol.GetAtomWithIdx(ar2).GetNeighbors()
+                      if n.GetIdx() != c and n.GetSymbol() == "C"]
+                if n1:
+                    out["aryl1_ketone_twist_deg"] = tors(o, c, ar1, n1[0])
+                if n2:
+                    out["aryl2_ketone_twist_deg"] = tors(o, c, ar2, n2[0])
 
     # 메톡시기 방향 (Ar-O-CH3 가 고리 평면과 이루는 각)
     ome = mol.GetSubstructMatches(Chem.MolFromSmarts("[c][OX2][CH3]"))
