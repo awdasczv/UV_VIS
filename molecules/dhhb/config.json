@@ -1,0 +1,46 @@
+{
+  "molecule": {
+    "common_name": "Diethylamino Hydroxybenzoyl Hexyl Benzoate (DHHB)",
+    "inci_name": "Diethylamino Hydroxybenzoyl Hexyl Benzoate",
+    "trade_name": "Uvinul A Plus (BASF)",
+    "cas": "302776-68-7",
+    "formula": "C24H31NO4",
+    "monoisotopic_mass": 397.2253,
+    "mol_weight": 397.51,
+    "charge": 0,
+    "multiplicity": 1,
+    "role": "UVA 흡수제 (선크림). 아보벤존과 함께 4개 실제 제형 전부에 등장하는 핵심 성분."
+  },
+  "chromophore": {
+    "description": "o-히드록시벤조페논(o-hydroxybenzophenone) 발색단",
+    "ring_ketone_side": "2-히드록시-4-(디에틸아미노)페닐  (강한 전자 주개 -NEt2, 오쏘 -OH)",
+    "ring_ester_side": "4-(헥실옥시카보닐)페닐  (전자 받개 에스터)",
+    "bridge": "다이아릴 케톤 C=O",
+    "intramolecular_hbond": "오쏘 -OH 와 케톤 C=O 사이 6원 분자내 수소결합. 발색단을 평면화하고 push-pull(도너 NEt2 -> 억셉터 C=O) pi->pi* 전이를 장파장(UVA ~354 nm)으로 민다.",
+    "note": "아보벤존과 달리 토토머 평형이 없다. 단일 우세 구조라 계산이 더 단순하다 (종 1개)."
+  },
+  "_schema_note": "종 목록 키는 파이프라인 호환을 위해 아보벤존과 동일하게 'tautomers' 로 둔다. DHHB 는 토토머가 없으므로 항목이 하나뿐이며, 여기서는 '계산할 분자 형태 목록'의 의미다.",
+  "tautomers": [
+    {
+      "id": "dhhb",
+      "label": "DHHB (o-hydroxybenzophenone, single dominant form)",
+      "smiles": "CCCCCCOC(=O)c1ccc(cc1)C(=O)c2ccc(cc2O)N(CC)CC",
+      "smiles_note": "벤조일 고리에 오쏘 -OH(cc2O) 와 파라 -NEt2(N(CC)CC), 반대 고리 파라에 헥실 에스터. 오쏘 -OH 가 케톤과 분자내 수소결합을 이룬다.",
+      "geometry_requirement": "o-OH...O=C 6원 분자내 수소결합; 다이아릴케톤 발색단이 되도록 두 고리가 케톤에 공액",
+      "rationale": [
+        "DHHB 의 UVA 흡수는 o-히드록시벤조페논 발색단의 push-pull pi->pi* 전이에서 온다.",
+        "디에틸아미노(도너) -> 카보닐(억셉터) 전하이동 성격이 커서 흡수가 ~350-360 nm 로 장파장이다.",
+        "오쏘 -OH 의 분자내 수소결합이 케톤을 평면에 고정해 공액을 강화한다.",
+        "아보벤존 파이프라인이 사촌 발색단(다이아릴케톤)에도 통하는지 검증하는 대상."
+      ]
+    }
+  ],
+  "validation_targets": {
+    "formula": "C24H31NO4",
+    "heavy_atoms": 29,
+    "hydrogens": 31,
+    "hbond_donor_smarts": "[OX2H][cX3]:[cX3][CX3]=[OX1]",
+    "hbond_OH_O_distance_range_A": [1.4, 2.1],
+    "notes": "오쏘 히드록시케톤의 O-H...O=C 분자내 수소결합 거리가 대략 1.4-2.1 A 여야 한다. MMFF 는 분자내 수소결합을 과소평가하므로 xTB/DFT 후 재확인한다."
+  }
+}

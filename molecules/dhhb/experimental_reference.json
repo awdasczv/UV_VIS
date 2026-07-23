@@ -1,0 +1,23 @@
+{
+  "_comment": "DHHB(Uvinul A Plus) UV-Vis 실험 참조값. 계산 오차 평가에 쓴다. 출처 신뢰도를 명시한다.",
+  "experimental": {
+    "uva_band": {
+      "description": "o-히드록시벤조페논 발색단의 push-pull pi->pi* UVA 밴드",
+      "values": [
+        {"solvent": "ethanol", "lambda_max_nm": 354.0, "epsilon_M-1cm-1": null,
+         "ref": "manufacturer/literature (BASF Uvinul A Plus)", "confidence": "approximate"}
+      ],
+      "primary_target": {"solvent": "ethanol", "lambda_max_nm": 354.0,
+                         "ref": "manufacturer/literature", "confidence": "approximate"},
+      "provenance_note": [
+        "DHHB 의 UVA lambda_max 는 통상 ~354 nm(에탄올/제형 맥락)로 인용된다.",
+        "오프라인 환경이라 1차 문헌으로 정확 수치를 확정하지 못했다 -> 'approximate' 로 표기.",
+        "사용자가 제형 실무에서 실제 측정값을 알고 있으면 이 값을 대체할 것.",
+        "따라서 계산-실험 오차는 참고용이며, 이 단계의 핵심 산출물은 '계산된 스펙트럼' 자체다."
+      ]
+    }
+  },
+  "references": {
+    "BASF_UvinulAPlus": "BASF Uvinul A Plus (Diethylamino Hydroxybenzoyl Hexyl Benzoate) 기술자료. UVA 흡수 lambda_max ~354 nm, 높은 몰흡광계수."
+  }
+}

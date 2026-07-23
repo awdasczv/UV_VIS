@@ -1,0 +1,26 @@
+{
+  "dhhb": {
+    "formula": "C24H31NO4",
+    "n_heavy_atoms": 29,
+    "n_hydrogens": 31,
+    "mol_weight": 397.515,
+    "intramolecular_hbond": {
+      "donor_O_idx": 23,
+      "donor_H_idx": 49,
+      "acceptor_O_idx": 16,
+      "H_to_acceptorO_A": 1.767,
+      "in_expected_range": true,
+      "expected_range_A": [
+        1.4,
+        2.1
+      ]
+    },
+    "canonical_smiles_from_3d": "CCCCCCOC(=O)c1ccc(C(=O)c2ccc(N(CC)CC)cc2O)cc1",
+    "smiles": "CCCCCCOC(=O)c1ccc(cc1)C(=O)c2ccc(cc2O)N(CC)CC",
+    "label": "DHHB (o-hydroxybenzophenone, single dominant form)",
+    "mmff94s_energy_kcalmol": 77.4119,
+    "n_embedded": 40,
+    "problems": [],
+    "xyz": "molecules\\dhhb\\structures\\dhhb.xyz"
+  }
+}
