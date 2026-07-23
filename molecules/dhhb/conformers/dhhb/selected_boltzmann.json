@@ -1,0 +1,26 @@
+{
+  "tautomer": "dhhb",
+  "target_cumulative_weight": 0.9,
+  "max_conformers": 3,
+  "achieved_cumulative_weight": 0.09416984630124442,
+  "selected": [
+    {
+      "conf_id": "dhhb_c000",
+      "rel_energy_kcalmol": 0.0,
+      "boltzmann_weight": 0.03730037042683723,
+      "xyz": "conformers/dhhb/dhhb_c000.xyz"
+    },
+    {
+      "conf_id": "dhhb_c001",
+      "rel_energy_kcalmol": 0.03579022499414212,
+      "boltzmann_weight": 0.035113872495443565,
+      "xyz": "conformers/dhhb/dhhb_c001.xyz"
+    },
+    {
+      "conf_id": "dhhb_c002",
+      "rel_energy_kcalmol": 0.3194275406531242,
+      "boltzmann_weight": 0.021755603378963623,
+      "xyz": "conformers/dhhb/dhhb_c002.xyz"
+    }
+  ]
+}

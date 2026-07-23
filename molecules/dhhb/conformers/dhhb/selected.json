@@ -1,0 +1,42 @@
+{
+  "tautomer": "dhhb",
+  "selection_method": "발색단 기하 클러스터별 대표 (에너지 최저)",
+  "rationale": "컨포머들의 볼츠만 가중치가 고르게 퍼지는 이유는 스펙트럼과 무관한 알킬기 회전 때문이다. 발색단 기하로 묶어야 적은 계산으로 앙상블을 제대로 대표할 수 있다.",
+  "n_unique_conformers": 182,
+  "n_chromophore_clusters": 1,
+  "target_cumulative_weight": 0.9,
+  "max_conformers": 3,
+  "achieved_cumulative_weight": 1.0,
+  "selected": [
+    {
+      "conf_id": "dhhb_c000",
+      "rel_energy_kcalmol": 0.0,
+      "boltzmann_weight": 0.9990107400642412,
+      "own_boltzmann_weight": 0.03730037042683723,
+      "cluster": 0,
+      "cluster_size": 182,
+      "chromophore_dihedrals": {
+        "aryl1_ketone_twist_deg": 47.6,
+        "aryl2_ketone_twist_deg": 11.2
+      },
+      "xyz": "conformers/dhhb/dhhb_c000.xyz",
+      "weight_normalized": 0.99901
+    },
+    {
+      "conf_id": "dhhb_c131",
+      "rel_energy_kcalmol": 2.1506027078353456,
+      "boltzmann_weight": 0.0009892599357588453,
+      "own_boltzmann_weight": 0.0009892599357588453,
+      "cluster": 0,
+      "cluster_size": 1,
+      "role": "intra_cluster_check",
+      "max_dihedral_diff_from_rep_deg": 9.8,
+      "chromophore_dihedrals": {
+        "aryl1_ketone_twist_deg": 57.4,
+        "aryl2_ketone_twist_deg": 8.2
+      },
+      "xyz": "conformers/dhhb/dhhb_c131.xyz",
+      "weight_normalized": 0.00099
+    }
+  ]
+}

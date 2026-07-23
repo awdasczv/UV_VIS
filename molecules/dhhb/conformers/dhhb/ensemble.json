@@ -1,0 +1,1109 @@
+{
+  "tautomer": "dhhb",
+  "backend": "etkdg",
+  "solvent_xtb_alpb": "ethanol",
+  "level": "GFN2-xTB",
+  "n_raw": 200,
+  "n_unique": 182,
+  "dedup_criteria": {
+    "dE_kcal": 0.1,
+    "rmsd_A": 0.125,
+    "rmsd_type": "RDKit GetBestRMS (대칭 인식, heavy atom)",
+    "energy_window_kcal": 6.0
+  },
+  "temperature_K": 298.15,
+  "conformers": [
+    {
+      "conf_id": "dhhb_c000",
+      "energy_hartree": -86.470473320598,
+      "rel_energy_kcalmol": 0.0,
+      "boltzmann_weight": 0.03730037042683723
+    },
+    {
+      "conf_id": "dhhb_c001",
+      "energy_hartree": -86.470416285244,
+      "rel_energy_kcalmol": 0.03579022499414212,
+      "boltzmann_weight": 0.035113872495443565
+    },
+    {
+      "conf_id": "dhhb_c002",
+      "energy_hartree": -86.46996428041,
+      "rel_energy_kcalmol": 0.3194275406531242,
+      "boltzmann_weight": 0.021755603378963623
+    },
+    {
+      "conf_id": "dhhb_c003",
+      "energy_hartree": -86.469908541828,
+      "rel_energy_kcalmol": 0.35440402892376166,
+      "boltzmann_weight": 0.020508466558580626
+    },
+    {
+      "conf_id": "dhhb_c004",
+      "energy_hartree": -86.469905923249,
+      "rel_energy_kcalmol": 0.3560472120569845,
+      "boltzmann_weight": 0.020451667682424002
+    },
+    {
+      "conf_id": "dhhb_c005",
+      "energy_hartree": -86.469869433128,
+      "rel_energy_kcalmol": 0.3789451086972163,
+      "boltzmann_weight": 0.019676346079378956
+    },
+    {
+      "conf_id": "dhhb_c006",
+      "energy_hartree": -86.469853329702,
+      "rel_energy_kcalmol": 0.38905016107193663,
+      "boltzmann_weight": 0.01934360422334008
+    },
+    {
+      "conf_id": "dhhb_c007",
+      "energy_hartree": -86.469838736382,
+      "rel_energy_kcalmol": 0.3982076076319081,
+      "boltzmann_weight": 0.019046928122089236
+    },
+    {
+      "conf_id": "dhhb_c008",
+      "energy_hartree": -86.469834899181,
+      "rel_energy_kcalmol": 0.400615487617508,
+      "boltzmann_weight": 0.018969677806640373
+    },
+    {
+      "conf_id": "dhhb_c009",
+      "energy_hartree": -86.469827679495,
+      "rel_energy_kcalmol": 0.40514590898068975,
+      "boltzmann_weight": 0.01882517979359744
+    },
+    {
+      "conf_id": "dhhb_c010",
+      "energy_hartree": -86.469794237681,
+      "rel_energy_kcalmol": 0.42613096409373535,
+      "boltzmann_weight": 0.01817008590447901
+    },
+    {
+      "conf_id": "dhhb_c011",
+      "energy_hartree": -86.469790990516,
+      "rel_energy_kcalmol": 0.428168590893408,
+      "boltzmann_weight": 0.018107704130585423
+    },
+    {
+      "conf_id": "dhhb_c012",
+      "energy_hartree": -86.469763050559,
+      "rel_energy_kcalmol": 0.4457011786205683,
+      "boltzmann_weight": 0.017579718388325904
+    },
+    {
+      "conf_id": "dhhb_c013",
+      "energy_hartree": -86.469739365504,
+      "rel_energy_kcalmol": 0.4605637750256244,
+      "boltzmann_weight": 0.017144213049876116
+    },
+    {
+      "conf_id": "dhhb_c014",
+      "energy_hartree": -86.46972354397,
+      "rel_energy_kcalmol": 0.47049193749998286,
+      "boltzmann_weight": 0.01685932417365339
+    },
+    {
+      "conf_id": "dhhb_c015",
+      "energy_hartree": -86.469718672685,
+      "rel_energy_kcalmol": 0.47354871498850937,
+      "boltzmann_weight": 0.016772566713439317
+    },
+    {
+      "conf_id": "dhhb_c016",
+      "energy_hartree": -86.469702926812,
+      "rel_energy_kcalmol": 0.4834293994734841,
+      "boltzmann_weight": 0.016495175325863535
+    },
+    {
+      "conf_id": "dhhb_c017",
+      "energy_hartree": -86.469697115407,
+      "rel_energy_kcalmol": 0.4870761111707616,
+      "boltzmann_weight": 0.016393960251265376
+    },
+    {
+      "conf_id": "dhhb_c018",
+      "energy_hartree": -86.469639844103,
+      "rel_energy_kcalmol": 0.5230143970236261,
+      "boltzmann_weight": 0.015429111994112711
+    },
+    {
+      "conf_id": "dhhb_c019",
+      "energy_hartree": -86.469630527708,
+      "rel_energy_kcalmol": 0.5288605231465566,
+      "boltzmann_weight": 0.015277619564548867
+    },
+    {
+      "conf_id": "dhhb_c020",
+      "energy_hartree": -86.469606385345,
+      "rel_energy_kcalmol": 0.5440100846571881,
+      "boltzmann_weight": 0.014891929981692417
+    },
+    {
+      "conf_id": "dhhb_c021",
+      "energy_hartree": -86.469594543068,
+      "rel_energy_kcalmol": 0.5514412256718961,
+      "boltzmann_weight": 0.014706316943373713
+    },
+    {
+      "conf_id": "dhhb_c022",
+      "energy_hartree": -86.469584847051,
+      "rel_energy_kcalmol": 0.5575255682017202,
+      "boltzmann_weight": 0.014556067720197938
+    },
+    {
+      "conf_id": "dhhb_c023",
+      "energy_hartree": -86.469548426101,
+      "rel_energy_kcalmol": 0.5803800593788024,
+      "boltzmann_weight": 0.014005273978366711
+    },
+    {
+      "conf_id": "dhhb_c024",
+      "energy_hartree": -86.469526084656,
+      "rel_energy_kcalmol": 0.5943995277826636,
+      "boltzmann_weight": 0.013677769085123949
+    },
+    {
+      "conf_id": "dhhb_c025",
+      "energy_hartree": -86.469521723713,
+      "rel_energy_kcalmol": 0.5971360608279774,
+      "boltzmann_weight": 0.013614740714356284
+    },
+    {
+      "conf_id": "dhhb_c026",
+      "energy_hartree": -86.469519801895,
+      "rel_energy_kcalmol": 0.5983420198286366,
+      "boltzmann_weight": 0.013587057106864663
+    },
+    {
+      "conf_id": "dhhb_c027",
+      "energy_hartree": -86.469510444338,
+      "rel_energy_kcalmol": 0.6042139755032458,
+      "boltzmann_weight": 0.013453064592387418
+    },
+    {
+      "conf_id": "dhhb_c028",
+      "energy_hartree": -86.469503725738,
+      "rel_energy_kcalmol": 0.6084299606589673,
+      "boltzmann_weight": 0.013357675498263024
+    },
+    {
+      "conf_id": "dhhb_c029",
+      "energy_hartree": -86.469475183693,
+      "rel_energy_kcalmol": 0.6263403642974666,
+      "boltzmann_weight": 0.01295992451066887
+    },
+    {
+      "conf_id": "dhhb_c030",
+      "energy_hartree": -86.469431437671,
+      "rel_energy_kcalmol": 0.6537914075558557,
+      "boltzmann_weight": 0.012373162524088962
+    },
+    {
+      "conf_id": "dhhb_c031",
+      "energy_hartree": -86.469424037051,
+      "rel_energy_kcalmol": 0.6584353667239333,
+      "boltzmann_weight": 0.012276559465729057
+    },
+    {
+      "conf_id": "dhhb_c032",
+      "energy_hartree": -86.469397210039,
+      "rel_energy_kcalmol": 0.6752695709104652,
+      "boltzmann_weight": 0.011932655828491453
+    },
+    {
+      "conf_id": "dhhb_c033",
+      "energy_hartree": -86.469381380663,
+      "rel_energy_kcalmol": 0.6852026543257848,
+      "boltzmann_weight": 0.011734270998376988
+    },
+    {
+      "conf_id": "dhhb_c034",
+      "energy_hartree": -86.469375164199,
+      "rel_energy_kcalmol": 0.6891035443817982,
+      "boltzmann_weight": 0.01165726694269771
+    },
+    {
+      "conf_id": "dhhb_c035",
+      "energy_hartree": -86.469361022587,
+      "rel_energy_kcalmol": 0.6979775398895398,
+      "boltzmann_weight": 0.011483970223606067
+    },
+    {
+      "conf_id": "dhhb_c036",
+      "energy_hartree": -86.469353928411,
+      "rel_energy_kcalmol": 0.7024292025393609,
+      "boltzmann_weight": 0.011398008234461111
+    },
+    {
+      "conf_id": "dhhb_c037",
+      "energy_hartree": -86.46929900179,
+      "rel_energy_kcalmol": 0.7368961775889588,
+      "boltzmann_weight": 0.010753862973499659
+    },
+    {
+      "conf_id": "dhhb_c038",
+      "energy_hartree": -86.469252245918,
+      "rel_energy_kcalmol": 0.7662359302408606,
+      "boltzmann_weight": 0.010234303936673593
+    },
+    {
+      "conf_id": "dhhb_c039",
+      "energy_hartree": -86.469244315158,
+      "rel_energy_kcalmol": 0.771212557281176,
+      "boltzmann_weight": 0.010148700063944603
+    },
+    {
+      "conf_id": "dhhb_c040",
+      "energy_hartree": -86.469135257041,
+      "rel_energy_kcalmol": 0.8396475589161767,
+      "boltzmann_weight": 0.009041640040361128
+    },
+    {
+      "conf_id": "dhhb_c041",
+      "energy_hartree": -86.469131133985,
+      "rel_energy_kcalmol": 0.842234815619213,
+      "boltzmann_weight": 0.009002243188455942
+    },
+    {
+      "conf_id": "dhhb_c042",
+      "energy_hartree": -86.469115181743,
+      "rel_energy_kcalmol": 0.8522449986035662,
+      "boltzmann_weight": 0.00885142565211859
+    },
+    {
+      "conf_id": "dhhb_c043",
+      "energy_hartree": -86.469104932369,
+      "rel_energy_kcalmol": 0.8586765778918963,
+      "boltzmann_weight": 0.008755860738185284
+    },
+    {
+      "conf_id": "dhhb_c044",
+      "energy_hartree": -86.468959776926,
+      "rel_energy_kcalmol": 0.9497629935910159,
+      "boltzmann_weight": 0.007508134423170012
+    },
+    {
+      "conf_id": "dhhb_c045",
+      "energy_hartree": -86.468955622671,
+      "rel_energy_kcalmol": 0.9523698279581242,
+      "boltzmann_weight": 0.007475172458218088
+    },
+    {
+      "conf_id": "dhhb_c046",
+      "energy_hartree": -86.468954286065,
+      "rel_energy_kcalmol": 0.9532085608890645,
+      "boltzmann_weight": 0.007464597948829873
+    },
+    {
+      "conf_id": "dhhb_c047",
+      "energy_hartree": -86.468899552586,
+      "rel_energy_kcalmol": 0.9875543375126329,
+      "boltzmann_weight": 0.007044185631452572
+    },
+    {
+      "conf_id": "dhhb_c048",
+      "energy_hartree": -86.468812424066,
+      "rel_energy_kcalmol": 1.0422283092696407,
+      "boltzmann_weight": 0.006423245077873734
+    },
+    {
+      "conf_id": "dhhb_c049",
+      "energy_hartree": -86.468791143781,
+      "rel_energy_kcalmol": 1.0555818897161844,
+      "boltzmann_weight": 0.0062800955342605875
+    },
+    {
+      "conf_id": "dhhb_c050",
+      "energy_hartree": -86.468754023539,
+      "rel_energy_kcalmol": 1.0788751932497098,
+      "boltzmann_weight": 0.006037986537957718
+    },
+    {
+      "conf_id": "dhhb_c051",
+      "energy_hartree": -86.468719444509,
+      "rel_energy_kcalmol": 1.1005738621787846,
+      "boltzmann_weight": 0.005820856672029994
+    },
+    {
+      "conf_id": "dhhb_c052",
+      "energy_hartree": -86.468642717116,
+      "rel_energy_kcalmol": 1.148721028211476,
+      "boltzmann_weight": 0.0053665451570610295
+    },
+    {
+      "conf_id": "dhhb_c053",
+      "energy_hartree": -86.468620734171,
+      "rel_energy_kcalmol": 1.1625155344669922,
+      "boltzmann_weight": 0.005243042098497317
+    },
+    {
+      "conf_id": "dhhb_c054",
+      "energy_hartree": -86.468586074427,
+      "rel_energy_kcalmol": 1.1842648521973833,
+      "boltzmann_weight": 0.005054066876831988
+    },
+    {
+      "conf_id": "dhhb_c055",
+      "energy_hartree": -86.468577952827,
+      "rel_energy_kcalmol": 1.1893612331355732,
+      "boltzmann_weight": 0.005010779721522562
+    },
+    {
+      "conf_id": "dhhb_c056",
+      "energy_hartree": -86.468559299785,
+      "rel_energy_kcalmol": 1.2010661937139409,
+      "boltzmann_weight": 0.0049127596289750405
+    },
+    {
+      "conf_id": "dhhb_c057",
+      "energy_hartree": -86.468542636092,
+      "rel_energy_kcalmol": 1.2115228189463518,
+      "boltzmann_weight": 0.004826816137641983
+    },
+    {
+      "conf_id": "dhhb_c058",
+      "energy_hartree": -86.468526142724,
+      "rel_energy_kcalmol": 1.221872563621815,
+      "boltzmann_weight": 0.004743231708032812
+    },
+    {
+      "conf_id": "dhhb_c059",
+      "energy_hartree": -86.468524237768,
+      "rel_energy_kcalmol": 1.2230679415645382,
+      "boltzmann_weight": 0.004733671568738966
+    },
+    {
+      "conf_id": "dhhb_c060",
+      "energy_hartree": -86.468522231529,
+      "rel_energy_kcalmol": 1.2243268755447168,
+      "boltzmann_weight": 0.004723623966488578
+    },
+    {
+      "conf_id": "dhhb_c061",
+      "energy_hartree": -86.468521247333,
+      "rel_energy_kcalmol": 1.2249444678541948,
+      "boltzmann_weight": 0.004718702737831281
+    },
+    {
+      "conf_id": "dhhb_c062",
+      "energy_hartree": -86.468501770722,
+      "rel_energy_kcalmol": 1.2371662257801668,
+      "boltzmann_weight": 0.00462236257673861
+    },
+    {
+      "conf_id": "dhhb_c063",
+      "energy_hartree": -86.468484815672,
+      "rel_energy_kcalmol": 1.2478056802886524,
+      "boltzmann_weight": 0.004540098070475804
+    },
+    {
+      "conf_id": "dhhb_c064",
+      "energy_hartree": -86.468479538953,
+      "rel_energy_kcalmol": 1.251116871449479,
+      "boltzmann_weight": 0.0045147958188482135
+    },
+    {
+      "conf_id": "dhhb_c065",
+      "energy_hartree": -86.468479003239,
+      "rel_energy_kcalmol": 1.2514530370650536,
+      "boltzmann_weight": 0.004512234929100967
+    },
+    {
+      "conf_id": "dhhb_c066",
+      "energy_hartree": -86.468473314563,
+      "rel_energy_kcalmol": 1.2550227351485592,
+      "boltzmann_weight": 0.004485130627601443
+    },
+    {
+      "conf_id": "dhhb_c067",
+      "energy_hartree": -86.468470778676,
+      "rel_energy_kcalmol": 1.2566140282700786,
+      "boltzmann_weight": 0.00447310064840478
+    },
+    {
+      "conf_id": "dhhb_c068",
+      "energy_hartree": -86.468464306888,
+      "rel_energy_kcalmol": 1.2606751365529216,
+      "boltzmann_weight": 0.0044425452211821195
+    },
+    {
+      "conf_id": "dhhb_c069",
+      "energy_hartree": -86.468461474462,
+      "rel_energy_kcalmol": 1.2624525106971882,
+      "boltzmann_weight": 0.004429238160323177
+    },
+    {
+      "conf_id": "dhhb_c070",
+      "energy_hartree": -86.468448528239,
+      "rel_energy_kcalmol": 1.2705763882887824,
+      "boltzmann_weight": 0.0043689209758261335
+    },
+    {
+      "conf_id": "dhhb_c071",
+      "energy_hartree": -86.468425131753,
+      "rel_energy_kcalmol": 1.2852579049136537,
+      "boltzmann_weight": 0.004261991340535255
+    },
+    {
+      "conf_id": "dhhb_c072",
+      "energy_hartree": -86.46842512189,
+      "rel_energy_kcalmol": 1.2852640940402758,
+      "boltzmann_weight": 0.004261946819798816
+    },
+    {
+      "conf_id": "dhhb_c073",
+      "energy_hartree": -86.468416643369,
+      "rel_energy_kcalmol": 1.290584446291554,
+      "boltzmann_weight": 0.0042238470258436495
+    },
+    {
+      "conf_id": "dhhb_c074",
+      "energy_hartree": -86.468388140495,
+      "rel_energy_kcalmol": 1.3084702697660595,
+      "boltzmann_weight": 0.004098243714548688
+    },
+    {
+      "conf_id": "dhhb_c075",
+      "energy_hartree": -86.468381936697,
+      "rel_energy_kcalmol": 1.3123632117827384,
+      "boltzmann_weight": 0.00407140433933693
+    },
+    {
+      "conf_id": "dhhb_c076",
+      "energy_hartree": -86.46836611425,
+      "rel_energy_kcalmol": 1.322291947176248,
+      "boltzmann_weight": 0.004003745113576869
+    },
+    {
+      "conf_id": "dhhb_c077",
+      "energy_hartree": -86.468350186332,
+      "rel_energy_kcalmol": 1.332286866623127,
+      "boltzmann_weight": 0.0039367704742967295
+    },
+    {
+      "conf_id": "dhhb_c078",
+      "energy_hartree": -86.468322890689,
+      "rel_energy_kcalmol": 1.3494151412113375,
+      "boltzmann_weight": 0.0038245908566364685
+    },
+    {
+      "conf_id": "dhhb_c079",
+      "energy_hartree": -86.46825685951,
+      "rel_energy_kcalmol": 1.3908503316102552,
+      "boltzmann_weight": 0.003566258149632073
+    },
+    {
+      "conf_id": "dhhb_c080",
+      "energy_hartree": -86.468256739353,
+      "rel_energy_kcalmol": 1.3909257312733163,
+      "boltzmann_weight": 0.00356580433632609
+    },
+    {
+      "conf_id": "dhhb_c081",
+      "energy_hartree": -86.46824925581,
+      "rel_energy_kcalmol": 1.3956217254061813,
+      "boltzmann_weight": 0.0035376537286370487
+    },
+    {
+      "conf_id": "dhhb_c082",
+      "energy_hartree": -86.468239364371,
+      "rel_energy_kcalmol": 1.4018286970859835,
+      "boltzmann_weight": 0.003500786127765246
+    },
+    {
+      "conf_id": "dhhb_c083",
+      "energy_hartree": -86.468238938431,
+      "rel_energy_kcalmol": 1.402095978472302,
+      "boltzmann_weight": 0.003499207211800499
+    },
+    {
+      "conf_id": "dhhb_c084",
+      "energy_hartree": -86.468234455956,
+      "rel_energy_kcalmol": 1.4049087740059965,
+      "boltzmann_weight": 0.0034826342544499738
+    },
+    {
+      "conf_id": "dhhb_c085",
+      "energy_hartree": -86.468229493139,
+      "rel_energy_kcalmol": 1.408022988683748,
+      "boltzmann_weight": 0.003464376884155557
+    },
+    {
+      "conf_id": "dhhb_c086",
+      "energy_hartree": -86.468195909526,
+      "rel_energy_kcalmol": 1.4290970240166687,
+      "boltzmann_weight": 0.0033433185429214136
+    },
+    {
+      "conf_id": "dhhb_c087",
+      "energy_hartree": -86.468190668142,
+      "rel_energy_kcalmol": 1.4323860421353616,
+      "boltzmann_weight": 0.0033248104434833448
+    },
+    {
+      "conf_id": "dhhb_c088",
+      "energy_hartree": -86.468177573868,
+      "rel_energy_kcalmol": 1.4406028231236803,
+      "boltzmann_weight": 0.003279019110328177
+    },
+    {
+      "conf_id": "dhhb_c089",
+      "energy_hartree": -86.468148877626,
+      "rel_energy_kcalmol": 1.4586099868472757,
+      "boltzmann_weight": 0.0031808603688060146
+    },
+    {
+      "conf_id": "dhhb_c090",
+      "energy_hartree": -86.468143145152,
+      "rel_energy_kcalmol": 1.4622071685973475,
+      "boltzmann_weight": 0.003161606768388804
+    },
+    {
+      "conf_id": "dhhb_c091",
+      "energy_hartree": -86.46809620842,
+      "rel_energy_kcalmol": 1.4916604126120865,
+      "boltzmann_weight": 0.003008281514103636
+    },
+    {
+      "conf_id": "dhhb_c092",
+      "energy_hartree": -86.468076635442,
+      "rel_energy_kcalmol": 1.5039426417366777,
+      "boltzmann_weight": 0.0029465616935178142
+    },
+    {
+      "conf_id": "dhhb_c093",
+      "energy_hartree": -86.468071992959,
+      "rel_energy_kcalmol": 1.5068558438061341,
+      "boltzmann_weight": 0.002932109240478312
+    },
+    {
+      "conf_id": "dhhb_c094",
+      "energy_hartree": -86.468065547773,
+      "rel_energy_kcalmol": 1.5109002590849143,
+      "boltzmann_weight": 0.0029121622619243896
+    },
+    {
+      "conf_id": "dhhb_c095",
+      "energy_hartree": -86.468009302206,
+      "rel_energy_kcalmol": 1.546194885248338,
+      "boltzmann_weight": 0.0027437493148609756
+    },
+    {
+      "conf_id": "dhhb_c096",
+      "energy_hartree": -86.46796250343,
+      "rel_energy_kcalmol": 1.5755615605613629,
+      "boltzmann_weight": 0.0026110699507590966
+    },
+    {
+      "conf_id": "dhhb_c097",
+      "energy_hartree": -86.467961545337,
+      "rel_energy_kcalmol": 1.5761627729939756,
+      "boltzmann_weight": 0.0026084217627825187
+    },
+    {
+      "conf_id": "dhhb_c098",
+      "energy_hartree": -86.467930834278,
+      "rel_energy_kcalmol": 1.5954342534821546,
+      "boltzmann_weight": 0.0025249438331204454
+    },
+    {
+      "conf_id": "dhhb_c099",
+      "energy_hartree": -86.467907720988,
+      "rel_energy_kcalmol": 1.6099380619329047,
+      "boltzmann_weight": 0.002463884562049084
+    },
+    {
+      "conf_id": "dhhb_c100",
+      "energy_hartree": -86.467889561629,
+      "rel_energy_kcalmol": 1.6213332317491973,
+      "boltzmann_weight": 0.0024169498486842386
+    },
+    {
+      "conf_id": "dhhb_c101",
+      "energy_hartree": -86.4677901955,
+      "rel_energy_kcalmol": 1.683686419092985,
+      "boltzmann_weight": 0.0021755167703577044
+    },
+    {
+      "conf_id": "dhhb_c102",
+      "energy_hartree": -86.467780822936,
+      "rel_energy_kcalmol": 1.689567791795638,
+      "boltzmann_weight": 0.002154028074500707
+    },
+    {
+      "conf_id": "dhhb_c103",
+      "energy_hartree": -86.467759600803,
+      "rel_energy_kcalmol": 1.7028848813131314,
+      "boltzmann_weight": 0.002106152747846395
+    },
+    {
+      "conf_id": "dhhb_c104",
+      "energy_hartree": -86.467757710066,
+      "rel_energy_kcalmol": 1.7040713367001898,
+      "boltzmann_weight": 0.00210193938182791
+    },
+    {
+      "conf_id": "dhhb_c105",
+      "energy_hartree": -86.467750017176,
+      "rel_energy_kcalmol": 1.7088986980545757,
+      "boltzmann_weight": 0.002084883089349469
+    },
+    {
+      "conf_id": "dhhb_c106",
+      "energy_hartree": -86.467555903464,
+      "rel_energy_kcalmol": 1.8307068913791977,
+      "boltzmann_weight": 0.0016974448833014385
+    },
+    {
+      "conf_id": "dhhb_c107",
+      "energy_hartree": -86.467553650497,
+      "rel_energy_kcalmol": 1.8321206495212314,
+      "boltzmann_weight": 0.0016933993532211864
+    },
+    {
+      "conf_id": "dhhb_c108",
+      "energy_hartree": -86.467545818305,
+      "rel_energy_kcalmol": 1.8370354242021438,
+      "boltzmann_weight": 0.0016794103861906713
+    },
+    {
+      "conf_id": "dhhb_c109",
+      "energy_hartree": -86.467535594438,
+      "rel_energy_kcalmol": 1.8434509976023754,
+      "boltzmann_weight": 0.0016613234174670732
+    },
+    {
+      "conf_id": "dhhb_c110",
+      "energy_hartree": -86.467532553985,
+      "rel_energy_kcalmol": 1.8453589106711936,
+      "boltzmann_weight": 0.0016559822477338994
+    },
+    {
+      "conf_id": "dhhb_c111",
+      "energy_hartree": -86.467502389045,
+      "rel_energy_kcalmol": 1.8642876963057868,
+      "boltzmann_weight": 0.001603912901071454
+    },
+    {
+      "conf_id": "dhhb_c112",
+      "energy_hartree": -86.467466958705,
+      "rel_energy_kcalmol": 1.8865205703198233,
+      "boltzmann_weight": 0.0015448416539139604
+    },
+    {
+      "conf_id": "dhhb_c113",
+      "energy_hartree": -86.467444431814,
+      "rel_energy_kcalmol": 1.9006564078444275,
+      "boltzmann_weight": 0.0015084201669245025
+    },
+    {
+      "conf_id": "dhhb_c114",
+      "energy_hartree": -86.467436102486,
+      "rel_energy_kcalmol": 1.9058831400751888,
+      "boltzmann_weight": 0.001495171839400069
+    },
+    {
+      "conf_id": "dhhb_c115",
+      "energy_hartree": -86.467319707696,
+      "rel_energy_kcalmol": 1.9789219735306776,
+      "boltzmann_weight": 0.0013217620316243303
+    },
+    {
+      "conf_id": "dhhb_c116",
+      "energy_hartree": -86.467318759625,
+      "rel_energy_kcalmol": 1.9795168970682826,
+      "boltzmann_weight": 0.0013204354955086907
+    },
+    {
+      "conf_id": "dhhb_c117",
+      "energy_hartree": -86.467305285686,
+      "rel_energy_kcalmol": 1.9879719214476863,
+      "boltzmann_weight": 0.001301726105477201
+    },
+    {
+      "conf_id": "dhhb_c118",
+      "energy_hartree": -86.467299109088,
+      "rel_energy_kcalmol": 1.9918477952052585,
+      "boltzmann_weight": 0.0012932383634490137
+    },
+    {
+      "conf_id": "dhhb_c119",
+      "energy_hartree": -86.467268055139,
+      "rel_energy_kcalmol": 2.0113344424108366,
+      "boltzmann_weight": 0.0012513960154071446
+    },
+    {
+      "conf_id": "dhhb_c120",
+      "energy_hartree": -86.467265143338,
+      "rel_energy_kcalmol": 2.013161625127908,
+      "boltzmann_weight": 0.0012475427410839277
+    },
+    {
+      "conf_id": "dhhb_c121",
+      "energy_hartree": -86.46724261219,
+      "rel_energy_kcalmol": 2.027300133953709,
+      "boltzmann_weight": 0.0012181249389284807
+    },
+    {
+      "conf_id": "dhhb_c122",
+      "energy_hartree": -86.467233224697,
+      "rel_energy_kcalmol": 2.03319087475438,
+      "boltzmann_weight": 0.001206073823597758
+    },
+    {
+      "conf_id": "dhhb_c123",
+      "energy_hartree": -86.467219874698,
+      "rel_energy_kcalmol": 2.0415681256020184,
+      "boltzmann_weight": 0.0011891409205121869
+    },
+    {
+      "conf_id": "dhhb_c124",
+      "energy_hartree": -86.467199687266,
+      "rel_energy_kcalmol": 2.054235930438916,
+      "boltzmann_weight": 0.0011639860054828593
+    },
+    {
+      "conf_id": "dhhb_c125",
+      "energy_hartree": -86.467186200496,
+      "rel_energy_kcalmol": 2.062699006389202,
+      "boltzmann_weight": 0.001147477771054791
+    },
+    {
+      "conf_id": "dhhb_c126",
+      "energy_hartree": -86.467172036546,
+      "rel_energy_kcalmol": 2.0715870192035086,
+      "boltzmann_weight": 0.001130392643594046
+    },
+    {
+      "conf_id": "dhhb_c127",
+      "energy_hartree": -86.467125922858,
+      "rel_energy_kcalmol": 2.1005237953078497,
+      "boltzmann_weight": 0.0010765111154455234
+    },
+    {
+      "conf_id": "dhhb_c128",
+      "energy_hartree": -86.46712237659,
+      "rel_energy_kcalmol": 2.102749112078293,
+      "boltzmann_weight": 0.0010724754262938661
+    },
+    {
+      "conf_id": "dhhb_c129",
+      "energy_hartree": -86.467108508383,
+      "rel_energy_kcalmol": 2.111451543353837,
+      "boltzmann_weight": 0.00105683800740699
+    },
+    {
+      "conf_id": "dhhb_c130",
+      "energy_hartree": -86.467101736961,
+      "rel_energy_kcalmol": 2.1157006748167366,
+      "boltzmann_weight": 0.001049285783077519
+    },
+    {
+      "conf_id": "dhhb_c131",
+      "energy_hartree": -86.467046117031,
+      "rel_energy_kcalmol": 2.1506027078353456,
+      "boltzmann_weight": 0.0009892599357588453
+    },
+    {
+      "conf_id": "dhhb_c132",
+      "energy_hartree": -86.467033330876,
+      "rel_energy_kcalmol": 2.1586261412328036,
+      "boltzmann_weight": 0.000975953674094095
+    },
+    {
+      "conf_id": "dhhb_c133",
+      "energy_hartree": -86.46700960286,
+      "rel_energy_kcalmol": 2.1735156960757758,
+      "boltzmann_weight": 0.0009517329031452425
+    },
+    {
+      "conf_id": "dhhb_c134",
+      "energy_hartree": -86.467001266094,
+      "rel_energy_kcalmol": 2.178747095724509,
+      "boltzmann_weight": 0.0009433664814757634
+    },
+    {
+      "conf_id": "dhhb_c135",
+      "energy_hartree": -86.466907184908,
+      "rel_energy_kcalmol": 2.237783931274479,
+      "boltzmann_weight": 0.0008538982836586308
+    },
+    {
+      "conf_id": "dhhb_c136",
+      "energy_hartree": -86.466881129498,
+      "rel_energy_kcalmol": 2.2541339478935307,
+      "boltzmann_weight": 0.0008306565524894571
+    },
+    {
+      "conf_id": "dhhb_c137",
+      "energy_hartree": -86.466869778193,
+      "rel_energy_kcalmol": 2.261256999327331,
+      "boltzmann_weight": 0.0008207299129560546
+    },
+    {
+      "conf_id": "dhhb_c138",
+      "energy_hartree": -86.466845650702,
+      "rel_energy_kcalmol": 2.276397228516738,
+      "boltzmann_weight": 0.0008000228610267373
+    },
+    {
+      "conf_id": "dhhb_c139",
+      "energy_hartree": -86.466842677787,
+      "rel_energy_kcalmol": 2.278262760843958,
+      "boltzmann_weight": 0.0007975078244202044
+    },
+    {
+      "conf_id": "dhhb_c140",
+      "energy_hartree": -86.466837371341,
+      "rel_energy_kcalmol": 2.2815926059819684,
+      "boltzmann_weight": 0.000793038294584752
+    },
+    {
+      "conf_id": "dhhb_c141",
+      "energy_hartree": -86.466836394409,
+      "rel_energy_kcalmol": 2.2822056400676,
+      "boltzmann_weight": 0.0007922181757240436
+    },
+    {
+      "conf_id": "dhhb_c142",
+      "energy_hartree": -86.466828732678,
+      "rel_energy_kcalmol": 2.2870134488605243,
+      "boltzmann_weight": 0.0007858156138529474
+    },
+    {
+      "conf_id": "dhhb_c143",
+      "energy_hartree": -86.466826219418,
+      "rel_energy_kcalmol": 2.2885905433213796,
+      "boltzmann_weight": 0.0007837266873675204
+    },
+    {
+      "conf_id": "dhhb_c144",
+      "energy_hartree": -86.466824197738,
+      "rel_energy_kcalmol": 2.289859166668402,
+      "boltzmann_weight": 0.0007820503742575437
+    },
+    {
+      "conf_id": "dhhb_c145",
+      "energy_hartree": -86.466820573749,
+      "rel_energy_kcalmol": 2.2921332541011963,
+      "boltzmann_weight": 0.0007790544462627535
+    },
+    {
+      "conf_id": "dhhb_c146",
+      "energy_hartree": -86.46677905418,
+      "rel_energy_kcalmol": 2.318187177013707,
+      "boltzmann_weight": 0.0007455386321143686
+    },
+    {
+      "conf_id": "dhhb_c147",
+      "energy_hartree": -86.466663571757,
+      "rel_energy_kcalmol": 2.3906534915330435,
+      "boltzmann_weight": 0.0006597083414204605
+    },
+    {
+      "conf_id": "dhhb_c148",
+      "energy_hartree": -86.466659589831,
+      "rel_energy_kcalmol": 2.3931521878228086,
+      "boltzmann_weight": 0.0006569320013089968
+    },
+    {
+      "conf_id": "dhhb_c149",
+      "energy_hartree": -86.466649964067,
+      "rel_energy_kcalmol": 2.3991924459240646,
+      "boltzmann_weight": 0.0006502687421856515
+    },
+    {
+      "conf_id": "dhhb_c150",
+      "energy_hartree": -86.466610406101,
+      "rel_energy_kcalmol": 2.4240154443669164,
+      "boltzmann_weight": 0.0006235876338458613
+    },
+    {
+      "conf_id": "dhhb_c151",
+      "energy_hartree": -86.466594798369,
+      "rel_energy_kcalmol": 2.4338094440628653,
+      "boltzmann_weight": 0.0006133642262407936
+    },
+    {
+      "conf_id": "dhhb_c152",
+      "energy_hartree": -86.466515080553,
+      "rel_energy_kcalmol": 2.4838331288588886,
+      "boltzmann_weight": 0.0005637036245068115
+    },
+    {
+      "conf_id": "dhhb_c153",
+      "energy_hartree": -86.466482730114,
+      "rel_energy_kcalmol": 2.504133335821256,
+      "boltzmann_weight": 0.0005447166776259736
+    },
+    {
+      "conf_id": "dhhb_c154",
+      "energy_hartree": -86.466397468357,
+      "rel_energy_kcalmol": 2.5576358961098205,
+      "boltzmann_weight": 0.0004976832489308929
+    },
+    {
+      "conf_id": "dhhb_c155",
+      "energy_hartree": -86.466289533211,
+      "rel_energy_kcalmol": 2.6253662228123007,
+      "boltzmann_weight": 0.000443921673975365
+    },
+    {
+      "conf_id": "dhhb_c156",
+      "energy_hartree": -86.466148921927,
+      "rel_energy_kcalmol": 2.7136011356799017,
+      "boltzmann_weight": 0.0003824984763703894
+    },
+    {
+      "conf_id": "dhhb_c157",
+      "energy_hartree": -86.466091364213,
+      "rel_energy_kcalmol": 2.749719146521055,
+      "boltzmann_weight": 0.00035987777264430567
+    },
+    {
+      "conf_id": "dhhb_c158",
+      "energy_hartree": -86.466083146555,
+      "rel_energy_kcalmol": 2.7548758047747537,
+      "boltzmann_weight": 0.00035675918830442745
+    },
+    {
+      "conf_id": "dhhb_c159",
+      "energy_hartree": -86.466072961254,
+      "rel_energy_kcalmol": 2.761267177644501,
+      "boltzmann_weight": 0.0003529313670432004
+    },
+    {
+      "conf_id": "dhhb_c160",
+      "energy_hartree": -86.466038099714,
+      "rel_energy_kcalmol": 2.7831431242758278,
+      "boltzmann_weight": 0.00034013794081289006
+    },
+    {
+      "conf_id": "dhhb_c161",
+      "energy_hartree": -86.465982060422,
+      "rel_energy_kcalmol": 2.8183083109287783,
+      "boltzmann_weight": 0.00032053747942259567
+    },
+    {
+      "conf_id": "dhhb_c162",
+      "energy_hartree": -86.465849838573,
+      "rel_energy_kcalmol": 2.901278773845691,
+      "boltzmann_weight": 0.0002786512824303811
+    },
+    {
+      "conf_id": "dhhb_c163",
+      "energy_hartree": -86.465801292854,
+      "rel_energy_kcalmol": 2.931741672450247,
+      "boltzmann_weight": 0.0002646863752352454
+    },
+    {
+      "conf_id": "dhhb_c164",
+      "energy_hartree": -86.465520348243,
+      "rel_energy_kcalmol": 3.108037077534794,
+      "boltzmann_weight": 0.00019656498513102267
+    },
+    {
+      "conf_id": "dhhb_c165",
+      "energy_hartree": -86.465517650604,
+      "rel_energy_kcalmol": 3.109729871567797,
+      "boltzmann_weight": 0.0001960041790828127
+    },
+    {
+      "conf_id": "dhhb_c166",
+      "energy_hartree": -86.465499354755,
+      "rel_energy_kcalmol": 3.1212106901531604,
+      "boltzmann_weight": 0.00019224268911288383
+    },
+    {
+      "conf_id": "dhhb_c167",
+      "energy_hartree": -86.465473803987,
+      "rel_energy_kcalmol": 3.13724403914333,
+      "boltzmann_weight": 0.0001871101325534608
+    },
+    {
+      "conf_id": "dhhb_c168",
+      "energy_hartree": -86.46546627404,
+      "rel_energy_kcalmol": 3.1419691522240027,
+      "boltzmann_weight": 0.00018562384933282536
+    },
+    {
+      "conf_id": "dhhb_c169",
+      "energy_hartree": -86.465401412601,
+      "rel_energy_kcalmol": 3.182670319697992,
+      "boltzmann_weight": 0.00017330041859689988
+    },
+    {
+      "conf_id": "dhhb_c170",
+      "energy_hartree": -86.465325695781,
+      "rel_energy_kcalmol": 3.23018334158923,
+      "boltzmann_weight": 0.00015994561015797117
+    },
+    {
+      "conf_id": "dhhb_c171",
+      "energy_hartree": -86.465298378771,
+      "rel_energy_kcalmol": 3.2473250241727576,
+      "boltzmann_weight": 0.00015538438902797515
+    },
+    {
+      "conf_id": "dhhb_c172",
+      "energy_hartree": -86.465230516,
+      "rel_energy_kcalmol": 3.2899095559053113,
+      "boltzmann_weight": 0.0001446081286813543
+    },
+    {
+      "conf_id": "dhhb_c173",
+      "energy_hartree": -86.465227350865,
+      "rel_energy_kcalmol": 3.2918957081035836,
+      "boltzmann_weight": 0.00014412417902928503
+    },
+    {
+      "conf_id": "dhhb_c174",
+      "energy_hartree": -86.465120124281,
+      "rel_energy_kcalmol": 3.3591814054391014,
+      "boltzmann_weight": 0.00012865186550862037
+    },
+    {
+      "conf_id": "dhhb_c175",
+      "energy_hartree": -86.465079294393,
+      "rel_energy_kcalmol": 3.3848025469798038,
+      "boltzmann_weight": 0.00012320707887592732
+    },
+    {
+      "conf_id": "dhhb_c176",
+      "energy_hartree": -86.464749079555,
+      "rel_energy_kcalmol": 3.5920154863019897,
+      "boltzmann_weight": 8.684554050789597e-05
+    },
+    {
+      "conf_id": "dhhb_c177",
+      "energy_hartree": -86.464656463326,
+      "rel_energy_kcalmol": 3.650133047458613,
+      "boltzmann_weight": 7.873123328922655e-05
+    },
+    {
+      "conf_id": "dhhb_c178",
+      "energy_hartree": -86.464629900861,
+      "rel_energy_kcalmol": 3.6668012458977897,
+      "boltzmann_weight": 7.654717724577587e-05
+    },
+    {
+      "conf_id": "dhhb_c179",
+      "energy_hartree": -86.462790893773,
+      "rel_energy_kcalmol": 4.820795616483569,
+      "boltzmann_weight": 1.0915545312818284e-05
+    },
+    {
+      "conf_id": "dhhb_c180",
+      "energy_hartree": -86.462358395958,
+      "rel_energy_kcalmol": 5.092192092906467,
+      "boltzmann_weight": 6.904153510663516e-06
+    },
+    {
+      "conf_id": "dhhb_c181",
+      "energy_hartree": -86.461198214157,
+      "rel_energy_kcalmol": 5.820217164677133,
+      "boltzmann_weight": 2.020525605211908e-06
+    }
+  ]
+}

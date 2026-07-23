@@ -1,0 +1,21 @@
+
+=== 컨포머 탐색: dhhb (backend=etkdg, solvent=ethanol) ===
+  ETKDG+MMFF: 200 개 초기 구조
+    xTB 최적화 20/200  (53s)
+    xTB 최적화 40/200  (114s)
+    xTB 최적화 60/200  (204s)
+    xTB 최적화 80/200  (324s)
+    xTB 최적화 100/200  (386s)
+    xTB 최적화 120/200  (460s)
+    xTB 최적화 140/200  (518s)
+    xTB 최적화 160/200  (570s)
+    xTB 최적화 180/200  (624s)
+    xTB 최적화 200/200  (710s)
+  xTB 최적화 완료: 200 개 성공, 710s
+  중복 제거 후: 182 개 고유 컨포머
+  대표 컨포머 3 개 선택, 누적 가중치 = 0.094
+    dhhb_c000  dE=0.00 kcal/mol  w=0.037
+    dhhb_c001  dE=0.04 kcal/mol  w=0.035
+    dhhb_c002  dE=0.32 kcal/mol  w=0.022
+
+완료. conformers/search_summary.json 저장
