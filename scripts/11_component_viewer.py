@@ -12,7 +12,10 @@
 무엇을 그리는가
   - 각 분자의 '주 흡수 종'(config.principal_species) 최고수준 TD-DFT 스펙트럼
   - 절대 몰흡광계수 eps(L mol^-1 cm^-1) 로 broadening (가중합이 물리적으로 의미)
-  - UVB(280-315)/UVA(315-400) 밴드, 분자별 실험 lambda_max 마커
+  - UVB(280-315)/UVA(315-400) 밴드, 분자별 실험 UVA lambda_max 마커
+  - 용어: 전역 피크(broadened 최대점) / 계산 UVA 밴드(가장 장파장의 밝은 stick 전이)
+    / 실험 UVA lambda_max 를 구분해서 표기한다. 하나로 뭉뚱그리면 DHHB 처럼
+    전역 피크(297 nm)와 UVA 밴드(391 nm)가 다른 분자에서 오해를 낳는다.
   - 가중치 슬라이더로 성분 합 곡선
 
 분자 선택
@@ -108,22 +111,36 @@ def collect_molecule(mol_dir: Path) -> dict | None:
     osc = [t["osc_strength"] for t in best["transitions"]]
     eps = gaussian_spectrum(lam, osc, GRID, fwhm_ev=FWHM_EV)
 
-    # 주 흡수 밴드(lambda_max) = '밝은' 전이 중 가장 장파장의 것.
-    # 왜 brightest(f 최대)가 아닌가: DHHB 는 f 최대 전이가 296 nm 이지만, 실제
-    # 자외선차단에 쓰이고 실험 lambda_max(~354 nm)로 관측되는 UVA 밴드는 그보다
-    # 장파장의 S1(도너->억셉터 CT, HOMO->LUMO)이다. 가장 장파장의 밝은 전이를
-    # 골라야 이 주 흡수 밴드를 집는다.
+    # 용어를 셋으로 구분한다 (하나로 뭉뚱그려 'lambda_max' 라 부르면 안 된다):
+    #   global_peak_nm            broadened 스펙트럼 '전체'의 최대점 (통상적 lambda_max 정의).
+    #                             DHHB 는 ~297 nm 로, UVA 밴드가 아니라 단파장 밴드다.
+    #   uva_band_transition_nm    가장 장파장의 '밝은'(f>=0.10) TD-DFT stick 전이.
+    #                             실제 자외선차단 기능과 실험 UVA lambda_max(~354 nm)에
+    #                             대응하는 밴드는 이쪽이다 (DHHB: S1 CT, 390.8 nm).
+    #   broadened_uva_local_peak_nm  그 전이 주변 broadened 곡선의 국소 최대점.
+    gi = int(np.argmax(eps))
+    global_peak_nm = float(GRID[gi])
+
     BRIGHT_F = 0.10
     bright = [t for t in best["transitions"] if t["osc_strength"] >= BRIGHT_F]
     band = (max(bright, key=lambda t: t["wavelength_nm"])
             if bright else (best.get("brightest") or {}))
     b = band
 
-    # 실험 lambda_max (스키마가 분자마다 조금 달라 관대하게 탐색)
+    uva_local_peak = None
+    if b.get("wavelength_nm"):
+        # broadened 곡선의 국소 최대점들 중 UVA 전이에 가장 가까운 것
+        locs = [i for i in range(1, len(GRID) - 1)
+                if eps[i] >= eps[i - 1] and eps[i] >= eps[i + 1] and eps[i] > 0]
+        if locs:
+            near = min(locs, key=lambda i: abs(float(GRID[i]) - b["wavelength_nm"]))
+            uva_local_peak = float(GRID[near])
+
+    # 실험 UVA lambda_max (스키마가 분자마다 조금 달라 관대하게 탐색)
     exp_nm, exp_conf = None, None
     if exp:
-        for band in exp.get("experimental", {}).values():
-            pt = (band or {}).get("primary_target") if isinstance(band, dict) else None
+        for band_ref in exp.get("experimental", {}).values():
+            pt = (band_ref or {}).get("primary_target") if isinstance(band_ref, dict) else None
             if pt and pt.get("lambda_max_nm"):
                 exp_nm = pt["lambda_max_nm"]
                 exp_conf = pt.get("confidence") or pt.get("ref")
@@ -137,9 +154,18 @@ def collect_molecule(mol_dir: Path) -> dict | None:
         "level": f"{best.get('functional')}/{best.get('basis')}",
         "solvent": best.get("solvent"),
         "geometry_source": best.get("geometry_source"),
-        "calc_lambda_max_nm": round(b.get("wavelength_nm"), 1) if b.get("wavelength_nm") else None,
-        "calc_osc": round(b.get("osc_strength"), 3) if b.get("osc_strength") else None,
-        "exp_lambda_max_nm": exp_nm,
+        # 스펙트럼 층 구분: raw = 동일 수준(B3LYP)의 원계산. 성분마다 오차 부호가
+        # 다르므로(아보벤존 -2.4 nm vs DHHB +37 nm) raw 를 그대로 제형 예측에
+        # 합산하면 안 된다. 추후 발색단 유형별 보정을 적용한 calibrated 층이
+        # 따로 생기면 calibration 에 {method, shift_nm, ...} 가 채워진다.
+        "spectrum_kind": "raw",
+        "calibration": None,
+        "global_peak_nm": round(global_peak_nm, 1),
+        "uva_band_transition_nm": round(b.get("wavelength_nm"), 1) if b.get("wavelength_nm") else None,
+        "uva_band_osc": round(b.get("osc_strength"), 3) if b.get("osc_strength") else None,
+        "uva_band_state": b.get("state"),
+        "broadened_uva_local_peak_nm": round(uva_local_peak, 1) if uva_local_peak else None,
+        "exp_uva_lambda_max_nm": exp_nm,
         "exp_confidence": exp_conf,
         "eps": [round(float(v), 1) for v in eps],
     }
@@ -159,8 +185,10 @@ def build_html(series: list[dict]) -> str:
         "grid": [float(x) for x in GRID],
         "series": [{k: s[k] for k in
                     ("molecule", "display_name", "species", "level", "solvent",
-                     "geometry_source", "calc_lambda_max_nm", "calc_osc",
-                     "exp_lambda_max_nm", "exp_confidence", "eps")}
+                     "geometry_source", "spectrum_kind", "calibration",
+                     "global_peak_nm", "uva_band_transition_nm", "uva_band_osc",
+                     "uva_band_state", "broadened_uva_local_peak_nm",
+                     "exp_uva_lambda_max_nm", "exp_confidence", "eps")}
                    for s in series],
         "palette": PALETTE,
     }
@@ -186,8 +214,9 @@ def main() -> int:
         if s:
             series.append(s)
             print(f"  {s['molecule']:12s} {s['species']:8s} {s['level']:18s} "
-                  f"{s['solvent']:8s} calc lambda_max={s['calc_lambda_max_nm']} nm "
-                  f"(exp {s['exp_lambda_max_nm']})")
+                  f"{s['solvent']:8s} 전역피크={s['global_peak_nm']} nm, "
+                  f"UVA밴드={s['uva_band_transition_nm']} nm "
+                  f"(실험 UVA {s['exp_uva_lambda_max_nm']})")
         else:
             print(f"  {d.name}: TD-DFT 결과 없음 (건너뜀)")
 
@@ -269,7 +298,7 @@ HTML_TEMPLATE = r"""<!doctype html>
     <div class="ctl">
       <label><input type="checkbox" id="norm"> 정규화(피크=1)</label>
       <label><input type="checkbox" id="showsum" checked> 성분 합 표시</label>
-      <label><input type="checkbox" id="showexp" checked> 실험 λmax 마커</label>
+      <label><input type="checkbox" id="showexp" checked> 실험 UVA λmax 마커</label>
       <span class="muted pill" id="readout"></span>
     </div>
     <div class="chartwrap">
@@ -286,11 +315,21 @@ HTML_TEMPLATE = r"""<!doctype html>
 
   <div class="card">
     <table><thead><tr>
-      <th>성분</th><th>주 흡수 종</th><th>이론수준</th>
-      <th class="num">계산 λmax</th><th class="num">실험 λmax</th><th class="num">오차</th>
+      <th>성분</th><th>주 흡수 종</th><th>이론수준</th><th>스펙트럼</th>
+      <th class="num">전역 피크</th><th class="num">계산 UVA 밴드</th>
+      <th class="num">실험 UVA λmax</th><th class="num">오차(UVA)</th>
     </tr></thead><tbody id="tbody"></tbody></table>
-    <div class="sub" style="margin-top:10px">FWHM 0.30 eV 가우시안 broadening,
-      절대 몰흡광계수 ε (L·mol⁻¹·cm⁻¹). 용매·구조는 각 성분 최고수준(에탄올/DFT 구조).</div>
+    <div class="sub" style="margin-top:10px">
+      <b>전역 피크</b> = broadened 스펙트럼 전체의 최대점(통상적 λmax 정의).
+      <b>계산 UVA 밴드</b> = 가장 장파장의 밝은(f≥0.10) TD-DFT 전이 — 실험 UVA λmax 와
+      비교해야 하는 밴드는 이쪽이다 (예: DHHB 는 전역 피크 297 nm ≠ UVA 밴드 391 nm).
+      오차(UVA) = 계산 UVA 밴드 − 실험 UVA λmax.<br>
+      <b>스펙트럼 층</b>: 지금 표시되는 곡선은 전부 <b>raw</b>(동일 B3LYP 수준의 무보정
+      원계산)다. 성분마다 오차 부호·크기가 달라(아보벤존 −2.4 nm, DHHB +37 nm) raw 를
+      그대로 제형 예측에 합산하면 안 되고, 발색단 유형별 보정을 거친 calibrated 층이
+      제형 예측용이다(구축 예정).<br>
+      FWHM 0.30 eV 가우시안 broadening, 절대 몰흡광계수 ε (L·mol⁻¹·cm⁻¹).
+      용매·구조는 각 성분 최고수준(에탄올/DFT 구조).</div>
   </div>
 </div>
 <script>
@@ -347,10 +386,10 @@ function draw(){
   disp.forEach(({s,y})=>{ el+=`<path d="${path(y)}" fill="none" stroke="${s.color}" stroke-width="2"/>`; });
   if(sumY){ el+=`<path d="${path(sumY)}" fill="none" stroke="var(--ink)" stroke-width="2.4" stroke-dasharray="2 4"/>`; }
   // 실험 마커
-  if(showexp){ active.forEach(s=>{ if(!s.exp_lambda_max_nm) return;
-    const x=px(s.exp_lambda_max_nm);
+  if(showexp){ active.forEach(s=>{ if(!s.exp_uva_lambda_max_nm) return;
+    const x=px(s.exp_uva_lambda_max_nm);
     el+=`<line x1="${x}" y1="${mT}" x2="${x}" y2="${H-mB}" stroke="${s.color}" stroke-width="1.3" stroke-dasharray="4 3" opacity=".8"/>`;
-    el+=`<text x="${x}" y="${mT+28}" fill="${s.color}" font-size="10" text-anchor="middle">${s.exp_lambda_max_nm}</text>`; }); }
+    el+=`<text x="${x}" y="${mT+28}" fill="${s.color}" font-size="10" text-anchor="middle">${s.exp_uva_lambda_max_nm}</text>`; }); }
   el+=`<line id="cross" x1="0" y1="${mT}" x2="0" y2="${H-mB}" stroke="var(--line)" opacity="0"/>`;
   svg.innerHTML=el;
 }
@@ -372,13 +411,15 @@ function renderComp(){
 
 function renderTable(){
   const tb=document.getElementById('tbody'); tb.innerHTML='';
-  S.forEach(s=>{ const err=(s.calc_lambda_max_nm&&s.exp_lambda_max_nm)?
-      (s.calc_lambda_max_nm-s.exp_lambda_max_nm):null;
+  S.forEach(s=>{ const err=(s.uva_band_transition_nm&&s.exp_uva_lambda_max_nm)?
+      (s.uva_band_transition_nm-s.exp_uva_lambda_max_nm):null;
     const tr=document.createElement('tr');
     tr.innerHTML=`<td><span class="sw" style="background:${s.color}"></span>${s.display_name}</td>
       <td>${s.species}</td><td class="muted">${s.level} · ${s.solvent} · ${s.geometry_source}</td>
-      <td class="num">${s.calc_lambda_max_nm??'–'}</td>
-      <td class="num">${s.exp_lambda_max_nm??'–'}${s.exp_confidence==='approximate'?'*':''}</td>
+      <td class="muted">${s.spectrum_kind==='raw'?'raw(무보정)':s.spectrum_kind}</td>
+      <td class="num">${s.global_peak_nm??'–'}</td>
+      <td class="num">${s.uva_band_transition_nm??'–'}</td>
+      <td class="num">${s.exp_uva_lambda_max_nm??'–'}${s.exp_confidence==='approximate'?'*':''}</td>
       <td class="num">${err==null?'–':(err>0?'+':'')+err.toFixed(1)}</td>`;
     tb.appendChild(tr); });
 }

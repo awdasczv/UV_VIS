@@ -2,22 +2,47 @@
   "_comment": "DHHB(Uvinul A Plus) UV-Vis 실험 참조값. 계산 오차 평가에 쓴다. 출처 신뢰도를 명시한다.",
   "experimental": {
     "uva_band": {
-      "description": "o-히드록시벤조페논 발색단의 push-pull pi->pi* UVA 밴드",
+      "description": "o-히드록시벤조페논 발색단의 push-pull pi->pi* UVA 밴드 (donor NEt2 -> acceptor C=O 전하이동 성격을 강하게 시사)",
       "values": [
         {"solvent": "ethanol", "lambda_max_nm": 354.0, "epsilon_M-1cm-1": null,
-         "ref": "manufacturer/literature (BASF Uvinul A Plus)", "confidence": "approximate"}
+         "temperature_C": 25, "concentration_ug_mL": 5,
+         "ref": "직접 측정 문헌 + BASF Uvinul A Plus 기술자료",
+         "confidence": "experimental_supported"},
+        {"solvent": "methanol", "lambda_max_nm": null, "lambda_max_range_nm": [353, 356],
+         "ref": "양성자성 용매(메탄올/에탄올/이소프로판올) 직접 측정 연구",
+         "confidence": "experimental_supported"},
+        {"solvent": "isopropanol", "lambda_max_nm": null, "lambda_max_range_nm": [353, 356],
+         "ref": "양성자성 용매 직접 측정 연구", "confidence": "experimental_supported"},
+        {"solvent": "nonpolar (예: 사이클로헥세인 등)", "lambda_max_nm": null,
+         "lambda_max_range_nm": [344, 348],
+         "ref": "비극성 용매 직접 측정 연구", "confidence": "experimental_supported"}
       ],
       "primary_target": {"solvent": "ethanol", "lambda_max_nm": 354.0,
-                         "ref": "manufacturer/literature", "confidence": "approximate"},
+                         "experimental_range_nm": [353, 356],
+                         "temperature_C": 25, "concentration_ug_mL": 5,
+                         "ref": "직접 측정 문헌 + 제조사 기술자료",
+                         "confidence": "experimental_supported"},
+      "solvatochromism": {
+        "protic_range_nm": [353, 356],
+        "nonpolar_range_nm": [344, 348],
+        "shift_note": [
+          "양성자성 용매(MeOH/EtOH/iPrOH)에서 비극성 용매보다 약 +9~12 nm 적색이동.",
+          "방향성 있는 DHHB-용매 수소결합이 관여함을 시사 -> CPCM 연속체만으로는",
+          "이 조건 의존성을 온전히 표현하지 못한다. 명시적 EtOH cluster-continuum",
+          "모델(DHHB + EtOH 1~3개 + CPCM)의 검증 목표값이기도 하다."
+        ]
+      },
       "provenance_note": [
-        "DHHB 의 UVA lambda_max 는 통상 ~354 nm(에탄올/제형 맥락)로 인용된다.",
-        "오프라인 환경이라 1차 문헌으로 정확 수치를 확정하지 못했다 -> 'approximate' 로 표기.",
-        "사용자가 제형 실무에서 실제 측정값을 알고 있으면 이 값을 대체할 것.",
-        "따라서 계산-실험 오차는 참고용이며, 이 단계의 핵심 산출물은 '계산된 스펙트럼' 자체다."
+        "에탄올 lambda_max 354 nm 는 직접 측정 연구(양성자성 용매 353-356 nm)와",
+        "제조사(BASF Uvinul A Plus) 기술자료가 일치하는 값 -> 'experimental_supported'.",
+        "따라서 CPCM(ethanol) 계산을 354 nm 와 비교하는 방향은 유효하다.",
+        "B3LYP(+37 nm)/CAM-B3LYP(-36 nm) 오차는 실험 기준값의 문제가 아니라",
+        "계산 방법(함수의 CT 전이 취급)의 문제다."
       ]
     }
   },
   "references": {
+    "direct_measurement": "DHHB 용매별 UV-Vis 직접 측정 연구: 양성자성 용매(메탄올/에탄올/이소프로판올) 353-356 nm, 비극성 용매 344-348 nm, 25 C, 5 ug/mL.",
     "BASF_UvinulAPlus": "BASF Uvinul A Plus (Diethylamino Hydroxybenzoyl Hexyl Benzoate) 기술자료. UVA 흡수 lambda_max ~354 nm, 높은 몰흡광계수."
   }
 }

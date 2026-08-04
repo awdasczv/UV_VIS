@@ -59,7 +59,7 @@ def build_input(symbols, coords, *, functional: str, basis: str,
                 nprocs: int = 4, maxcore_mb: int = 2500,
                 optimize: bool = False, rijcosx: bool = True,
                 aux_basis: str = "def2/J", extra_keywords: str = "",
-                comment: str = "") -> str:
+                nto_states: str = "", comment: str = "") -> str:
     """
     ORCA 입력 파일 내용을 만든다.
 
@@ -97,6 +97,13 @@ def build_input(symbols, coords, *, functional: str, basis: str,
         lines.append(f"  nroots {nstates}")
         lines.append(f"  tda    {'true' if tda else 'false'}")
         lines.append("  maxdim 5")
+        if nto_states:
+            # NTO(자연 전이 오비탈): 전이를 '단일 hole -> particle 쌍'으로 압축해
+            # 함수가 달라도 같은 전이(예: 도너->억셉터 CT)를 추적할 수 있게 한다.
+            # 상태별로 basename.sN.nto 파일이 생기고 orca_plot 으로 cube 를 뽑는다.
+            lines.append("  DoNTO true")
+            lines.append(f"  NTOStates {nto_states}")
+            lines.append("  NTOThresh 1e-4")
         lines.append("end")
     lines.append("* xyz 0 1")
     for s, (x, y, z) in zip(symbols, coords):
@@ -279,6 +286,42 @@ def parse_output(out_path: Path) -> dict:
     if trans:
         res["brightest"] = max(trans, key=lambda t: t["osc_strength"])
     return res
+
+
+# ------------------------------------------------------------------ NTO 파싱
+_RE_NTO_HEADER = re.compile(r"NATURAL TRANSITION ORBITALS FOR STATE\s+(\d+)")
+_RE_NTO_PAIR = re.compile(r"^\s*(\d+)a\s*->\s*(\d+)a\s*:\s*n=\s*([\d.]+)")
+
+
+def parse_nto(out_path: Path) -> dict[str, list[dict]]:
+    """
+    ORCA 출력의 NTO 블록을 읽는다.
+
+    반환: {"<상태번호>": [{"hole": i, "particle": a, "occ": n}, ...]}  (occ 내림차순)
+    hole/particle 은 해당 상태의 .nto 파일 안에서의 0-기반 오비탈 번호다.
+    (점유 쪽 마지막 = 주 hole, 가상 쪽 첫 번째 = 주 particle 이 되도록 저장됨)
+    JSON 직렬화를 위해 키는 문자열로 둔다.
+    """
+    text = out_path.read_text(encoding="utf-8", errors="replace")
+    blocks: dict[str, list[dict]] = {}
+    cur = None
+    for ln in text.splitlines():
+        m = _RE_NTO_HEADER.search(ln)
+        if m:
+            cur = m.group(1)
+            blocks[cur] = []
+            continue
+        if cur is not None:
+            m = _RE_NTO_PAIR.match(ln)
+            if m:
+                blocks[cur].append({"hole": int(m.group(1)),
+                                    "particle": int(m.group(2)),
+                                    "occ": float(m.group(3))})
+            elif blocks[cur] and ln.strip() == "":
+                cur = None
+    for k in blocks:
+        blocks[k].sort(key=lambda d: -d["occ"])
+    return blocks
 
 
 # ------------------------------------------------------------------ 실패 분류
