@@ -60,7 +60,7 @@ def build_input(symbols, coords, *, functional: str, basis: str,
                 optimize: bool = False, rijcosx: bool = True,
                 aux_basis: str = "def2/J", extra_keywords: str = "",
                 nto_states: str = "", tddft_extra: tuple = (),
-                comment: str = "") -> str:
+                maxdim: int = 5, comment: str = "") -> str:
     """
     ORCA 입력 파일 내용을 만든다.
 
@@ -97,7 +97,14 @@ def build_input(symbols, coords, *, functional: str, basis: str,
         lines.append("%tddft")
         lines.append(f"  nroots {nstates}")
         lines.append(f"  tda    {'true' if tda else 'false'}")
-        lines.append("  maxdim 5")
+        # maxdim = Davidson 전개공간의 최대 크기 배수 (실제 한계 = maxdim * nroots).
+        # 너무 작으면 수렴 전에 공간이 차서 'Rebuilding the expansion space due to
+        # space constraints' 로 초기화되고, 잔차가 다시 튀어 영원히 수렴하지 못한다.
+        # 실제로 겪은 문제: DHHB full TD-DFT(nroots 22, maxdim 5 -> 공간 110)에서
+        # 잔차가 0.0185 -> 2.9e-5 로 4회 만에 떨어지지만 목표 2.5e-7 에 닿기 전에
+        # 공간이 차서 재구축 -> 이 4회 주기가 무한 반복 (2.5시간 낭비 후 iteration
+        # 100 에서 실패). full TD-DFT 는 비Hermitian 문제라 재구축 손실이 더 크다.
+        lines.append(f"  maxdim {maxdim}")
         if nto_states:
             # NTO(자연 전이 오비탈): 전이를 '단일 hole -> particle 쌍'으로 압축해
             # 함수가 달라도 같은 전이(예: 도너->억셉터 CT)를 추적할 수 있게 한다.

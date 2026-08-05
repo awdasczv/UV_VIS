@@ -36,16 +36,35 @@ from qc_common import (CALCULATIONS, CONFORMERS, INPUTS, LOGS, MOL_CONFIG,
 OUTROOT = CALCULATIONS / "03_functional_benchmark"
 
 # 벤치마크 함수 목록. hf_exchange 는 보고서용 메타데이터(함수의 정확교환 구성).
+#   extra_keywords : ! 줄에 붙일 추가 키워드 (함수별 수치 안정성 대응)
+#   tddft_extra    : %tddft 블록에 넣을 추가 줄
 FUNCTIONALS = {
     "b3lyp":    {"orca": "B3LYP",     "hf_exchange": "전역 20%"},
     "pbe0":     {"orca": "PBE0",      "hf_exchange": "전역 25%"},
-    "m062x":    {"orca": "M062X",     "hf_exchange": "전역 54%"},
+    "m062x":    {"orca": "M062X",     "hf_exchange": "전역 54%",
+                 # M06-2X 는 meta-GGA 라 교환-상관 적분격자에 민감하다. 기본격자 +
+                 # RIJCOSX 조합에서 TDA Davidson 이 잔차 1e8 로 발산했다(실측).
+                 # 더 촘촘한 격자(DEFGRID3)와 BHP-2022 solver 로 재시도한다.
+                 "extra_keywords": "DEFGRID3",
+                 "tddft_extra": ("solver bhp22",)},
     "camb3lyp": {"orca": "CAM-B3LYP", "hf_exchange": "범위분리 19% -> 장거리 65%"},
-    "wb97xd4":  {"orca": "WB97X-D4",  "hf_exchange": "범위분리 ~17% -> 장거리 100%"},
+    "wb97xd4":  {"orca": "WB97X-D4",  "hf_exchange": "범위분리 ~17% -> 장거리 100%",
+                 # 실측: SCF 가 14 사이클로 정상 수렴했는데도 10시간 33분이 걸렸다
+                 # (같은 14 사이클의 B3LYP 는 11분 33초 -> 사이클당 약 55배).
+                 # 장거리 100% 정확교환을 RIJCOSX 로 근사하지 못해 생기는 비용으로
+                 # 보인다. 오류는 아니므로 그대로 두되, 이 함수만 유독 비싸다는 점을
+                 # 결과 해석과 일정 계획에 반영할 것.
+                 "cost_note": "SCF 사이클당 B3LYP 대비 약 55배 (RIJCOSX 가 장거리 "
+                              "100% 교환을 근사하지 못하는 것으로 추정)"},
 }
 
 BRIGHT_F = 0.10          # '밝은 전이' 판정 문턱 (11_component_viewer 와 동일)
 NTO_STATES = "1,2,3,4,5,6"   # UVA CT 밴드는 모든 후보 함수에서 최저 6개 안에 있다
+
+# Davidson 전개공간 배수. full TD-DFT 는 비Hermitian 문제라 공간 재구축 시 손실이
+# 커서 TDA 보다 넉넉히 준다. (nroots 22 기준 공간 = maxdim * 22 벡터,
+# 벡터당 약 0.3 MB -> maxdim 15 여도 100 MB 수준으로 maxcore 안에 충분히 들어간다)
+MAXDIM = {"tda": 10, "full": 15}
 
 
 def pick_uva_band(transitions: list[dict]) -> dict | None:
@@ -71,9 +90,15 @@ def run_one(species: str, conf_id: str, xyz: Path, func_id: str, mode: str,
 
     g = read_xyz(xyz)
     tda = mode == "tda"
+    maxdim = MAXDIM[mode]
+    # 함수별 고정 대응책 + CLI 로 준 추가 옵션을 합친다.
+    extras = tuple(func.get("tddft_extra", ())) + tuple(tddft_extra)
+    kw_extra = func.get("extra_keywords", "")
     print(f"  [벤치마크] {tag}")
     print(f"             {func['orca']}/{basis}, {'TDA' if tda else 'full TD-DFT'}, "
-          f"{nstates}상태, CPCM({solvent_name}), NTO {NTO_STATES}")
+          f"{nstates}상태, CPCM({solvent_name}), NTO {NTO_STATES}, maxdim {maxdim}"
+          + (f", 키워드 +{kw_extra}" if kw_extra else "")
+          + (f", %tddft +{list(extras)}" if extras else ""))
 
     inp = build_input(
         g.symbols, g.coords,
@@ -81,10 +106,11 @@ def run_one(species: str, conf_id: str, xyz: Path, func_id: str, mode: str,
         nstates=nstates, tda=tda, solvent=solvent_name,
         nprocs=orca_cfg["nprocs"], maxcore_mb=orca_cfg["maxcore_mb"],
         rijcosx=orca_cfg["rijcosx"], aux_basis=orca_cfg["aux_basis"],
-        nto_states=NTO_STATES, tddft_extra=tddft_extra,
+        extra_keywords=kw_extra,
+        nto_states=NTO_STATES, tddft_extra=extras, maxdim=maxdim,
         comment=f"functional benchmark / {species} {conf_id} / "
                 f"{func_id} / {mode} / CPCM({solvent_name})"
-                + (f" / extra={list(tddft_extra)}" if tddft_extra else ""),
+                + (f" / extra={list(extras)}" if extras else ""),
     )
 
     out_path, seconds = run_orca(inp, outdir, name="td")
@@ -95,7 +121,9 @@ def run_one(species: str, conf_id: str, xyz: Path, func_id: str, mode: str,
         "hf_exchange": func["hf_exchange"],
         "basis": basis, "mode": mode, "tda": tda,
         "solvent": solvent_name.lower(), "solvent_model": "CPCM",
-        "n_states": nstates, "nto_states": NTO_STATES,
+        "n_states": nstates, "nto_states": NTO_STATES, "maxdim": maxdim,
+        "extra_keywords": kw_extra or None,
+        "tddft_extra": list(extras) or None,
         "geometry_file": str(xyz), "geometry_source": "DFT",
         "wall_seconds": round(seconds, 1),
     }
