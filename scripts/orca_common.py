@@ -59,7 +59,8 @@ def build_input(symbols, coords, *, functional: str, basis: str,
                 nprocs: int = 4, maxcore_mb: int = 2500,
                 optimize: bool = False, rijcosx: bool = True,
                 aux_basis: str = "def2/J", extra_keywords: str = "",
-                nto_states: str = "", comment: str = "") -> str:
+                nto_states: str = "", tddft_extra: tuple = (),
+                comment: str = "") -> str:
     """
     ORCA 입력 파일 내용을 만든다.
 
@@ -104,6 +105,10 @@ def build_input(symbols, coords, *, functional: str, basis: str,
             lines.append("  DoNTO true")
             lines.append(f"  NTOStates {nto_states}")
             lines.append("  NTOThresh 1e-4")
+        for extra in tddft_extra:
+            # 수렴 보조 옵션 등 (예: "maxiter 300", "solver bhp22").
+            # M06-2X 처럼 Davidson 이 안 도는 함수의 재시도에 쓴다.
+            lines.append(f"  {extra}")
         lines.append("end")
     lines.append("* xyz 0 1")
     for s, (x, y, z) in zip(symbols, coords):
@@ -331,12 +336,16 @@ ORCA_FAILURE_PATTERNS = [
      "SCF 미수렴. 대응: %scf MaxIter 늘리기, SOSCF 켜기, "
      "'! SlowConv' 또는 'VerySlowConv' 추가, Damp/Shift 조정, "
      "더 작은 기저셋의 궤도를 MORead 로 초기 guess 로 재사용."),
-    (r"CIS/TDA.*not converged|Davidson.*not converged|TDDFT.*NOT CONVERGED",
+    (r"CIS/TDA.*(?:did )?not converge|Davidson.*(?:did )?not converge|"
+     r"TDDFT.*NOT CONVERGED",
      "EXCITED_STATE_NOT_CONVERGED",
-     "들뜬상태 미수렴. 대응: %tddft 의 maxdim 키우기, MaxIter 늘리기, "
-     "nroots 줄이기, TDA 사용."),
-    (r"not enough memory|insufficient memory|MEMORY|out of memory|"
-     r"Error.*allocat",
+     "들뜬상태 미수렴. 대응: %tddft 의 maxiter 늘리기, 'solver bhp22' 사용, "
+     "maxdim 키우기, nroots 줄이기, TDA 사용."),
+    # 주의: 'MEMORY' 같은 단독 단어 패턴은 정상 출력('memory conserving SCF
+    # solver' 등)에도 걸려 오분류를 낳는다 (M06-2X 수렴 실패를 OOM 으로 잘못
+    # 분류했던 실제 사례). 반드시 오류 문맥이 포함된 구체 패턴만 쓴다.
+    (r"not enough memory|insufficient memory|out of memory|"
+     r"Error\s*\(ORCA_\w+\):.*[Mm]emory|cannot allocate",
      "OUT_OF_MEMORY",
      "메모리 부족. 대응: %maxcore 낮추기(코어당 MB), nprocs 줄이기, "
      "기저셋/상태 수 줄이기."),

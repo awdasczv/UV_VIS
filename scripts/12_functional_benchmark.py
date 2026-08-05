@@ -55,7 +55,8 @@ def pick_uva_band(transitions: list[dict]) -> dict | None:
 
 
 def run_one(species: str, conf_id: str, xyz: Path, func_id: str, mode: str,
-            basis: str, solvent_name: str, nstates: int, orca_cfg: dict) -> dict:
+            basis: str, solvent_name: str, nstates: int, orca_cfg: dict,
+            tddft_extra: tuple = ()) -> dict:
     from orca_common import run_orca            # 지연 import (테스트 편의)
     func = FUNCTIONALS[func_id]
     tag = f"{conf_id}_{func_id}_{mode}"
@@ -80,9 +81,10 @@ def run_one(species: str, conf_id: str, xyz: Path, func_id: str, mode: str,
         nstates=nstates, tda=tda, solvent=solvent_name,
         nprocs=orca_cfg["nprocs"], maxcore_mb=orca_cfg["maxcore_mb"],
         rijcosx=orca_cfg["rijcosx"], aux_basis=orca_cfg["aux_basis"],
-        nto_states=NTO_STATES,
+        nto_states=NTO_STATES, tddft_extra=tddft_extra,
         comment=f"functional benchmark / {species} {conf_id} / "
-                f"{func_id} / {mode} / CPCM({solvent_name})",
+                f"{func_id} / {mode} / CPCM({solvent_name})"
+                + (f" / extra={list(tddft_extra)}" if tddft_extra else ""),
     )
 
     out_path, seconds = run_orca(inp, outdir, name="td")
@@ -143,6 +145,9 @@ def main() -> int:
     ap.add_argument("--basis", default="6-31+G(d)")
     ap.add_argument("--solvent", default="Ethanol")
     ap.add_argument("--nstates", type=int, default=22)
+    ap.add_argument("--tddft-extra", nargs="*", default=[],
+                    help="%%tddft 블록에 추가할 줄들. 예) --tddft-extra "
+                         "'maxiter 300' 'solver bhp22'  (M06-2X Davidson 미수렴 재시도용)")
     args = ap.parse_args()
 
     cfg = json.loads((INPUTS / "calc_config.json").read_text(encoding="utf-8"))
@@ -175,7 +180,8 @@ def main() -> int:
     for mode in args.modes:
         for func_id in args.functionals:
             rec = run_one(species, conf_id, xyz, func_id, mode,
-                          args.basis, args.solvent, args.nstates, orca_cfg)
+                          args.basis, args.solvent, args.nstates, orca_cfg,
+                          tddft_extra=tuple(args.tddft_extra))
             recs.append(rec)
             save_checkpoint(OUTROOT / "summary.json",
                             {"species": species, "conf_id": conf_id,
