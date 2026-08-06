@@ -1,0 +1,40 @@
+﻿엔진   : ORCA  (C:\ORCA_6.1.1\orca.exe)   MPI = True
+대상   : dhhb / dhhb_c000  (DFT-opt 구조 고정)
+수준   : ['b3lyp', 'pbe0', 'm062x', 'camb3lyp', 'wb97xd4'] x ['tda', 'full'] / 6-31+G(d) / CPCM(Ethanol) / 22상태
+계산 수: 10  (TDA 1건 실측 ~45-70분, full 은 그 ~2배. 체크포인트로 재개 가능)
+
+  [건너뜀] dhhb_c000_b3lyp_tda  (UVA band = 390.8 nm)
+  [건너뜀] dhhb_c000_pbe0_tda  (UVA band = 371.4 nm)
+  [벤치마크] dhhb_c000_m062x_tda
+             M062X/6-31+G(d), TDA, 22상태, CPCM(Ethanol), NTO 1,2,3,4,5,6, maxdim 10, 키워드 +DEFGRID3, %tddft +['solver bhp22']
+             완료 3571초 | UVA band 321.9 nm (f=0.951, S1) | HOMO->LUMO (86%); HOMO->LUMO+1 (5%); HOMO-1-
+  [건너뜀] dhhb_c000_camb3lyp_tda  (UVA band = 318.0 nm)
+  [건너뜀] dhhb_c000_wb97xd4_tda  (UVA band = 298.6 nm)
+  [벤치마크] dhhb_c000_b3lyp_full
+             B3LYP/6-31+G(d), full TD-DFT, 22상태, CPCM(Ethanol), NTO 1,2,3,4,5,6, maxdim 15
+             완료 1766초 | UVA band 400.8 nm (f=0.412, S1) | HOMO->LUMO (98%)
+  [벤치마크] dhhb_c000_pbe0_full
+             PBE0/6-31+G(d), full TD-DFT, 22상태, CPCM(Ethanol), NTO 1,2,3,4,5,6, maxdim 15
+             완료 1665초 | UVA band 381.7 nm (f=0.486, S1) | HOMO->LUMO (98%)
+  [벤치마크] dhhb_c000_m062x_full
+             M062X/6-31+G(d), full TD-DFT, 22상태, CPCM(Ethanol), NTO 1,2,3,4,5,6, maxdim 15, 키워드 +DEFGRID3, %tddft +['solver bhp22']
+             완료 4773초 | UVA band 334.5 nm (f=0.836, S1) | HOMO->LUMO (84%); HOMO->LUMO+1 (9%); HOMO-1-
+  [벤치마크] dhhb_c000_camb3lyp_full
+             CAM-B3LYP/6-31+G(d), full TD-DFT, 22상태, CPCM(Ethanol), NTO 1,2,3,4,5,6, maxdim 15
+             완료 2843초 | UVA band 330.5 nm (f=0.869, S1) | HOMO->LUMO (81%); HOMO->LUMO+1 (10%); HOMO-1
+  [벤치마크] dhhb_c000_wb97xd4_full
+             WB97X-D4/6-31+G(d), full TD-DFT, 22상태, CPCM(Ethanol), NTO 1,2,3,4,5,6, maxdim 15
+             완료 58386초 | UVA band 311.0 nm (f=0.951, S1) | HOMO->LUMO (65%); HOMO->LUMO+1 (20%); HOMO-1
+
+=== 완료 10/10 ===
+함수           모드     UVA band       f      전역최강       초
+B3LYP        tda       390.8   0.417     296.3    1828
+PBE0         tda       371.4   0.499     286.8    1565
+M062X        tda       321.9   0.951     321.9    3572
+CAM-B3LYP    tda       318.0   0.990     318.0    2938
+WB97X-D4     tda       298.6   1.083     298.6   42580
+B3LYP        full      400.8   0.412     400.8    1766
+PBE0         full      381.7   0.486     381.7    1665
+M062X        full      334.5   0.836     334.5    4773
+CAM-B3LYP    full      330.5   0.869     330.5    2843
+WB97X-D4     full      311.0   0.951     311.0   58386

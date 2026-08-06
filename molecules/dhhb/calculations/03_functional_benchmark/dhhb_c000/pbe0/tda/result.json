@@ -1,0 +1,1039 @@
+{
+  "engine": "ORCA 6.1.1",
+  "species": "dhhb",
+  "conf_id": "dhhb_c000",
+  "functional_id": "pbe0",
+  "functional": "PBE0",
+  "hf_exchange": "전역 25%",
+  "basis": "6-31+G(d)",
+  "mode": "tda",
+  "tda": true,
+  "solvent": "ethanol",
+  "solvent_model": "CPCM",
+  "n_states": 22,
+  "nto_states": "1,2,3,4,5,6",
+  "geometry_file": "C:\\Users\\ysm04\\Documents\\etc\\uv_vis\\molecules\\dhhb\\calculations\\01_dft_opt\\dhhb\\dhhb_c000\\optimized.xyz",
+  "geometry_source": "DFT",
+  "wall_seconds": 1565.3,
+  "ok": true,
+  "scf_energy_hartree": -1287.349725388596,
+  "n_basis": 584,
+  "n_occupied": 107,
+  "transitions": [
+    {
+      "state": 1,
+      "energy_eV": 3.33792,
+      "wavelength_nm": 371.4,
+      "osc_strength": 0.498772,
+      "orbital_transitions": [
+        {
+          "from": "HOMO",
+          "to": "LUMO",
+          "weight": 0.9561
+        },
+        {
+          "from": "HOMO",
+          "to": "LUMO+1",
+          "weight": 0.0196
+        }
+      ],
+      "orbital_transitions_str": "HOMO->LUMO (96%); HOMO->LUMO+1 (2%)"
+    },
+    {
+      "state": 2,
+      "energy_eV": 3.83547,
+      "wavelength_nm": 323.3,
+      "osc_strength": 0.042628,
+      "orbital_transitions": [
+        {
+          "from": "HOMO-1",
+          "to": "LUMO",
+          "weight": 0.9515
+        },
+        {
+          "from": "HOMO-1",
+          "to": "LUMO+1",
+          "weight": 0.0165
+        }
+      ],
+      "orbital_transitions_str": "HOMO-1->LUMO (95%); HOMO-1->LUMO+1 (2%)"
+    },
+    {
+      "state": 3,
+      "energy_eV": 4.10591,
+      "wavelength_nm": 302.0,
+      "osc_strength": 0.051555,
+      "orbital_transitions": [
+        {
+          "from": "HOMO-2",
+          "to": "LUMO",
+          "weight": 0.5452
+        },
+        {
+          "from": "HOMO-4",
+          "to": "LUMO",
+          "weight": 0.2791
+        },
+        {
+          "from": "HOMO-2",
+          "to": "LUMO+1",
+          "weight": 0.0433
+        }
+      ],
+      "orbital_transitions_str": "HOMO-2->LUMO (55%); HOMO-4->LUMO (28%); HOMO-2->LUMO+1 (4%)"
+    },
+    {
+      "state": 4,
+      "energy_eV": 4.32284,
+      "wavelength_nm": 286.8,
+      "osc_strength": 0.637931,
+      "orbital_transitions": [
+        {
+          "from": "HOMO",
+          "to": "LUMO+1",
+          "weight": 0.8394
+        },
+        {
+          "from": "HOMO-4",
+          "to": "LUMO",
+          "weight": 0.0784
+        },
+        {
+          "from": "HOMO-1",
+          "to": "LUMO+3",
+          "weight": 0.0145
+        }
+      ],
+      "orbital_transitions_str": "HOMO->LUMO+1 (84%); HOMO-4->LUMO (8%); HOMO-1->LUMO+3 (1%)"
+    },
+    {
+      "state": 5,
+      "energy_eV": 4.6026,
+      "wavelength_nm": 269.4,
+      "osc_strength": 0.031649,
+      "orbital_transitions": [
+        {
+          "from": "HOMO",
+          "to": "LUMO+2",
+          "weight": 0.4602
+        },
+        {
+          "from": "HOMO-3",
+          "to": "LUMO",
+          "weight": 0.3502
+        },
+        {
+          "from": "HOMO-2",
+          "to": "LUMO",
+          "weight": 0.0477
+        }
+      ],
+      "orbital_transitions_str": "HOMO->LUMO+2 (46%); HOMO-3->LUMO (35%); HOMO-2->LUMO (5%)"
+    },
+    {
+      "state": 6,
+      "energy_eV": 4.69109,
+      "wavelength_nm": 264.3,
+      "osc_strength": 0.020997,
+      "orbital_transitions": [
+        {
+          "from": "HOMO-3",
+          "to": "LUMO",
+          "weight": 0.3152
+        },
+        {
+          "from": "HOMO",
+          "to": "LUMO+2",
+          "weight": 0.2818
+        },
+        {
+          "from": "HOMO-1",
+          "to": "LUMO+1",
+          "weight": 0.1456
+        }
+      ],
+      "orbital_transitions_str": "HOMO-3->LUMO (32%); HOMO->LUMO+2 (28%); HOMO-1->LUMO+1 (15%)"
+    },
+    {
+      "state": 7,
+      "energy_eV": 4.77853,
+      "wavelength_nm": 259.5,
+      "osc_strength": 0.008858,
+      "orbital_transitions": [
+        {
+          "from": "HOMO-1",
+          "to": "LUMO+1",
+          "weight": 0.4305
+        },
+        {
+          "from": "HOMO",
+          "to": "LUMO+2",
+          "weight": 0.238
+        },
+        {
+          "from": "HOMO",
+          "to": "LUMO+3",
+          "weight": 0.2201
+        }
+      ],
+      "orbital_transitions_str": "HOMO-1->LUMO+1 (43%); HOMO->LUMO+2 (24%); HOMO->LUMO+3 (22%)"
+    },
+    {
+      "state": 8,
+      "energy_eV": 4.90321,
+      "wavelength_nm": 252.9,
+      "osc_strength": 0.002522,
+      "orbital_transitions": [
+        {
+          "from": "HOMO-5",
+          "to": "LUMO",
+          "weight": 0.5944
+        },
+        {
+          "from": "HOMO-6",
+          "to": "LUMO",
+          "weight": 0.1709
+        },
+        {
+          "from": "HOMO-5",
+          "to": "LUMO+1",
+          "weight": 0.1152
+        }
+      ],
+      "orbital_transitions_str": "HOMO-5->LUMO (59%); HOMO-6->LUMO (17%); HOMO-5->LUMO+1 (12%)"
+    },
+    {
+      "state": 9,
+      "energy_eV": 5.00653,
+      "wavelength_nm": 247.6,
+      "osc_strength": 0.395643,
+      "orbital_transitions": [
+        {
+          "from": "HOMO-4",
+          "to": "LUMO",
+          "weight": 0.4056
+        },
+        {
+          "from": "HOMO-2",
+          "to": "LUMO",
+          "weight": 0.1746
+        },
+        {
+          "from": "HOMO",
+          "to": "LUMO+3",
+          "weight": 0.1403
+        }
+      ],
+      "orbital_transitions_str": "HOMO-4->LUMO (41%); HOMO-2->LUMO (17%); HOMO->LUMO+3 (14%)"
+    },
+    {
+      "state": 10,
+      "energy_eV": 5.11741,
+      "wavelength_nm": 242.3,
+      "osc_strength": 0.0087,
+      "orbital_transitions": [
+        {
+          "from": "HOMO",
+          "to": "LUMO+3",
+          "weight": 0.4533
+        },
+        {
+          "from": "HOMO-1",
+          "to": "LUMO+1",
+          "weight": 0.2916
+        },
+        {
+          "from": "HOMO-4",
+          "to": "LUMO",
+          "weight": 0.0973
+        }
+      ],
+      "orbital_transitions_str": "HOMO->LUMO+3 (45%); HOMO-1->LUMO+1 (29%); HOMO-4->LUMO (10%)"
+    },
+    {
+      "state": 11,
+      "energy_eV": 5.30764,
+      "wavelength_nm": 233.6,
+      "osc_strength": 0.013045,
+      "orbital_transitions": [
+        {
+          "from": "HOMO",
+          "to": "LUMO+4",
+          "weight": 0.844
+        },
+        {
+          "from": "HOMO",
+          "to": "LUMO+5",
+          "weight": 0.1127
+        }
+      ],
+      "orbital_transitions_str": "HOMO->LUMO+4 (84%); HOMO->LUMO+5 (11%)"
+    },
+    {
+      "state": 12,
+      "energy_eV": 5.40813,
+      "wavelength_nm": 229.3,
+      "osc_strength": 0.052147,
+      "orbital_transitions": [
+        {
+          "from": "HOMO-2",
+          "to": "LUMO+1",
+          "weight": 0.7293
+        },
+        {
+          "from": "HOMO-4",
+          "to": "LUMO+1",
+          "weight": 0.1305
+        },
+        {
+          "from": "HOMO-2",
+          "to": "LUMO",
+          "weight": 0.041
+        }
+      ],
+      "orbital_transitions_str": "HOMO-2->LUMO+1 (73%); HOMO-4->LUMO+1 (13%); HOMO-2->LUMO (4%)"
+    },
+    {
+      "state": 13,
+      "energy_eV": 5.48387,
+      "wavelength_nm": 226.1,
+      "osc_strength": 0.019619,
+      "orbital_transitions": [
+        {
+          "from": "HOMO-1",
+          "to": "LUMO+2",
+          "weight": 0.9607
+        },
+        {
+          "from": "HOMO-3",
+          "to": "LUMO+1",
+          "weight": 0.015
+        }
+      ],
+      "orbital_transitions_str": "HOMO-1->LUMO+2 (96%); HOMO-3->LUMO+1 (2%)"
+    },
+    {
+      "state": 14,
+      "energy_eV": 5.58119,
+      "wavelength_nm": 222.1,
+      "osc_strength": 0.008899,
+      "orbital_transitions": [
+        {
+          "from": "HOMO-3",
+          "to": "LUMO+1",
+          "weight": 0.6968
+        },
+        {
+          "from": "HOMO-2",
+          "to": "LUMO+2",
+          "weight": 0.0888
+        },
+        {
+          "from": "HOMO-4",
+          "to": "LUMO+1",
+          "weight": 0.0613
+        }
+      ],
+      "orbital_transitions_str": "HOMO-3->LUMO+1 (70%); HOMO-2->LUMO+2 (9%); HOMO-4->LUMO+1 (6%)"
+    },
+    {
+      "state": 15,
+      "energy_eV": 5.58533,
+      "wavelength_nm": 222.0,
+      "osc_strength": 0.022463,
+      "orbital_transitions": [
+        {
+          "from": "HOMO-6",
+          "to": "LUMO",
+          "weight": 0.6612
+        },
+        {
+          "from": "HOMO-5",
+          "to": "LUMO",
+          "weight": 0.2074
+        },
+        {
+          "from": "HOMO-3",
+          "to": "LUMO+1",
+          "weight": 0.0451
+        }
+      ],
+      "orbital_transitions_str": "HOMO-6->LUMO (66%); HOMO-5->LUMO (21%); HOMO-3->LUMO+1 (5%)"
+    },
+    {
+      "state": 16,
+      "energy_eV": 5.71435,
+      "wavelength_nm": 217.0,
+      "osc_strength": 0.008154,
+      "orbital_transitions": [
+        {
+          "from": "HOMO",
+          "to": "LUMO+5",
+          "weight": 0.5983
+        },
+        {
+          "from": "HOMO",
+          "to": "LUMO+6",
+          "weight": 0.2514
+        },
+        {
+          "from": "HOMO",
+          "to": "LUMO+4",
+          "weight": 0.0452
+        }
+      ],
+      "orbital_transitions_str": "HOMO->LUMO+5 (60%); HOMO->LUMO+6 (25%); HOMO->LUMO+4 (5%)"
+    },
+    {
+      "state": 17,
+      "energy_eV": 5.78653,
+      "wavelength_nm": 214.3,
+      "osc_strength": 0.04791,
+      "orbital_transitions": [
+        {
+          "from": "HOMO-7",
+          "to": "LUMO",
+          "weight": 0.5816
+        },
+        {
+          "from": "HOMO",
+          "to": "LUMO+6",
+          "weight": 0.1114
+        },
+        {
+          "from": "HOMO",
+          "to": "LUMO+7",
+          "weight": 0.101
+        }
+      ],
+      "orbital_transitions_str": "HOMO-7->LUMO (58%); HOMO->LUMO+6 (11%); HOMO->LUMO+7 (10%)"
+    },
+    {
+      "state": 18,
+      "energy_eV": 5.803,
+      "wavelength_nm": 213.7,
+      "osc_strength": 0.005436,
+      "orbital_transitions": [
+        {
+          "from": "HOMO",
+          "to": "LUMO+6",
+          "weight": 0.3469
+        },
+        {
+          "from": "HOMO",
+          "to": "LUMO+7",
+          "weight": 0.231
+        },
+        {
+          "from": "HOMO-7",
+          "to": "LUMO",
+          "weight": 0.2172
+        }
+      ],
+      "orbital_transitions_str": "HOMO->LUMO+6 (35%); HOMO->LUMO+7 (23%); HOMO-7->LUMO (22%)"
+    },
+    {
+      "state": 19,
+      "energy_eV": 5.87735,
+      "wavelength_nm": 211.0,
+      "osc_strength": 0.007261,
+      "orbital_transitions": [
+        {
+          "from": "HOMO",
+          "to": "LUMO+8",
+          "weight": 0.3602
+        },
+        {
+          "from": "HOMO",
+          "to": "LUMO+7",
+          "weight": 0.2806
+        },
+        {
+          "from": "HOMO",
+          "to": "LUMO+9",
+          "weight": 0.0871
+        }
+      ],
+      "orbital_transitions_str": "HOMO->LUMO+8 (36%); HOMO->LUMO+7 (28%); HOMO->LUMO+9 (9%)"
+    },
+    {
+      "state": 20,
+      "energy_eV": 5.93214,
+      "wavelength_nm": 209.0,
+      "osc_strength": 0.109032,
+      "orbital_transitions": [
+        {
+          "from": "HOMO-4",
+          "to": "LUMO+1",
+          "weight": 0.5723
+        },
+        {
+          "from": "HOMO-7",
+          "to": "LUMO",
+          "weight": 0.1145
+        },
+        {
+          "from": "HOMO-2",
+          "to": "LUMO+1",
+          "weight": 0.1018
+        }
+      ],
+      "orbital_transitions_str": "HOMO-4->LUMO+1 (57%); HOMO-7->LUMO (11%); HOMO-2->LUMO+1 (10%)"
+    },
+    {
+      "state": 21,
+      "energy_eV": 6.0338,
+      "wavelength_nm": 205.5,
+      "osc_strength": 0.004642,
+      "orbital_transitions": [
+        {
+          "from": "HOMO-1",
+          "to": "LUMO+4",
+          "weight": 0.481
+        },
+        {
+          "from": "HOMO",
+          "to": "LUMO+5",
+          "weight": 0.1121
+        },
+        {
+          "from": "HOMO-1",
+          "to": "LUMO+5",
+          "weight": 0.055
+        }
+      ],
+      "orbital_transitions_str": "HOMO-1->LUMO+4 (48%); HOMO->LUMO+5 (11%); HOMO-1->LUMO+5 (6%)"
+    },
+    {
+      "state": 22,
+      "energy_eV": 6.08918,
+      "wavelength_nm": 203.6,
+      "osc_strength": 0.013997,
+      "orbital_transitions": [
+        {
+          "from": "HOMO",
+          "to": "LUMO+9",
+          "weight": 0.2537
+        },
+        {
+          "from": "HOMO-1",
+          "to": "LUMO+4",
+          "weight": 0.2015
+        },
+        {
+          "from": "HOMO",
+          "to": "LUMO+7",
+          "weight": 0.1015
+        }
+      ],
+      "orbital_transitions_str": "HOMO->LUMO+9 (25%); HOMO-1->LUMO+4 (20%); HOMO->LUMO+7 (10%)"
+    }
+  ],
+  "brightest": {
+    "state": 4,
+    "energy_eV": 4.32284,
+    "wavelength_nm": 286.8,
+    "osc_strength": 0.637931,
+    "orbital_transitions": [
+      {
+        "from": "HOMO",
+        "to": "LUMO+1",
+        "weight": 0.8394
+      },
+      {
+        "from": "HOMO-4",
+        "to": "LUMO",
+        "weight": 0.0784
+      },
+      {
+        "from": "HOMO-1",
+        "to": "LUMO+3",
+        "weight": 0.0145
+      }
+    ],
+    "orbital_transitions_str": "HOMO->LUMO+1 (84%); HOMO-4->LUMO (8%); HOMO-1->LUMO+3 (1%)"
+  },
+  "uva_band_transition": {
+    "state": 1,
+    "energy_eV": 3.33792,
+    "wavelength_nm": 371.4,
+    "osc_strength": 0.498772,
+    "orbital_transitions": [
+      {
+        "from": "HOMO",
+        "to": "LUMO",
+        "weight": 0.9561
+      },
+      {
+        "from": "HOMO",
+        "to": "LUMO+1",
+        "weight": 0.0196
+      }
+    ],
+    "orbital_transitions_str": "HOMO->LUMO (96%); HOMO->LUMO+1 (2%)"
+  },
+  "nto": {
+    "1": [
+      {
+        "hole": 106,
+        "particle": 107,
+        "occ": 0.9858065
+      },
+      {
+        "hole": 105,
+        "particle": 108,
+        "occ": 0.00489402
+      },
+      {
+        "hole": 104,
+        "particle": 109,
+        "occ": 0.00158815
+      },
+      {
+        "hole": 103,
+        "particle": 110,
+        "occ": 0.00145889
+      },
+      {
+        "hole": 102,
+        "particle": 111,
+        "occ": 0.00083072
+      },
+      {
+        "hole": 101,
+        "particle": 112,
+        "occ": 0.00057664
+      },
+      {
+        "hole": 100,
+        "particle": 113,
+        "occ": 0.00055601
+      },
+      {
+        "hole": 99,
+        "particle": 114,
+        "occ": 0.00048101
+      },
+      {
+        "hole": 98,
+        "particle": 115,
+        "occ": 0.00042159
+      },
+      {
+        "hole": 97,
+        "particle": 116,
+        "occ": 0.00039423
+      },
+      {
+        "hole": 96,
+        "particle": 117,
+        "occ": 0.00030097
+      },
+      {
+        "hole": 95,
+        "particle": 118,
+        "occ": 0.00025566
+      },
+      {
+        "hole": 94,
+        "particle": 119,
+        "occ": 0.00021706
+      },
+      {
+        "hole": 93,
+        "particle": 120,
+        "occ": 0.00019894
+      },
+      {
+        "hole": 92,
+        "particle": 121,
+        "occ": 0.00018387
+      },
+      {
+        "hole": 91,
+        "particle": 122,
+        "occ": 0.00016523
+      },
+      {
+        "hole": 90,
+        "particle": 123,
+        "occ": 0.00015429
+      },
+      {
+        "hole": 89,
+        "particle": 124,
+        "occ": 0.0001462
+      },
+      {
+        "hole": 88,
+        "particle": 125,
+        "occ": 0.00012191
+      },
+      {
+        "hole": 87,
+        "particle": 126,
+        "occ": 0.00010727
+      },
+      {
+        "hole": 86,
+        "particle": 127,
+        "occ": 0.00010472
+      }
+    ],
+    "2": [
+      {
+        "hole": 106,
+        "particle": 107,
+        "occ": 0.97906312
+      },
+      {
+        "hole": 105,
+        "particle": 108,
+        "occ": 0.01578988
+      },
+      {
+        "hole": 104,
+        "particle": 109,
+        "occ": 0.00120615
+      },
+      {
+        "hole": 103,
+        "particle": 110,
+        "occ": 0.00072355
+      },
+      {
+        "hole": 102,
+        "particle": 111,
+        "occ": 0.00062339
+      },
+      {
+        "hole": 101,
+        "particle": 112,
+        "occ": 0.00047635
+      },
+      {
+        "hole": 100,
+        "particle": 113,
+        "occ": 0.00046435
+      },
+      {
+        "hole": 99,
+        "particle": 114,
+        "occ": 0.00032649
+      },
+      {
+        "hole": 98,
+        "particle": 115,
+        "occ": 0.00027412
+      },
+      {
+        "hole": 97,
+        "particle": 116,
+        "occ": 0.00019962
+      },
+      {
+        "hole": 96,
+        "particle": 117,
+        "occ": 0.00015961
+      },
+      {
+        "hole": 95,
+        "particle": 118,
+        "occ": 0.00011963
+      },
+      {
+        "hole": 94,
+        "particle": 119,
+        "occ": 0.00010223
+      }
+    ],
+    "3": [
+      {
+        "hole": 106,
+        "particle": 107,
+        "occ": 0.95530605
+      },
+      {
+        "hole": 105,
+        "particle": 108,
+        "occ": 0.03961323
+      },
+      {
+        "hole": 104,
+        "particle": 109,
+        "occ": 0.00223331
+      },
+      {
+        "hole": 103,
+        "particle": 110,
+        "occ": 0.00107497
+      },
+      {
+        "hole": 102,
+        "particle": 111,
+        "occ": 0.00053828
+      },
+      {
+        "hole": 101,
+        "particle": 112,
+        "occ": 0.00022875
+      },
+      {
+        "hole": 100,
+        "particle": 113,
+        "occ": 0.00012351
+      }
+    ],
+    "4": [
+      {
+        "hole": 106,
+        "particle": 107,
+        "occ": 0.87385393
+      },
+      {
+        "hole": 105,
+        "particle": 108,
+        "occ": 0.09194455
+      },
+      {
+        "hole": 104,
+        "particle": 109,
+        "occ": 0.01904056
+      },
+      {
+        "hole": 103,
+        "particle": 110,
+        "occ": 0.00343965
+      },
+      {
+        "hole": 102,
+        "particle": 111,
+        "occ": 0.00133248
+      },
+      {
+        "hole": 101,
+        "particle": 112,
+        "occ": 0.00120232
+      },
+      {
+        "hole": 100,
+        "particle": 113,
+        "occ": 0.00114169
+      },
+      {
+        "hole": 99,
+        "particle": 114,
+        "occ": 0.0009178
+      },
+      {
+        "hole": 98,
+        "particle": 115,
+        "occ": 0.00088999
+      },
+      {
+        "hole": 97,
+        "particle": 116,
+        "occ": 0.00072388
+      },
+      {
+        "hole": 96,
+        "particle": 117,
+        "occ": 0.00062441
+      },
+      {
+        "hole": 95,
+        "particle": 118,
+        "occ": 0.00053472
+      },
+      {
+        "hole": 94,
+        "particle": 119,
+        "occ": 0.00050388
+      },
+      {
+        "hole": 93,
+        "particle": 120,
+        "occ": 0.00042985
+      },
+      {
+        "hole": 92,
+        "particle": 121,
+        "occ": 0.00040735
+      },
+      {
+        "hole": 91,
+        "particle": 122,
+        "occ": 0.00034723
+      },
+      {
+        "hole": 90,
+        "particle": 123,
+        "occ": 0.00032137
+      },
+      {
+        "hole": 89,
+        "particle": 124,
+        "occ": 0.00028931
+      },
+      {
+        "hole": 88,
+        "particle": 125,
+        "occ": 0.00026702
+      },
+      {
+        "hole": 87,
+        "particle": 126,
+        "occ": 0.00021475
+      },
+      {
+        "hole": 86,
+        "particle": 127,
+        "occ": 0.00019377
+      },
+      {
+        "hole": 85,
+        "particle": 128,
+        "occ": 0.00015248
+      },
+      {
+        "hole": 84,
+        "particle": 129,
+        "occ": 0.00012567
+      },
+      {
+        "hole": 83,
+        "particle": 130,
+        "occ": 0.0001148
+      }
+    ],
+    "5": [
+      {
+        "hole": 106,
+        "particle": 107,
+        "occ": 0.52760971
+      },
+      {
+        "hole": 105,
+        "particle": 108,
+        "occ": 0.43912916
+      },
+      {
+        "hole": 104,
+        "particle": 109,
+        "occ": 0.02667717
+      },
+      {
+        "hole": 103,
+        "particle": 110,
+        "occ": 0.00393002
+      },
+      {
+        "hole": 102,
+        "particle": 111,
+        "occ": 0.00073469
+      },
+      {
+        "hole": 101,
+        "particle": 112,
+        "occ": 0.00031059
+      },
+      {
+        "hole": 100,
+        "particle": 113,
+        "occ": 0.00024941
+      },
+      {
+        "hole": 99,
+        "particle": 114,
+        "occ": 0.00021745
+      },
+      {
+        "hole": 98,
+        "particle": 115,
+        "occ": 0.00021485
+      },
+      {
+        "hole": 97,
+        "particle": 116,
+        "occ": 0.00013826
+      }
+    ],
+    "6": [
+      {
+        "hole": 106,
+        "particle": 107,
+        "occ": 0.43774979
+      },
+      {
+        "hole": 105,
+        "particle": 108,
+        "occ": 0.39032878
+      },
+      {
+        "hole": 104,
+        "particle": 109,
+        "occ": 0.14743425
+      },
+      {
+        "hole": 103,
+        "particle": 110,
+        "occ": 0.02079443
+      },
+      {
+        "hole": 102,
+        "particle": 111,
+        "occ": 0.00062541
+      },
+      {
+        "hole": 101,
+        "particle": 112,
+        "occ": 0.00039375
+      },
+      {
+        "hole": 100,
+        "particle": 113,
+        "occ": 0.00035574
+      },
+      {
+        "hole": 99,
+        "particle": 114,
+        "occ": 0.00029704
+      },
+      {
+        "hole": 98,
+        "particle": 115,
+        "occ": 0.00025648
+      },
+      {
+        "hole": 97,
+        "particle": 116,
+        "occ": 0.00022279
+      },
+      {
+        "hole": 96,
+        "particle": 117,
+        "occ": 0.0001967
+      },
+      {
+        "hole": 95,
+        "particle": 118,
+        "occ": 0.00017599
+      },
+      {
+        "hole": 94,
+        "particle": 119,
+        "occ": 0.00014732
+      },
+      {
+        "hole": 93,
+        "particle": 120,
+        "occ": 0.00013993
+      },
+      {
+        "hole": 92,
+        "particle": 121,
+        "occ": 0.00010193
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+﻿
+=== dhhb_c000: 조각 크기 donor 26, bridge 2, acceptor 32 원자 ===
+  B3LYP        full  S1  400.8 nm | NTO점유 1.001 | hole(donor 0.88) -> particle(donor 0.15, bridge 0.21, acceptor 0.64) | d=4.97 A, Lambda=0.462
+  B3LYP        tda   S1  390.8 nm | NTO점유 0.987 | hole(donor 0.88) -> particle(donor 0.11, bridge 0.17, acceptor 0.72) | d=5.43 A, Lambda=0.420
+  CAM-B3LYP    full  S1  330.5 nm | NTO점유 0.982 | hole(donor 0.85) -> particle(donor 0.37, bridge 0.36, acceptor 0.26) | d=2.33 A, Lambda=0.635
+  CAM-B3LYP    tda   S1  318.0 nm | NTO점유 0.964 | hole(donor 0.84) -> particle(donor 0.33, bridge 0.35, acceptor 0.32) | d=2.58 A, Lambda=0.622
+  M062X        full  S1  334.5 nm | NTO점유 0.986 | hole(donor 0.86) -> particle(donor 0.36, bridge 0.35, acceptor 0.29) | d=2.53 A, Lambda=0.622
+  M062X        tda   S1  321.9 nm | NTO점유 0.968 | hole(donor 0.85) -> particle(donor 0.31, bridge 0.34, acceptor 0.35) | d=2.84 A, Lambda=0.604
+  PBE0         full  S1  381.7 nm | NTO점유 1.001 | hole(donor 0.87) -> particle(donor 0.18, bridge 0.24, acceptor 0.59) | d=4.58 A, Lambda=0.492
+  PBE0         tda   S1  371.4 nm | NTO점유 0.986 | hole(donor 0.88) -> particle(donor 0.13, bridge 0.20, acceptor 0.67) | d=5.06 A, Lambda=0.452
+  WB97X-D4     full  S1  311.0 nm | NTO점유 0.963 | hole(donor 0.85) -> particle(donor 0.47, bridge 0.38, acceptor 0.15) | d=1.54 A, Lambda=0.667
+  WB97X-D4     tda   S1  298.6 nm | NTO점유 0.942 | hole(donor 0.84) -> particle(donor 0.44, bridge 0.38, acceptor 0.18) | d=1.65 A, Lambda=0.660
+
+저장 -> C:\Users\ysm04\Documents\etc\uv_vis\molecules\dhhb\calculations\03_functional_benchmark\nto_analysis.json
+
+해석 기준: donor_depletion(hole~particle 의 donor 분율 감소)이 크고
+Lambda 가 작을수록 CT 성격이 강하다. 함수 간에 이 패턴이 같은 상태를
+추적해야 '같은 전이'를 비교하는 것이다.

@@ -146,8 +146,12 @@ def read_cube(path: Path):
             vecs.append([float(x) for x in p[1:4]])
         for _ in range(abs(natoms)):
             fh.readline()
-        data = np.array(fh.read().split(), dtype=float)
-    return origin, np.array(vecs), data.reshape(nvec)
+        vals = np.array(fh.read().split(), dtype=float)
+    # MO cube 는 원자 블록 뒤에 '오비탈 개수 + 인덱스' 줄이 하나 더 붙는다
+    # (Gaussian cube 규약: NAtoms 가 음수일 때). 그 줄의 길이가 가변이므로
+    # 앞에서 세지 말고 뒤에서 격자 크기만큼 잘라낸다.
+    n = nvec[0] * nvec[1] * nvec[2]
+    return origin, np.array(vecs), vals[-n:].reshape(nvec)
 
 
 def density_metrics(cube_h: Path, cube_p: Path, symbols, coords_A, frags) -> dict:

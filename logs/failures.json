@@ -37,6 +37,13 @@
       "remedy": "subprocess.run 에 encoding='utf-8', errors='replace' 를 명시. 반환값도 (res.stdout or '') 로 방어.",
       "outcome": "해결.",
       "note": "이 실패는 '수준을 낮춰야 할 계산 실패'가 아니라 순수한 환경 문제였다. 로그를 먼저 읽지 않고 계산 수준부터 낮췄다면 원인을 영영 못 찾았을 사례."
+    },
+    {
+      "tag": "funcbench:dhhb_c000_m062x_tda",
+      "engine": "ORCA",
+      "code": "OUT_OF_MEMORY",
+      "remedy": "메모리 부족. 대응: %maxcore 낮추기(코어당 MB), nprocs 줄이기, 기저셋/상태 수 줄이기.",
+      "output": "C:\\Users\\ysm04\\Documents\\etc\\uv_vis\\molecules\\dhhb\\calculations\\03_functional_benchmark\\dhhb_c000\\m062x\\tda\\td.out"
     }
   ]
 }

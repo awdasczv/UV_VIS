@@ -1,0 +1,364 @@
+{
+  "results": [
+    {
+      "functional_id": "b3lyp",
+      "functional": "B3LYP",
+      "hf_exchange": "전역 20%",
+      "mode": "full",
+      "state": 1,
+      "wavelength_nm": 400.8,
+      "osc_strength": 0.412138,
+      "orbital_transitions_str": "HOMO->LUMO (98%)",
+      "dominant_nto_occ": 1.0012678,
+      "n_significant_nto_pairs": 1,
+      "hole_fraction": {
+        "donor": 0.8774,
+        "bridge": 0.0943,
+        "acceptor": 0.0283
+      },
+      "particle_fraction": {
+        "donor": 0.1484,
+        "bridge": 0.2094,
+        "acceptor": 0.6421
+      },
+      "hole_centroid_A": [
+        -4.867,
+        -0.372,
+        0.163
+      ],
+      "particle_centroid_A": [
+        -0.385,
+        -2.32,
+        -0.718
+      ],
+      "d_hole_electron_A": 4.966,
+      "overlap_lambda": 0.4622,
+      "donor_depletion": 0.729,
+      "conf_id": "dhhb_c000"
+    },
+    {
+      "functional_id": "b3lyp",
+      "functional": "B3LYP",
+      "hf_exchange": "전역 20%",
+      "mode": "tda",
+      "state": 1,
+      "wavelength_nm": 390.8,
+      "osc_strength": 0.417314,
+      "orbital_transitions_str": "HOMO->LUMO (94%); HOMO->LUMO+1 (4%)",
+      "dominant_nto_occ": 0.98671783,
+      "n_significant_nto_pairs": 1,
+      "hole_fraction": {
+        "donor": 0.8807,
+        "bridge": 0.0908,
+        "acceptor": 0.0285
+      },
+      "particle_fraction": {
+        "donor": 0.1097,
+        "bridge": 0.1676,
+        "acceptor": 0.7227
+      },
+      "hole_centroid_A": [
+        -4.906,
+        -0.343,
+        0.173
+      ],
+      "particle_centroid_A": [
+        0.054,
+        -2.349,
+        -0.755
+      ],
+      "d_hole_electron_A": 5.43,
+      "overlap_lambda": 0.4197,
+      "donor_depletion": 0.771,
+      "conf_id": "dhhb_c000"
+    },
+    {
+      "functional_id": "camb3lyp",
+      "functional": "CAM-B3LYP",
+      "hf_exchange": "범위분리 19% -> 장거리 65%",
+      "mode": "full",
+      "state": 1,
+      "wavelength_nm": 330.5,
+      "osc_strength": 0.869232,
+      "orbital_transitions_str": "HOMO->LUMO (81%); HOMO->LUMO+1 (10%); HOMO-1->LUMO (4%)",
+      "dominant_nto_occ": 0.98184939,
+      "n_significant_nto_pairs": 1,
+      "hole_fraction": {
+        "donor": 0.8513,
+        "bridge": 0.1011,
+        "acceptor": 0.0476
+      },
+      "particle_fraction": {
+        "donor": 0.3732,
+        "bridge": 0.3625,
+        "acceptor": 0.2642
+      },
+      "hole_centroid_A": [
+        -4.339,
+        -0.756,
+        0.021
+      ],
+      "particle_centroid_A": [
+        -2.478,
+        -2.058,
+        -0.502
+      ],
+      "d_hole_electron_A": 2.33,
+      "overlap_lambda": 0.6348,
+      "donor_depletion": 0.4781,
+      "conf_id": "dhhb_c000"
+    },
+    {
+      "functional_id": "camb3lyp",
+      "functional": "CAM-B3LYP",
+      "hf_exchange": "범위분리 19% -> 장거리 65%",
+      "mode": "tda",
+      "state": 1,
+      "wavelength_nm": 318.0,
+      "osc_strength": 0.989636,
+      "orbital_transitions_str": "HOMO->LUMO (82%); HOMO->LUMO+1 (7%); HOMO-1->LUMO (4%)",
+      "dominant_nto_occ": 0.96403008,
+      "n_significant_nto_pairs": 1,
+      "hole_fraction": {
+        "donor": 0.8423,
+        "bridge": 0.0949,
+        "acceptor": 0.0629
+      },
+      "particle_fraction": {
+        "donor": 0.3305,
+        "bridge": 0.349,
+        "acceptor": 0.3204
+      },
+      "hole_centroid_A": [
+        -4.287,
+        -0.752,
+        0.017
+      ],
+      "particle_centroid_A": [
+        -2.18,
+        -2.129,
+        -0.544
+      ],
+      "d_hole_electron_A": 2.579,
+      "overlap_lambda": 0.6216,
+      "donor_depletion": 0.5118,
+      "conf_id": "dhhb_c000"
+    },
+    {
+      "functional_id": "m062x",
+      "functional": "M062X",
+      "hf_exchange": "전역 54%",
+      "mode": "full",
+      "state": 1,
+      "wavelength_nm": 334.5,
+      "osc_strength": 0.835583,
+      "orbital_transitions_str": "HOMO->LUMO (84%); HOMO->LUMO+1 (9%); HOMO-1->LUMO (3%)",
+      "dominant_nto_occ": 0.98647654,
+      "n_significant_nto_pairs": 1,
+      "hole_fraction": {
+        "donor": 0.8586,
+        "bridge": 0.1016,
+        "acceptor": 0.0398
+      },
+      "particle_fraction": {
+        "donor": 0.3586,
+        "bridge": 0.354,
+        "acceptor": 0.2874
+      },
+      "hole_centroid_A": [
+        -4.426,
+        -0.704,
+        0.042
+      ],
+      "particle_centroid_A": [
+        -2.37,
+        -2.076,
+        -0.515
+      ],
+      "d_hole_electron_A": 2.533,
+      "overlap_lambda": 0.6221,
+      "donor_depletion": 0.5,
+      "conf_id": "dhhb_c000"
+    },
+    {
+      "functional_id": "m062x",
+      "functional": "M062X",
+      "hf_exchange": "전역 54%",
+      "mode": "tda",
+      "state": 1,
+      "wavelength_nm": 321.9,
+      "osc_strength": 0.951003,
+      "orbital_transitions_str": "HOMO->LUMO (86%); HOMO->LUMO+1 (5%); HOMO-1->LUMO (3%)",
+      "dominant_nto_occ": 0.9684979,
+      "n_significant_nto_pairs": 1,
+      "hole_fraction": {
+        "donor": 0.8533,
+        "bridge": 0.0953,
+        "acceptor": 0.0514
+      },
+      "particle_fraction": {
+        "donor": 0.3127,
+        "bridge": 0.3366,
+        "acceptor": 0.3507
+      },
+      "hole_centroid_A": [
+        -4.398,
+        -0.688,
+        0.043
+      ],
+      "particle_centroid_A": [
+        -2.037,
+        -2.151,
+        -0.559
+      ],
+      "d_hole_electron_A": 2.843,
+      "overlap_lambda": 0.6042,
+      "donor_depletion": 0.5406,
+      "conf_id": "dhhb_c000"
+    },
+    {
+      "functional_id": "pbe0",
+      "functional": "PBE0",
+      "hf_exchange": "전역 25%",
+      "mode": "full",
+      "state": 1,
+      "wavelength_nm": 381.7,
+      "osc_strength": 0.486112,
+      "orbital_transitions_str": "HOMO->LUMO (98%)",
+      "dominant_nto_occ": 1.000542,
+      "n_significant_nto_pairs": 1,
+      "hole_fraction": {
+        "donor": 0.8743,
+        "bridge": 0.0947,
+        "acceptor": 0.0309
+      },
+      "particle_fraction": {
+        "donor": 0.1761,
+        "bridge": 0.2371,
+        "acceptor": 0.5867
+      },
+      "hole_centroid_A": [
+        -4.798,
+        -0.411,
+        0.149
+      ],
+      "particle_centroid_A": [
+        -0.716,
+        -2.301,
+        -0.692
+      ],
+      "d_hole_electron_A": 4.577,
+      "overlap_lambda": 0.4919,
+      "donor_depletion": 0.6982,
+      "conf_id": "dhhb_c000"
+    },
+    {
+      "functional_id": "pbe0",
+      "functional": "PBE0",
+      "hf_exchange": "전역 25%",
+      "mode": "tda",
+      "state": 1,
+      "wavelength_nm": 371.4,
+      "osc_strength": 0.498772,
+      "orbital_transitions_str": "HOMO->LUMO (96%); HOMO->LUMO+1 (2%)",
+      "dominant_nto_occ": 0.9858065,
+      "n_significant_nto_pairs": 1,
+      "hole_fraction": {
+        "donor": 0.877,
+        "bridge": 0.0907,
+        "acceptor": 0.0323
+      },
+      "particle_fraction": {
+        "donor": 0.1324,
+        "bridge": 0.1952,
+        "acceptor": 0.6724
+      },
+      "hole_centroid_A": [
+        -4.834,
+        -0.379,
+        0.159
+      ],
+      "particle_centroid_A": [
+        -0.255,
+        -2.342,
+        -0.734
+      ],
+      "d_hole_electron_A": 5.061,
+      "overlap_lambda": 0.4516,
+      "donor_depletion": 0.7446,
+      "conf_id": "dhhb_c000"
+    },
+    {
+      "functional_id": "wb97xd4",
+      "functional": "WB97X-D4",
+      "hf_exchange": "범위분리 ~17% -> 장거리 100%",
+      "mode": "full",
+      "state": 1,
+      "wavelength_nm": 311.0,
+      "osc_strength": 0.950828,
+      "orbital_transitions_str": "HOMO->LUMO (65%); HOMO->LUMO+1 (20%); HOMO-1->LUMO (6%)",
+      "dominant_nto_occ": 0.96275111,
+      "n_significant_nto_pairs": 1,
+      "hole_fraction": {
+        "donor": 0.8545,
+        "bridge": 0.1045,
+        "acceptor": 0.041
+      },
+      "particle_fraction": {
+        "donor": 0.4673,
+        "bridge": 0.3782,
+        "acceptor": 0.1545
+      },
+      "hole_centroid_A": [
+        -4.208,
+        -0.917,
+        -0.034
+      ],
+      "particle_centroid_A": [
+        -3.068,
+        -1.888,
+        -0.41
+      ],
+      "d_hole_electron_A": 1.545,
+      "overlap_lambda": 0.6667,
+      "donor_depletion": 0.3872,
+      "conf_id": "dhhb_c000"
+    },
+    {
+      "functional_id": "wb97xd4",
+      "functional": "WB97X-D4",
+      "hf_exchange": "범위분리 ~17% -> 장거리 100%",
+      "mode": "tda",
+      "state": 1,
+      "wavelength_nm": 298.6,
+      "osc_strength": 1.082843,
+      "orbital_transitions_str": "HOMO->LUMO (66%); HOMO->LUMO+1 (17%); HOMO-1->LUMO (6%)",
+      "dominant_nto_occ": 0.94188001,
+      "n_significant_nto_pairs": 1,
+      "hole_fraction": {
+        "donor": 0.844,
+        "bridge": 0.0993,
+        "acceptor": 0.0567
+      },
+      "particle_fraction": {
+        "donor": 0.4366,
+        "bridge": 0.3808,
+        "acceptor": 0.1826
+      },
+      "hole_centroid_A": [
+        -4.141,
+        -0.932,
+        -0.045
+      ],
+      "particle_centroid_A": [
+        -2.909,
+        -1.949,
+        -0.44
+      ],
+      "d_hole_electron_A": 1.646,
+      "overlap_lambda": 0.6596,
+      "donor_depletion": 0.4074,
+      "conf_id": "dhhb_c000"
+    }
+  ]
+}
